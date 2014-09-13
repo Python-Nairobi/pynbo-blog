@@ -23,13 +23,8 @@ LINKS = (('PyNBO Meetup', 'http://meetup.com/Python-Nairobi/'),
          ('Python.org', 'http://python.org/'),)
 
 # Social widget
-#SOCIAL = (('You can add links in your config file', '#'),
-#          ('Another social link', '#'),)
-
-DEFAULT_PAGINATION = 10
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+SOCIAL = (('github', 'https://github.com/Python-Nairobi'),
+          ('twitter-square', 'https://twitter.com/example'),)
 
 DEFAULT_PAGINATION = 10
 
@@ -56,16 +51,12 @@ STATIC_PATHS = [
 
 # code blocks with line numbers
 PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
-GITHUB_URL = "http://github.com/kili/help.kili.io"
 #DISQUS_SITENAME = ""
 PDF_GENERATOR = False
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
-DEFAULT_PAGINATION = 4
 DEFAULT_DATE = (1969, 12, 31, 23, 59, 59) 
 THEME = "pure-pynbo"
-HIDE_SIDEBAR = True
-CUSTOM_CSS = 'css/pynbo.css'
 SHOW_ARTICLE_AUTHOR = True
 DISPLAY_PAGES_ON_MENU = False
 DISPLAY_CATEGORIES_ON_MENU = False
