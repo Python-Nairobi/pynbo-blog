@@ -29,7 +29,7 @@ Any changes you make will automatically be reflected there.
 ### MARKDOWN
 ![Markdown, do you speak it?](content/img/markdown!%20do%20you%20speak%20it%3F.jpg)  
 We write our articles in [MarkDown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-from the `[content](https://github.com/Python-Nairobi/pynbo-blog/tree/master/content)` folder.  
+from the [`content`](content/) folder.  
 Your markdown files should end with a `.md`, `.markdown`, or `.mkd` file extension. 
 You should also include some metadata at the top of your markdown files.  
 Checkout the example bellow and adapt appropriately:-  
