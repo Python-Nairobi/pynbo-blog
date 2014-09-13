@@ -1,0 +1,18 @@
+.CodeMirror{ height: 100%; }
+.CodeMirror-gutter-wrapper + pre > span { margin-left:30px; }
+.CodeMirror pre {
+    line-height: normal;
+    box-shadow: none;
+    padding: 2px 1px;
+    font-size: 15px;
+}
+.CodeMirror-gutters { display:none }
+.cover-body .header { text-align: center; }
+.brand-main a, .tagline { margin-left: 0; }
+.brand-main a { 
+    font-family: inherit;
+    font-size: 70px;
+    text-transform: none;
+}
+.cover-body { font-family: 'cuprumbold_italic'; }
+.cover-img { background-color:black; }
