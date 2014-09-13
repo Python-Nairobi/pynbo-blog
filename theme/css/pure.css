@@ -59,7 +59,7 @@ pre {
 .cover-body {
     position: absolute;
     bottom: 0;
-    max-width: 100%;
+    width: 100%;
     padding-bottom: 0;
     padding-top: 100px;
     background-image: linear-gradient(to top,rgba(0,0,0,0.5) 0,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%);
@@ -122,7 +122,7 @@ pre {
 
 .header {
     text-align: left;
-    width: 767px;
+    width: 100%;
     max-width: 100%;
 }
 
@@ -178,7 +178,7 @@ pre {
 
 .content {
     padding: 2em 3em 0;
-    max-width: 1000px;
+    /*max-width: 1000px;*/
     font-size: 110%;
     line-height: 1.45;
     color: #333332;
@@ -292,7 +292,7 @@ pre {
     padding-left: 25%; /* "left col (nav + list)" width */
     position: relative;
 }
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
     .sidebar {
         width: 100%;
         position: relative;
