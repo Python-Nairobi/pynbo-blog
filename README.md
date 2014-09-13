@@ -48,7 +48,7 @@ Blog Post Content Goes Here.
 You may also write fortions of your article in html to compensate for where markdown falls short 
 (e.g. opening links in new tabs)
 
-# FINALY
+## FINALLY
 1. Add, commit and push your changes.
 2. Send us a pull request against [master](https://github.com/Python-Nairobi/pynbo-blog/tree/master).
 
