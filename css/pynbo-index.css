@@ -16,6 +16,7 @@
     font-size: 70px;
     text-transform: none;
 }
+.tagline { letter-spacing: 2px; }
 .cover-body { font-family: 'cuprumbold_italic'; }
 .cover-img { background-color:black; }
 
