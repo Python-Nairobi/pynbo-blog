@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = u'Python Nairobi'
 SITENAME = u'#PyNBO'
 SITEURL = u'http://blog.pynbo.or.ke'
-TAGLINE = u'The Python-Nairobi Blog'
+TAGLINE = u'The Python::Nairobi Blog'
 
 PATH = 'content'
 
