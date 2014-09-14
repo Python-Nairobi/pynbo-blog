@@ -23,8 +23,9 @@ LINKS = (('PyNBO Meetup', 'http://meetup.com/Python-Nairobi/'),
          ('Python.org', 'http://python.org/'),)
 
 # Social widget
-SOCIAL = (('github', 'https://github.com/Python-Nairobi'),
-          ('meetup', 'http://www.meetup.com/Python-Nairobi/'),)
+SOCIAL = (('github', 'https://github.com/Python-Nairobi/'),
+          ('meetup', 'http://www.meetup.com/Python-Nairobi/'),
+          ('twitter', 'http://twitter.com/pynbo/'),)
 
 DEFAULT_PAGINATION = 10
 
