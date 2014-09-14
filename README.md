@@ -18,7 +18,7 @@ To contribute, we recommend you install:-
 2. Clone your fork and cd into it.
 3. Create a virtualenv for your repo:- `mkvirtualenv -a . pynbo-blog`.
 4. Install the remaining dependencies:- `pip install -r requirements.txt`.
-5. Initialize & update submodule dependencies (theme & skulpt interpreter): `git submodule init && git submodule update`.
+5. Initialize & update submodule dependencies (plugins, theme & skulpt interpreter): `git submodule init && git submodule update`.
 6. Then create a branch, naming it along the lines as your topic of contribution.
 
 ## EDITING
@@ -42,6 +42,8 @@ Category: Relevant_Category
 Slug: short_descriptive_article_name
 Author: Your Name (github_handle)
 Summary: A summary of your blog post content
+about_author - A brief summary about you
+email - used to display your [gravar](https://gravatar.com/) in the article.
 
 Blog Post Content Goes Here.
 ```

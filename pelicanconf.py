@@ -66,3 +66,6 @@ DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 COVER_IMG_URL = 'img/blog-bg.png'
 PAGE_EXCLUDES = ['.git']
 IGNORE_FILES = ['*.swp','.git*']
+
+PLUGIN_PATHS = ['./pelican-plugins']
+PLUGINS = ['sitemap', 'gravatar']
