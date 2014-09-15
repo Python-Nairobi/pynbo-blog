@@ -48,6 +48,7 @@ STATIC_PATHS = [
     'skulpt',
     'extra/robots.txt',
     'CNAME',
+    'googlec9e1ed2a96ca548d.html',
     ]
 
 # code blocks with line numbers
