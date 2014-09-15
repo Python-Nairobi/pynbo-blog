@@ -178,7 +178,7 @@ pre {
 
 .content {
     padding: 2em 3em 0;
-    /*max-width: 1000px;*/
+    max-width: 1000px;
     font-size: 110%;
     line-height: 1.45;
     color: #333332;
@@ -308,6 +308,7 @@ pre {
     .content {
         padding: 1em 1.5em 0;
         font-size: 85%;
+        max-width: none;
     }
 
     .cover-img {

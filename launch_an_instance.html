@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Launching an Instance // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/james-nzomo.html" title="See posts by James Nzomo">
+                        <img class="avatar" alt="James Nzomo" src="http://www.gravatar.com/avatar/b73fe6183257f6086eddd6f695e53756">
+                </a>
+                <h2 class="article-info">James Nzomo</h2>
+                <small class="about-author">thoughtst and delkjdedmekcmek</small>
+                <h5>Published</h5>
+                <p>April 16, 2014</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Launching an Instance</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/instances.html">instances</a>
+                                <a class="post-category" href="./tag/launching.html">launching</a>
+                                <a class="post-category" href="./tag/how-to.html">how to</a>
+                        </p>
+                </header>
+            </section>
+            <p>virtual machines on our cloud (and of course, for you to have those 
+machines located in Kenya).  This tutorial walks you through the basics 
+of setting up your first instance. </p>
+<h3>INTRO</h3>
+<p>This article illustrates how to spin up both persistent and ephemeral instances
+from the dashboard.<br />
+A Persistent instance uses a block storage volume for it's root file system. 
+This allows the operating system files (and related user data) to survive 
+termination of the associated instance.<br />
+An Ephemeral instance is the direct opposite of a Persistent instance. 
+It's root volume will be destroyed once the instance is terminated!</p>
+<p>Ephemeral instances are mostly useful for one-off/short-lived applications 
+whereas persistent instances will be preferable for longterm applications.</p>
+<h3>Pre-requisites:-</h3>
+<ol>
+<li>Active login session</li>
+<li>Sufficient resource quota</li>
+</ol>
+<h3>Instructions</h3>
+<ol>
+<li>Open the launch Instance modal from either:-<ul>
+<li>The <a href="https://dash.kili.io/project/instances/" target="_blank">instances panel</a> 
+  (<code>Project</code> &rarr; <code>Compute</code> &rarr; <code>Instances</code>) by clicking 
+  "launch instance" button at the top right of the panel.</li>
+<li>The <a href="https://dash.kili.io/project/images/" target="_blank">images panel</a> 
+  (<code>Project</code> &rarr; <code>Compute</code> &rarr; <code>Images</code>) by clicking 
+  the "launch" button in the actions collumn of the desired image.</li>
+</ul>
+</li>
+<li>
+<p>In the "Launch Instance" modal form, provide an Instance Name and Flavor.  </p>
+<ul>
+<li>
+<p>To launch an <strong>ephemeral instance</strong>, select "Boot from image" as your 
+  Instance Boot Source and choose your preferred image Image.<br />
+<strong>NB.</strong> If you opened the Launch Instance modal from the images panel,
+  the last two options will already have been set<br />
+    <img src="img/launch_instance.png" height="500" width="460"></p>
+</li>
+<li>
+<p>To launch a <strong>persistent instance</strong>, select "Boot from image 
+  (creates a new volume)" as your Instance Boot Source, choose your 
+  preferred image and enter a device size for your new block volume. 
+  Do not check the <code>Delete on Terminate:</code> check-box lest you defeat 
+  the purpose of your persistent instance.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Switch to the "Access &amp; Security" tab and select the appropriate ssh key 
+   from the Key Pair dropdown. The selected key will be added to the default user's ssh 
+   <code>Authorized_Keys</code> file for key based authentication. If the drop down has no 
+   keys listed, click the <code>+</code> and follow the 
+   <a href="import_keypair" target="_blank">import keypair</a> guide.
+   <img src="img/instance_access_n_security.png" height="1200" width="526"></p>
+</li>
+</ol>
+<h3>Post Creation</h3>
+<p>After launch, you probably want to assign a public IP to your instance.</p>
+<p>Depending on the progress of your new VM's creation, manage your floating IP associations by clicking "Associate IP":-</p>
+<ol>
+<li>
+<p>Clicking "Associate IP" button in the VM's actions column if the VM 
+   is still spawning. (see below)<br />
+    <img src="img/assign_ip.png"></p>
+</li>
+<li>
+<p>Selecting the "Associate IP" option of the "more" drop down menu in 
+   the actions collumn if the VM has successfully spun up.(see below)<br />
+    <img src="img/assign_ip_spawning.png"> </p>
+</li>
+</ol>
+<p>On the popup dialog, you can either select an existing IP (if available)
+from the drop down or allocate a new one from the <code>public-net</code> pool by clicking 
+the <code>+</code> button to the right of the drop down.<br />
+<img src="img/manage_fl_ip.png"></p>
+<p>If both IP address assignment and spin up was successful, it should now be 
+possible to ssh into your VM using "ssh [USER]@[Public IP]" where:-</p>
+<p>[Public IP] is the public ip you associated with your instance and
+[USER] is the default image user provided by distro you chose.....which will be:-</p>
+<ul>
+<li>ubuntu (for ubuntu)</li>
+<li>debian (for debian)</li>
+<li>cloud-user (for CentOS)</li>
+</ul>
+<p>Hence if you spun up a CentOS image and you assigned an ip 1.2.3.4, you should 
+access your instance by <code>ssh cloud-user@1.2.3.4</code>, provided you have the required 
+security group rules in place. (See the security groups section below)  </p>
+<p>If you're having problems accessing your instance, you may want to have a look at
+<a href="http://gitolite.com/gitolite/sts.html">this great ssh troubleshooting article</a></p>
+<h3>A note on Security Groups</h3>
+<p>Security groups are sets of IP filter rules that are applied to an instance's 
+networking. By default, for new accounts, the default security group denies 
+access to port 22 from 0.0.0.0/0.</p>
+<p>If you wish to ssh into your instance you should tweak the "Security Groups"
+to allow ingress SSH access on port 22 of the VM. This action is only done 
+once for every new account.</p>
+<ul>
+<li>Go to <a href="https://dash.kili.io/project/access_and_security/?tab=access_security_tabs_security_groups_tab" target="_blank">Security Groups</a> (<code>Project</code> &rarr; <code>Compute</code> &rarr; <code>Access &amp; Security</code>).<br />
+        <img src="img/Security_Groups_AnS.png" height="1000" width="700"></li>
+<li>Click on <code>Manage Rules</code> button under Actions section for the security group 
+  <code>default</code> located below the <code>Create/Delete Security Group</code> button on the
+  right side of the dashboard.</li>
+<li>Under the section <code>Manage Security Group Rules:default</code>, select button 
+  <code>Add Rule</code> on the top right corner of the dashboard.<br />
+        <img src="img/Add_SSH_Rule.png" height="700" width="556"></li>
+<li>As shown in the image above, select ( <code>Rule</code> &rarr; <code>SSH</code>, <code>Remote</code> &rarr; <code>CIDR</code> , <code>CIDR</code> &rarr; <code>0.0.0.0/0</code>).</li>
+</ul>
+<p>At this point you should be capable of accessing your instances via ssh on port 22. 
+If you would like to open up a different port, feel free to adapt the steps by 
+selecting a different protocol from the <code>Rule:</code> drop down or selecting a custom 
+rule on the same for a custom port.</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-54801851-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+</body>
+</html>
