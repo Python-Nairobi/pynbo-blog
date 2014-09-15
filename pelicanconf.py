@@ -49,6 +49,7 @@ STATIC_PATHS = [
     'extra/robots.txt',
     'CNAME',
     'googlec9e1ed2a96ca548d.html',
+    'BingSiteAuth.xml',
     ]
 
 # code blocks with line numbers
