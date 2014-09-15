@@ -69,3 +69,4 @@ IGNORE_FILES = ['*.swp','.git*']
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['sitemap', 'gravatar']
+GOOGLE_ANALYTICS = 'UA-54801851-1'
