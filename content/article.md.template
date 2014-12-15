@@ -1,0 +1,16 @@
+Title: { Replace with appropriate title }
+Date: { Replace with UTC ISO 8601 combined formated date time e.g 1969-12-31 23:59:59 }
+Tags: { Replace with comma separated tags e.g comma, separated, tags }
+Slug: { Replace with unique but readable slug e.g some_unique_slug }
+Author: { Replace with your name(s). Be consistent for subsequent articles. }
+Summary: { Replace this with a brief description of the article. This will show up on the articles index. }
+
+
+#INTRO
+Just a basic template to get you started. 
+
+#STEPS
+1. Replace the front mater at the beginning of this file with values relevant to your article.
+2. Haxx the rest of the document to your liking in markdown.  
+
+Also Feel free to Haxx this template into a full blown article creation guide.
