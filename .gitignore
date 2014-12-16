@@ -6,3 +6,4 @@ pip-delete-this-directory.txt
 *.pid
 cache
 output
+venv
