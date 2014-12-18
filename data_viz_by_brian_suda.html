@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Data Vizualizations by Brian Suda // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/brian-suda.html" title="See posts by Brian Suda">
+                    <img class="avatar" alt="Brian Suda" src="http://www.gravatar.com/avatar/47670f6479d568975c906a0dc49df6ec">
+                    <h2 class="article-info">Brian Suda</h2>
+                </a>
+                <small class="about-author"><p>Brian Suda is an informatician currently residing in Reykjavík, Iceland. He has spent a good portion of each day connected to Internet after discovering it back in the mid-1990s.</p><p>Most recently, he has been focusing more on the mobile space and future predictions, how smaller devices will augment our every day life and what that means to the way we live, work and are entertained.</p><p>His own little patch of Internet can be found at <a href="http://suda.co.uk" target="_blank">http://suda.co.uk</a> where many of his past projects and crazy ideas can be found.</p></small>
+                <h5>Published</h5>
+                <p>December 16, 2014</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Data Vizualizations by Brian Suda</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/data-viz.html">data viz</a>
+                                <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/deterministic-design.html">deterministic design</a>
+                                <a class="post-category" href="./tag/iceland.html">iceland</a>
+                                <a class="post-category" href="./tag/brian-suda.html">brian suda</a>
+                        </p>
+                </header>
+            </section>
+            <p>Thanks to everyone who came on their Saturday to listen to me talk about data visualisations through a computer screen several timezones and many kilometres away. I know sitting through online presentations can be boring, so I hope mine was interesting enough that not many people fell asleep or left. It doesn’t matter, I could only see my slides and hear the shuffling of chairs every once and awhile, so I knew people were still there.</p>
+<p>On Saturday, December 13th, I ran through my presentation about the basics of charts &amp; graphs and how build-up to more complex data visualizations. It was a great group to chat with because it was the a Python meet-up. Most of the event I attend it is a mix of disciplines, so you can never get too technical, or even worse, it is a group of designers who you at you with a blank expression when you start to talk about code and scripts.</p>
+<p>Getting to share some ideas with the folks in Nairobi was an exciting experience, and I know you are the types of people who get it. You’ll take apart the code and understand what’s happening.</p>
+<h1>Deterministic Design</h1>
+<p>One of the topics I’m really interested in is this idea of Deterministic Design.</p>
+<p>This is the sort of design that you do once, up front, then feed in the data and see how it looks. Then if you need to update the design, you don’t do it for that particular instance, but back upstream at the source where the code is written. That way, next time the run the code, all future designs will benefit.</p>
+<p>At the moment, I’m calling this Deterministic Design, because if you feed in the same data, you’ll get the same results every time. Much like the color picking example I showed in the presentation. Using the MD5 function, we can get a hex string, which we take the first 6 characters and use that to generate a unique color that is fully reproducible on any system or language.</p>
+<div class="highlight"><pre><span class="n">import</span> <span class="n">hashlib</span>
+<span class="n">hh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">md5</span><span class="p">()</span>
+<span class="n">hh</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="err">”</span><span class="p">)</span>
+<span class="n">hh</span><span class="p">.</span><span class="n">hexdigest</span><span class="p">()[</span><span class="o">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+
+<p>I use this equation everywhere. It saves time and thought, but the downside is that you are bound by the color that it returns, even if it isn’t pretty! This little snippet of code needs a friend to help make sure you have the highest color contrast possible. I wrote about this on <a href="http://24ways.org/2010/calculating-color-contrast/">24ways Calculating Color Contrast</a>. You’ll have to port the code to Python yourself.</p>
+<p>I love a lot of these little projects, to convert small ideas into some code that is repeatable over and over again. I also like the UNIX philosophy of small, reusable pieces. This means I tend to write small programs which take a CSV as data and create small SVG files as output. Then I can bring those into more complex programs to edit, annotate and layout the data. If the CSV changes, it is easy for me to reproduce the charts &amp; graphs, because it is all done in code.</p>
+<p>Most of the simple tools that I have written are available on <a href="https://github.com/briansuda/Deterministic-Design">GitHub</a>. There is a lot to wade through and you’ll have to port it to Python, but they are simple, useful utilities.</p>
+<h1>Starting Small and Growing Bigger</h1>
+<p>When starting off, it is important to just start small. Rather than trying to dig into a massive amount of social media data, why not track your hours each week. How much is spent at work, at home, a sleep. Then try to visualize that in an interesting way. With some practice you’ll figure out what works, what doesn’t and what tools you like to use in your workflow.</p>
+<p>After that you can begin to progress to more complex data sets. Start off with some you like and understand, build-up a small portfolio of interesting examples and then take on bigger and bigger projects. You’ll quickly see that even the biggest project is just a series of smaller ones that you probably have some experience or tools to deal with.</p>
+<h1>Inspiration</h1>
+<p>To stay fresh, you need to keep an eye on interesting people in the field. There are a lot of resources out there and these are a few to get you started.</p>
+<ul>
+<li><a href="http://datastori.es">http://datastori.es</a></li>
+<li><a href="https://eagereyes.org">https://eagereyes.org</a></li>
+<li><a href="http://www.informationisbeautiful.net">http://www.informationisbeautiful.net</a></li>
+<li><a href="http://dataviz.tumblr.com">http://dataviz.tumblr.com</a></li>
+</ul>
+<p>If anyone has any questions, they can always contact me on twitter <a href="https://twitter.com/briansuda">@briansuda</a> or follow along with what I write on <a href="http://optional.is/required">(optional.is)</a> and <a href="http://optional.is/newsletter">join the mailing list</a>. I can’t guarantee that everything will be Data viz related, but it will be interesting!</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

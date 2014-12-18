@@ -17,7 +17,7 @@
     text-transform: none;
 }
 .tagline { letter-spacing: 2px; }
-.cover-body { font-family: 'cuprumbold_italic'; }
+h1,h2,h3,h4,h5,h6,.cover-body { font-family: 'cuprumbold_italic'; }
 .cover-img { background-color:black; }
 
 .fa-meetup:before {
