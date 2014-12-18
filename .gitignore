@@ -58,5 +58,7 @@ target/
 *.swo
 *.pid
 .venv
-.output
+venv
+output
+cache
 .DS_Store

@@ -42,13 +42,14 @@ Category: Relevant_Category
 Slug: short_descriptive_article_name
 Author: Your Name (github_handle)
 Summary: A summary of your blog post content
-about_author - A brief summary about you
-email - used to display your [gravar](https://gravatar.com/) in the article.
+about_author: A brief summary about you
+email: used to display your [gravar](https://gravatar.com/) in the article.
 
 Blog Post Content Goes Here.
 ```
-You may also write fortions of your article in html to compensate for where markdown falls short 
-(e.g. opening links in new tabs)
+You can also `cp content/article.md.template content/new_article.md` and `vi content/new_article.md` appropriately.  
+Feel free to write portions of your article in html to compensate for where markdown falls short
+e.g. opening links in new tabs. (Jules is ok with this)  
 
 ## FINALLY
 1. Add, commit and push your changes.
