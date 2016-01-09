@@ -13,6 +13,15 @@ Hello everyone, here's my blog post on how I built an API to return traffic cond
 ##### The Process
 To begin the process I decided to test if is possible to capture Image from each camera. After exploration of the website I realized each camera had a url with a JPEG file extension at the end. I figured the cameras wrote a new image to the JPEG file on the URL. So, can I captured every new image? Yes - I used the **urllib** library to capture the image and store it on the disk.
 
+I organized the camera urls into a dict so as to have a means of calling and referencing each road.
+
+    cameras = dict (
+    museum='http://traffic.accesskenya.com/images/traffic/feeds/purshotam.jpg',
+    ojijo='http://traffic.accesskenya.com/images/traffic/feeds/mhcojijo.jpg',
+    forest_limuru='http://traffic.accesskenya.com/images/traffic/feeds/forestlimuru.jpg?',
+    kenyatta_uhuru_valley='http://traffic.accesskenya.com/images/traffic/feeds/barclaysplaza.jpg',)
+    
+After that, I wrote a function that take a url and extract three images after every 6 seconds.
 
     def capture_images(self):
         for i in 'abc':
