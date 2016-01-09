@@ -13,10 +13,10 @@ Hello everyone, here's my blog post on how I built an API to return traffic cond
 ##### The Process
 To begin the process I decided to test if is possible to capture Image from each camera. After exploration of the website I realized each camera had a url with a JPEG file extension at the end. I figured the cameras wrote a new image to the JPEG file on the URL. So, can I captured every new image? Yes - I used the **urllib** library to capture the image and store it on the disk.
 
-'''
+
     def capture_images(self):
         for i in 'abc':
             if self.name in way:
                     urllib.urlretrieve(way[self.name],'img_'+i+'.jpg')
                     time.sleep(6)
-'''
+
