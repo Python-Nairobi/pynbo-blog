@@ -29,3 +29,4 @@ After that, I wrote a function that take a url and extract three images after ev
                     urllib.urlretrieve(way[self.name],'img_'+i+'.jpg')
                     time.sleep(6)
 
+#### The Artificial Intelligence
