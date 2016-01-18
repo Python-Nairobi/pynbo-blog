@@ -1,4 +1,4 @@
-Title: Data Vizualizations by Brian Suda
+Title: Data Vizualization by Brian Suda
 Date: 2014-12-16 18:11:00
 Tags: data viz, python, deterministic design, iceland, brian suda
 Slug: data_viz_by_brian_suda
