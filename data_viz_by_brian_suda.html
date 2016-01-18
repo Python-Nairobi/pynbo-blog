@@ -6,7 +6,7 @@
     <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
 
 
-        <title>Data Vizualizations by Brian Suda // #PyNBO // The Python::Nairobi Blog</title>
+        <title>Data Vizualization by Brian Suda // #PyNBO // The Python::Nairobi Blog</title>
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -46,7 +46,7 @@
         <div class="content">
             <section class="post">
                 <header class="post-header">
-                    <h1>Data Vizualizations by Brian Suda</h1>
+                    <h1>Data Vizualization by Brian Suda</h1>
                         <p class="post-meta">
                             // under                                 <a class="post-category" href="./tag/data-viz.html">data viz</a>
                                 <a class="post-category" href="./tag/python.html">python</a>
@@ -63,10 +63,10 @@
 <p>One of the topics I’m really interested in is this idea of Deterministic Design.</p>
 <p>This is the sort of design that you do once, up front, then feed in the data and see how it looks. Then if you need to update the design, you don’t do it for that particular instance, but back upstream at the source where the code is written. That way, next time the run the code, all future designs will benefit.</p>
 <p>At the moment, I’m calling this Deterministic Design, because if you feed in the same data, you’ll get the same results every time. Much like the color picking example I showed in the presentation. Using the MD5 function, we can get a hex string, which we take the first 6 characters and use that to generate a unique color that is fully reproducible on any system or language.</p>
-<div class="highlight"><pre><span class="n">import</span> <span class="n">hashlib</span>
-<span class="n">hh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">md5</span><span class="p">()</span>
-<span class="n">hh</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="err">”</span><span class="p">)</span>
-<span class="n">hh</span><span class="p">.</span><span class="n">hexdigest</span><span class="p">()[</span><span class="o">:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="n">hh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+<span class="n">hh</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="err">”</span><span class="p">)</span>
+<span class="n">hh</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 
 
