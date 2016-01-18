@@ -40,9 +40,9 @@ After that you can begin to progress to more complex data sets. Start off with s
 # Inspiration
 To stay fresh, you need to keep an eye on interesting people in the field. There are a lot of resources out there and these are a few to get you started.
 
-* [http://datastori.es](http://datastori.es)
-* [https://eagereyes.org](https://eagereyes.org)
-* [http://www.informationisbeautiful.net](http://www.informationisbeautiful.net)
-* [http://dataviz.tumblr.com](http://dataviz.tumblr.com)
+* <http://datastori.es>
+* <https://eagereyes.org>
+* <http://www.informationisbeautiful.net>
+* <http://dataviz.tumblr.com>
 
 If anyone has any questions, they can always contact me on twitter [@briansuda](https://twitter.com/briansuda) or follow along with what I write on [(optional.is)](http://optional.is/required) and [join the mailing list](http://optional.is/newsletter). I can’t guarantee that everything will be Data viz related, but it will be interesting!
