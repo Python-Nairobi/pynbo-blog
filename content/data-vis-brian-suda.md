@@ -21,9 +21,10 @@ This is the sort of design that you do once, up front, then feed in the data and
 
 At the moment, I’m calling this Deterministic Design, because if you feed in the same data, you’ll get the same results every time. Much like the color picking example I showed in the presentation. Using the MD5 function, we can get a hex string, which we take the first 6 characters and use that to generate a unique color that is fully reproducible on any system or language.
 
+    :::python
     import hashlib
     hh = hashlib.md5()
-    hh.update(“Hello World”)
+    hh.update("Hello World")
     hh.hexdigest()[:6]
 
 I use this equation everywhere. It saves time and thought, but the downside is that you are bound by the color that it returns, even if it isn’t pretty! This little snippet of code needs a friend to help make sure you have the highest color contrast possible. I wrote about this on [24ways Calculating Color Contrast](http://24ways.org/2010/calculating-color-contrast/). You’ll have to port the code to Python yourself.
