@@ -21,9 +21,10 @@ This is the sort of design that you do once, up front, then feed in the data and
 
 At the moment, I’m calling this Deterministic Design, because if you feed in the same data, you’ll get the same results every time. Much like the color picking example I showed in the presentation. Using the MD5 function, we can get a hex string, which we take the first 6 characters and use that to generate a unique color that is fully reproducible on any system or language.
 
+    :::python
     import hashlib
     hh = hashlib.md5()
-    hh.update(“Hello World”)
+    hh.update("Hello World")
     hh.hexdigest()[:6]
 
 I use this equation everywhere. It saves time and thought, but the downside is that you are bound by the color that it returns, even if it isn’t pretty! This little snippet of code needs a friend to help make sure you have the highest color contrast possible. I wrote about this on [24ways Calculating Color Contrast](http://24ways.org/2010/calculating-color-contrast/). You’ll have to port the code to Python yourself.
@@ -40,9 +41,9 @@ After that you can begin to progress to more complex data sets. Start off with s
 # Inspiration
 To stay fresh, you need to keep an eye on interesting people in the field. There are a lot of resources out there and these are a few to get you started.
 
-* [http://datastori.es](http://datastori.es)
-* [https://eagereyes.org](https://eagereyes.org)
-* [http://www.informationisbeautiful.net](http://www.informationisbeautiful.net)
-* [http://dataviz.tumblr.com](http://dataviz.tumblr.com)
+* <http://datastori.es>
+* <https://eagereyes.org>
+* <http://www.informationisbeautiful.net>
+* <http://dataviz.tumblr.com>
 
 If anyone has any questions, they can always contact me on twitter [@briansuda](https://twitter.com/briansuda) or follow along with what I write on [(optional.is)](http://optional.is/required) and [join the mailing list](http://optional.is/newsletter). I can’t guarantee that everything will be Data viz related, but it will be interesting!
