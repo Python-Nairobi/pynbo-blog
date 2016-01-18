@@ -65,7 +65,7 @@
 <p>At the moment, I’m calling this Deterministic Design, because if you feed in the same data, you’ll get the same results every time. Much like the color picking example I showed in the presentation. Using the MD5 function, we can get a hex string, which we take the first 6 characters and use that to generate a unique color that is fully reproducible on any system or language.</p>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="n">hh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-<span class="n">hh</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="err">”</span><span class="p">)</span>
+<span class="n">hh</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
 <span class="n">hh</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 
