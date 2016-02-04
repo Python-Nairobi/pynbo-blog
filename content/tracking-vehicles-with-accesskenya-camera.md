@@ -73,3 +73,38 @@ The first important step in analysis of the images is checking if there has been
             pixie = len(moving)
 
         return pixie
+
+#### Calibrating Movement
+Once movement is detected, it is important to then quantify trafficc in km/h. To aid in this calculation is the optical flow algorithm. A concept in computer vision that allow tracking features in an image. I utilized this functionality to find features to track (cars) in the first images, and get their corresponding positions in the second and third image. I then proceeded to calculate the avaerage distance (euclidean distance) that the feature has moved. Dividing the pixel distance by 12 seconds gives me speed at which the objects(cars) are moving. My function returns this value.
+
+    # calculate optical flow of points on images
+    def opticalFlow(self,img1,img2,img3):
+
+        #set variables
+        lk_params = dict(winSize = (10,10),
+                        maxLevel = 5,
+                        criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT,10,0.03))
+
+        features_param = dict( maxCorners = 3000,
+                                qualityLevel = 0.5,
+                                minDistance = 3,
+                                blockSize = 3)
+
+        # feature extraction of points to track 
+        pt = cv2.goodFeaturesToTrack(img1,**features_param)
+        p0 =np.float32(pt).reshape(-1,1,2)
+
+        # calaculate average movement
+        dist = list()
+        for loop in p0: 
+            p1,st,err =cv2.calcOpticalFlowPyrLK(img1, img2,loop,
+                                                None,**lk_params)
+      
+            p0r,st,err =cv2.calcOpticalFlowPyrLK(img2,img1,p1,
+                                            None,**lk_params)
+
+            if abs(loop-p0r).reshape(-1, 2).max(-1) < 1:
+                dst = distance.euclidean(loop,p0r)
+                dist.append(dst)
+        
+        return round(max(dist)*10,2)
