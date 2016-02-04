@@ -10,7 +10,7 @@ about_author: <p> Chris Orwa is a Data Scientist currently residing in Nairobi, 
 
 Hello everyone, here's my blog post on how I built an API to return traffic conditions from Access Kenya cameras. The API would work by specifiying a road name at the URL endpoint and a json reponse would have number of cars that moved and the speed of movement. 
 
-##### The Process
+#### Data Capture
 To begin the process I decided to test if is possible to capture Image from each camera. After exploration of the website I realized each camera had a url with a JPEG file extension at the end. I figured the cameras wrote a new image to the JPEG file on the URL. So, can I captured every new image? Yes - I used the **urllib** library to capture the image and store it on the disk.
 
 I organized the camera urls into a dict so as to have a means of calling and referencing each road.
