@@ -149,3 +149,5 @@ The API (underconstruction) is based on flask. By specifying a road name at the 
 
     if __name__ == "__main__":
     app.run()
+
+I hope you enjoyed it. Feel free to drop me an e-mail at chrisorwa@gmail.com for any queries.
