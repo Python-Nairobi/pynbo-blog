@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Tracking Vehicles on Access Kenya Camera's // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/chris-orwa.html" title="See posts by Chris Orwa">
+                    <img class="avatar" alt="Chris Orwa" src="http://www.gravatar.com/avatar/a2f9cb39e8a830418449ca2c6da500ae">
+                    <h2 class="article-info">Chris Orwa</h2>
+                </a>
+                <small class="about-author"><p> Chris Orwa is a Data Scientist currently residing in Nairobi, Kenya. He's main focus is on computational techniques for unstructured data. To that end, he has learned to code in Python and R, and retained both languages as the core-analysis software/language with an occasional dash of C and Java. </p><p>His crazy analysis monologues can be found at <a href="http://blackorwa.com" target="_blank">http://blackorwa.com </a></p></small>
+                <h5>Published</h5>
+                <p>January 09, 2016</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Tracking Vehicles on Access Kenya Camera's</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/image-analysis.html">image analysis</a>
+                                <a class="post-category" href="./tag/opencv.html">opencv</a>
+                                <a class="post-category" href="./tag/access-kenya.html">access kenya</a>
+                                <a class="post-category" href="./tag/traffic.html">traffic</a>
+                        </p>
+                </header>
+            </section>
+            <p>Hello everyone, here's my blog post on how I built an API to return traffic conditions from Access Kenya cameras. The API would work by specifiying a road name at the URL endpoint and a json reponse would have number of cars that moved and the speed of movement.</p>
+<h4>Data Capture</h4>
+<p>To begin the process I decided to test if is possible to capture Image from each camera. After exploration of the website I realized each camera had a url with a JPEG file extension at the end. I figured the cameras wrote a new image to the JPEG file on the URL. So, can I captured every new image? Yes - I used the <strong>urllib</strong> library to capture the image and store it on the disk.</p>
+<p>I organized the camera urls into a dict so as to have a means of calling and referencing each road.</p>
+<div class="highlight"><pre><span class="n">cameras</span> <span class="o">=</span> <span class="nb">dict</span> <span class="p">(</span>
+<span class="n">museum</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/purshotam.jpg&#39;</span><span class="p">,</span>
+<span class="n">ojijo</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/mhcojijo.jpg&#39;</span><span class="p">,</span>
+<span class="n">forest_limuru</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/forestlimuru.jpg?&#39;</span><span class="p">,</span>
+<span class="n">kenyatta_uhuru_valley</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/barclaysplaza.jpg&#39;</span><span class="p">,)</span>
+</pre></div>
+
+
+<p>After that, I wrote a function that takes a url and extracts three images every 6 seconds.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">capture_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">way</span><span class="p">:</span>
+                <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">way</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">],</span><span class="s1">&#39;img_&#39;</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>Image Processing</h4>
+<p>The images captured from the camera are stored on a folder with the name of the road. Next task involves processing the images for analysis. I utlize two libraries for this task; <strong>PIL</strong> for loading the images and <strong>numpy</strong> to convert pixel values to numerical array values. All these are wrapped in a function (shown below) that takes the image folder directory as input then proceeds to load all 3 images, converts them to numpy arrays, deletes the images and returns a python dict holding arrays on all the images.</p>
+<div class="highlight"><pre><span class="c1"># load images</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">names</span> <span class="o">!=</span> <span class="s1">&#39;.DS_Store&#39;</span><span class="p">:</span>
+                    <span class="n">a</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+                    <span class="n">a</span><span class="p">[</span><span class="n">names</span><span class="p">]</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+                    <span class="n">b</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">names</span><span class="p">])</span>
+            <span class="n">k</span> <span class="o">+=</span><span class="mi">1</span>
+
+    <span class="c1"># delete image folder</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">b</span>
+</pre></div>
+
+
+<h4>Motion Detection</h4>
+<p>The first important step in analysis of the images is checking if there has been movements within the 6 second period. To achieve this, I utilized the concept of differential imaging - a means of measuring motion detection by subtracting the pixel values of subsquent images. In my function, I calculate the number of pixels that have moved, this helps in quantifying the movement (standstill, moderate traffic).</p>
+<div class="highlight"><pre><span class="c1"># differential imaging</span>
+<span class="k">def</span> <span class="nf">diffImg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">img2</span><span class="p">,</span><span class="n">img3</span><span class="p">):</span>
+
+    <span class="c1"># calculate absolute difference</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">absdiff</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span><span class="n">img2</span><span class="p">)</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">absdiff</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span><span class="n">img3</span><span class="p">)</span>
+    <span class="n">bit</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">)</span>
+    <span class="n">ret</span><span class="p">,</span><span class="n">thresh</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">bit</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
+
+    <span class="c1">#get number of different pixels</span>
+    <span class="n">moving</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">thresh</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cell</span> <span class="o">==</span> <span class="mi">255</span><span class="p">:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
+            <span class="n">moving</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">move</span><span class="p">)</span>
+        <span class="n">pixie</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">moving</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pixie</span>
+</pre></div>
+
+
+<h4>Calibrating Movement</h4>
+<p>Once movement is detected, it is important to then quantify trafficc in km/h. To aid in this calculation is the optical flow algorithm. A concept in computer vision that allow tracking features in an image. I utilized this functionality to find features to track (cars) in the first images, and get their corresponding positions in the second and third image. I then proceeded to calculate the avaerage distance (euclidean distance) that the feature has moved. Dividing the pixel distance by 12 seconds gives me speed at which the objects(cars) are moving. My function returns this value.</p>
+<div class="highlight"><pre><span class="c1"># calculate optical flow of points on images</span>
+<span class="k">def</span> <span class="nf">opticalFlow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">img2</span><span class="p">,</span><span class="n">img3</span><span class="p">):</span>
+
+    <span class="c1">#set variables</span>
+    <span class="n">lk_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">winSize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
+                    <span class="n">maxLevel</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                    <span class="n">criteria</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">TERM_CRITERIA_EPS</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">TERM_CRITERIA_COUNT</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.03</span><span class="p">))</span>
+
+    <span class="n">features_param</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">maxCorners</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">,</span>
+                            <span class="n">qualityLevel</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                            <span class="n">minDistance</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                            <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># feature extraction of points to track</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">goodFeaturesToTrack</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span><span class="o">**</span><span class="n">features_param</span><span class="p">)</span>
+    <span class="n">p0</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># calaculate average movement</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="n">p0</span><span class="p">:</span>
+        <span class="n">p1</span><span class="p">,</span><span class="n">st</span><span class="p">,</span><span class="n">err</span> <span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">calcOpticalFlowPyrLK</span><span class="p">(</span><span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">,</span><span class="n">loop</span><span class="p">,</span>
+                                            <span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">lk_params</span><span class="p">)</span>
+
+        <span class="n">p0r</span><span class="p">,</span><span class="n">st</span><span class="p">,</span><span class="n">err</span> <span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">calcOpticalFlowPyrLK</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span>
+                                        <span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">lk_params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">loop</span><span class="o">-</span><span class="n">p0r</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">dst</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span><span class="n">p0r</span><span class="p">)</span>
+            <span class="n">dist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<h4>The API</h4>
+<p>The API (underconstruction) is based on flask. By specifying a road name at the HTTP endpoint, the API returns speed of traffic and level of movement (stanstill, moderate rate, no traffic).</p>
+<div class="highlight"><pre><span class="c1"># load required libraries</span>
+<span class="kn">import</span> <span class="nn">image_processing</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">import</span> <span class="nn">links</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+
+<span class="c1"># create flask web server</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="c1"># create HTTP endpoint</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/ImPro/&lt;road&gt;&#39;</span><span class="p">)</span>
+
+<span class="c1"># main function</span>
+<span class="k">def</span> <span class="nf">get_route</span><span class="p">(</span><span class="n">road</span><span class="p">):</span>
+    <span class="c1"># initialize route class</span>
+    <span class="n">road</span> <span class="o">=</span> <span class="s1">&#39;sarit&#39;</span>
+    <span class="n">traffic</span> <span class="o">=</span> <span class="n">image_processing</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="n">road</span><span class="p">)</span>
+
+    <span class="c1"># setup working directory</span>
+    <span class="n">traffic</span><span class="o">.</span><span class="n">set_dir</span><span class="p">()</span>
+
+    <span class="c1"># get image from traffic camera</span>
+    <span class="n">traffic</span><span class="o">.</span><span class="n">capture_images</span><span class="p">()</span>
+
+    <span class="c1"># load image stack</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+    <span class="c1"># differential imaging</span>
+    <span class="n">y</span> <span class="o">=</span>  <span class="n">traffic</span><span class="o">.</span><span class="n">diffImg</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_a.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_b.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_c.jpg&#39;</span><span class="p">])</span>
+
+    <span class="c1"># calculate optical flow</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><span class="n">opticalFlow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_a.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_b.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_c.jpg&#39;</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<p>The code is available at <a href="https://github.com/Python-Nairobi/ImPro">https://github.com/Python-Nairobi/ImPro</a>. Feel free to modify and improve as you see fit.<br />
+I hope you enjoyed the article. Feel free to drop me an e-mail at chrisorwa@gmail.com for any queries.</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
