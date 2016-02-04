@@ -138,15 +138,14 @@ The API (underconstruction) is based on flask. By specifying a road name at the 
         # get image from traffic camera
         traffic.capture_images()
 
-    # load image stack
-    x = traffic.load()
+        # load image stack
+        x = traffic.load()
 
-    # differential imaging
-    y =  traffic.diffImg(x['img_a.jpg'],x['img_b.jpg'],x['img_c.jpg'])
+        # differential imaging
+        y =  traffic.diffImg(x['img_a.jpg'],x['img_b.jpg'],x['img_c.jpg'])
 
-    # calculate optical flow
-    z = traffic.opticalFlow(x['img_a.jpg'],x['img_b.jpg'],x['img_c.jpg'])
-    print (z)
+        # calculate optical flow
+        z = traffic.opticalFlow(x['img_a.jpg'],x['img_b.jpg'],x['img_c.jpg'])
 
     if __name__ == "__main__":
     app.run()
