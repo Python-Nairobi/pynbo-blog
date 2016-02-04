@@ -51,3 +51,25 @@ The images captured from the camera are stored on a folder with the name of the 
         shutil.rmtree(os.getcwd())
             
         return b
+
+#### Motion Detection
+The first important step in analysis of the images is checking if there has been movements within the 6 second period. To achieve this, I utilized the concept of differential imaging - a means of measuring motion detection by subtracting the pixel values of subsquent images. In my function, I calculate the number of pixels that have moved, this helps in quantifying the movement (standstill, moderate traffic).
+
+# differential imaging
+    def diffImg(self,img1,img2,img3):
+
+        # calculate absolute difference
+        d1 = cv2.absdiff(img1,img2)
+        d2 = cv2.absdiff(img2,img3)
+        bit = cv2.bitwise_and(d1,d2)
+        ret,thresh = cv2.threshold(bit,35,255,cv2.THRESH_BINARY)
+
+        #get number of different pixels
+        moving = list()
+        for cell in thresh.flat:
+            if cell == 255:
+                move = 'True'
+                moving.append(move)
+            pixie = len(moving)
+
+        return pixie
