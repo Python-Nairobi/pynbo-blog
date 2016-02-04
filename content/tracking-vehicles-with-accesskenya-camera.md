@@ -29,4 +29,25 @@ After that, I wrote a function that take a url and extract three images after ev
                     urllib.urlretrieve(way[self.name],'img_'+i+'.jpg')
                     time.sleep(6)
 
-#### The Artificial Intelligence
+#### Image Processing
+The images captured from the camera are stored on a folder with the name of the road. Next task involves processing the images for analysis. I utlize two libraries for this task; **PIL** for loading the images and **numpy** to convert pixel values to numerical array values. All these are wrapped in a function (shown below) that takes the image folder directory as input then proceeds to load all 3 images, converts them to numpy arrays, deletes the images and return a python dict holding arrays on all the images.
+
+    # load images
+    def load(self):
+        files = os.listdir(self.path)
+        a = dict()
+        b = dict()
+        k = 0
+
+            while k <= len(files):
+                for names in files:
+                    if names != '.DS_Store':
+                        a[names] = Image.open(names).convert('L')
+                        a[names].load()
+                        b[names] = np.asarray(a[names])     
+                k +=1
+
+        # delete image folder
+        shutil.rmtree(os.getcwd())
+            
+        return b
