@@ -1,4 +1,3 @@
-
 Title: Tracking Vehicles on Access Kenya Camera's
 Date: 2016-01-09 18:11:00
 Tags: python, image analysis, opencv, access kenya, traffic
