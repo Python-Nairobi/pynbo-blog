@@ -55,7 +55,7 @@ The images captured from the camera are stored on a folder with the name of the 
 #### Motion Detection
 The first important step in analysis of the images is checking if there has been movements within the 6 second period. To achieve this, I utilized the concept of differential imaging - a means of measuring motion detection by subtracting the pixel values of subsquent images. In my function, I calculate the number of pixels that have moved, this helps in quantifying the movement (standstill, moderate traffic).
 
-# differential imaging
+    # differential imaging
     def diffImg(self,img1,img2,img3):
 
         # calculate absolute difference
