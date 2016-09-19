@@ -4,7 +4,7 @@ Date: 2016-09-19 19:51:00
 Slug: quicksort-python
 Summary: A brief demo of quicksort in python
 Author: Kenny Rachuonyo
-email: krmboya@gmail.com
+email: krm@99nth.com
 about_author: <p>A computer programmer in Nairobi, and fan of Python. You can check out his homepage <a href="http://www.99nth.com/~krm">here</a>.
 
 Quicksort is one of the common sorting algorithms taught in computer science.
