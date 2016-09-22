@@ -23,6 +23,7 @@ This should leave you with a fully sorted list at the end.
 
 Let's define a quicksort function
 
+    :::python
     def quicksort(L, lo, hi):
         """Sorts elements between indices lo and hi inclusive
         
@@ -54,6 +55,7 @@ element in the list within the given range, and divides the list into segments
 less than or equal, and greater than the pivot.
 
 
+    :::python
     def partition(L, lo, hi):
         """Partitions the list within the given range
         L - a list to partition
@@ -101,6 +103,7 @@ less than or equal, and greater than the pivot.
 
 We can now test our quicksort function.
 
+    :::python
     import random
 
     # Create a list of 10 unsorted integers between 1 and 100 inclusive
