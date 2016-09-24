@@ -62,3 +62,6 @@ venv
 output
 cache
 .DS_Store
+
+# emacs
+*~
