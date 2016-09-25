@@ -33,7 +33,7 @@ DEFAULT_PAGINATION = 10
 RELATIVE_URLS = True
 
 # global metadata to all the contents
-#DEFAULT_METADATA = (('key', 'val'),)
+# DEFAULT_METADATA = (('key', 'val'),)
 
 # path-specific metadata
 EXTRA_PATH_METADATA = {
@@ -47,13 +47,12 @@ STATIC_PATHS = [
     'css',
     'extra/robots.txt',
     'CNAME',
-    'googlec9e1ed2a96ca548d.html',
     'BingSiteAuth.xml',
     ]
 
 # code blocks with line numbers
 PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
-#DISQUS_SITENAME = ""
+# DISQUS_SITENAME = ""
 PDF_GENERATOR = False
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
@@ -66,8 +65,9 @@ DISPLAY_ARCHIVES_ON_MENU = False
 DEFAULT_DATE_FORMAT = ('%B %d, %Y')
 COVER_IMG_URL = 'img/blog-bg.png'
 PAGE_EXCLUDES = ['.git']
-IGNORE_FILES = ['*.swp','.git*']
+IGNORE_FILES = ['*.swp', '.git*']
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['sitemap', 'gravatar']
 GOOGLE_ANALYTICS = 'UA-54801851-1'
+READERS = {"html": None}
