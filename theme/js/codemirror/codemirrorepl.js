@@ -58,11 +58,11 @@ function CodeMirrorREPL(textareaId, options) {
     function to(line) {
         return { line: line, ch: mirror.getLine(line).length };
     }
-    
+
     function from(line) {
         return { line: line, ch: 0 };
     }
-    
+
     function up() {
         switch (n--) {
             case 0:
@@ -96,9 +96,9 @@ function CodeMirrorREPL(textareaId, options) {
         ch = 0;
         buffer.push(input);
         n = history.push(input);
-        
+
         mirror.replaceRange(text + '\n', { line: line++, ch: 0 }, { line: line, ch: 0 });
-        
+
         var code = buffer.join('\n').replace(/\r/g, '\n');
         var balanced = repl.isBalanced(code);
 
@@ -115,7 +115,7 @@ function CodeMirrorREPL(textareaId, options) {
         }
 
         mirror.scrollIntoView(from(line));
-        
+
         setTimeout(function () {
             user = true;
         }, 0);
@@ -148,7 +148,7 @@ function CodeMirrorREPL(textareaId, options) {
             mirror.replaceSelection("");
         }
     }
-    
+
     function change(mirror, changes) {
         var to = changes.to;
         var from = changes.from;
@@ -198,9 +198,9 @@ function CodeMirrorREPL(textareaId, options) {
             mirror.setGutterMarker(line, "note-gutter", document.createTextNode(">>>"));
             mirror.setCursor({line: line, ch: cursor});
         }
-        
+
         mirror.scrollIntoView(from(line));
-        
+
         setTimeout(function () {
             user = mode;
         }, 0);

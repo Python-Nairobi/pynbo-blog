@@ -4,7 +4,7 @@ $(function () {
             theme: "solarized dark"
         }),
         compilableLines = [],
-        //finds lines starting with "print" 
+        //finds lines starting with "print"
         re = new RegExp("\\s*print"),
         //finds import statements
         importre = new RegExp("\\s*import"),
@@ -15,7 +15,7 @@ $(function () {
         //test for empty line.
         emptyline = new RegExp("^\\s*$"),
         //a regex to check if a line is an assignment
-        //this regex checks whether or not a line starts with 
+        //this regex checks whether or not a line starts with
         //an identifier followed with some whitspace and then an = and then some more white space.
         //it also checks if the identifier is a tuple.
         assignment= /^((\s*\(\s*(\s*((\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*)|(\s*\(\s*(\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*,)*\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*\)\s*))\s*,)*\s*((\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*)|(\s*\(\s*(\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*,)*\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*\)\s*))\s*\)\s*)|(\s*\s*(\s*((\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*)|(\s*\(\s*(\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*,)*\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*\)\s*))\s*,)*\s*((\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*)|(\s*\(\s*(\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*,)*\s*((\s*[_a-zA-Z]\w*\s*)|(\s*\(\s*(\s*[_a-zA-Z]\w*\s*,)*\s*[_a-zA-Z]\w*\s*\)\s*))\s*\)\s*))\s*\s*))=/;
@@ -29,7 +29,7 @@ $(function () {
             depth = 0,
             mlsopened = false,
 			l;
-        
+
         for (l = 0; l < lines.length; l = l + 1) {
             if (lines[l].match(/'''/) !== null && lines[l].match(/'''/).length === 1) {
                 mlsopened = !mlsopened;
@@ -46,7 +46,7 @@ $(function () {
 
     //Loop
     repl.eval = function (code) {
-        Sk.configure({ 
+        Sk.configure({
             output: function(str) {
                 //strip out line-feeds
                 if (str.replace(/\n/g, "") !== "") {
@@ -61,7 +61,7 @@ $(function () {
             },
 			retainglobals: true
         });
-            
+
         //split lines on linefeed
         var lines = code.split('\n'), index = -1, line = 0;
 
@@ -91,7 +91,7 @@ $(function () {
             if ((index = err.toString().indexOf("on line")) !== -1) {
                 index = parseInt(err.toString().substr(index + 8), 10);
             }
-			
+
             //print the accumulated code with a ">" before the broken line.
             //Don't add the last statement to the accumulated code
             lines.forEach(function (str) {
