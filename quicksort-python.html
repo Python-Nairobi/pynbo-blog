@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Quicksort in python // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/kenny-rachuonyo.html" title="See posts by Kenny Rachuonyo">
+                    <img class="avatar" alt="Kenny Rachuonyo" src="http://www.gravatar.com/avatar/3ca50efecf9ee654743eb2371cedb28d">
+                    <h2 class="article-info">Kenny Rachuonyo</h2>
+                </a>
+                <small class="about-author"><p>A computer programmer in Nairobi, and fan of Python. You can check out his homepage <a href="http://www.99nth.com/~krm">here</a>.</small>
+                <h5>Published</h5>
+                <p>September 19, 2016</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Quicksort in python</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/algorithms.html">algorithms</a>
+                                <a class="post-category" href="./tag/quicksort.html">quicksort</a>
+                        </p>
+                </header>
+            </section>
+            <p>Quicksort is one of the common sorting algorithms taught in computer science.</p>
+<p>Here I shall attempt to give a brief and clear example in Python.</p>
+<p>As a divide end conquer algorithm, three main steps are involved:</p>
+<ul>
+<li>Pick an element (pivot) in the list</li>
+<li>Partition the list so that all elements smaller than the pivot
+   come before it and those bigger than the pivot come after it</li>
+<li>Recursively apply the previous steps to the smaller sublists
+   before and after the pivot</li>
+</ul>
+<p>This should leave you with a fully sorted list at the end.</p>
+<p>Let's define a quicksort function</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sorts elements between indices lo and hi inclusive</span>
+
+<span class="sd">    L - a list to sort</span>
+<span class="sd">    lo - index of the lower end in the range</span>
+<span class="sd">    hi - index of the higher end&quot;&quot;&quot;</span>
+
+    <span class="c1"># Base case: lo and hi are equal, i.e. only one element in sublist</span>
+    <span class="c1"># In this case, nothing is done on the list</span>
+
+    <span class="k">if</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="c1"># lo is less than hi, i.e. at least two elements in sublist</span>
+
+        <span class="c1"># the partitioning step, p is the final position of the</span>
+        <span class="c1"># pivot after partitioning</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+
+        <span class="c1"># Recursively sort the &#39;less than&#39; partition</span>
+        <span class="n">quicksort</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Recursively sort the &#39;greater than&#39; partition</span>
+        <span class="n">quicksort</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+
+        <span class="c1"># and that&#39;s it :-)</span>
+</pre></div>
+
+
+<p>We then define the partition function that does the actual work. It picks an
+element in the list within the given range, and divides the list into segments
+less than or equal, and greater than the pivot.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Partitions the list within the given range</span>
+<span class="sd">    L - a list to partition</span>
+<span class="sd">    lo - index of the lower end in list to start partitioning from</span>
+<span class="sd">    hi - index of higher end in list to end the partitioning&quot;&quot;&quot;</span>
+
+    <span class="c1"># There several schemes used to pick the pivot</span>
+    <span class="c1"># Here we shall use a one known as the &#39;Lomuto partition scheme&#39;</span>
+    <span class="c1"># Where we simply pick the last item in the range as the pivot</span>
+
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">hi</span><span class="p">]</span>
+
+    <span class="c1"># i is the next position in the list where we</span>
+    <span class="c1"># place an element less than or equal to the pivot</span>
+
+    <span class="c1"># We begin at the lower end</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span>
+
+    <span class="c1"># We iterate through the list from lo to hi - 1 (the pivot is at hi, remember?)</span>
+    <span class="c1"># separating elements less than or equal to the pivot</span>
+    <span class="c1"># from those greater than the pivot</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">lo</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="c1"># if element at j is less than or equal to the pivot</span>
+        <span class="c1"># swap it into location i</span>
+        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
+            <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># and increment i</span>
+
+        <span class="c1"># increment j</span>
+        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># When the loop completes, we know that all elements before i are less than</span>
+    <span class="c1"># or equal to the pivot, and all elements from i onwards are greater than</span>
+    <span class="c1"># the pivot</span>
+
+    <span class="c1"># swap the pivot into it&#39;s correct position, separating these two parts</span>
+    <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">hi</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">hi</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="c1"># Now the pivot is at position i, and all elements after i are greater than</span>
+    <span class="c1"># it</span>
+
+    <span class="c1"># return its position</span>
+    <span class="k">return</span> <span class="n">i</span>
+</pre></div>
+
+
+<p>We can now test our quicksort function.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Create a list of 10 unsorted integers between 1 and 100 inclusive</span>
+<span class="n">list_to_sort</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;List before sorting: &quot;</span><span class="p">,</span> <span class="n">list_to_sort</span><span class="p">)</span>
+
+<span class="c1"># Now let&#39;s sort the list</span>
+<span class="n">last_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_to_sort</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">quicksort</span><span class="p">(</span><span class="n">list_to_sort</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">last_index</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;List after sorting: &quot;</span><span class="p">,</span> <span class="n">list_to_sort</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can read more on quicksort in its 
+<a href="https://en.wikipedia.org/wiki/Quicksort">wikipedia page</a>.</p>
+<p>And <a href="https://www.safaribooksonline.com/library/view/python-cookbook/0596001673/ch02s12.html">here's</a> 
+an implementation in only 3 lines on python, if your into that sort of thing.</p>
+<p><a href="https://github.com/krmboya/py-examples/blob/master/quicksort.py">Here's</a> the source code.</p>
+<p>Also posted <a href="http://www.99nth.com/~krm/blog/quicksort-python.html">here</a></p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

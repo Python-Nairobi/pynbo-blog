@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/kenny-rachuonyo.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2016-09-19T19:51:00+03:00</updated><entry><title>Quicksort in python</title><link href="http://blog.pynbo.or.ke/quicksort-python.html" rel="alternate"></link><published>2016-09-19T19:51:00+03:00</published><updated>2016-09-19T19:51:00+03:00</updated><author><name>Kenny Rachuonyo</name></author><id>tag:blog.pynbo.or.ke,2016-09-19:quicksort-python.html</id><summary type="html">&lt;p&gt;Quicksort is one of the common sorting algorithms taught in computer science.&lt;/p&gt;
+&lt;p&gt;Here I shall attempt to give a brief and clear example in Python.&lt;/p&gt;
+&lt;p&gt;As a divide end conquer algorithm, three main steps are involved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pick an element (pivot) in the list&lt;/li&gt;
+&lt;li&gt;Partition the list so that all elements smaller than the pivot
+   come before it and those bigger than the pivot come after it&lt;/li&gt;
+&lt;li&gt;Recursively apply the previous steps to the smaller sublists
+   before and after the pivot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This should leave you with a fully sorted list at the end.&lt;/p&gt;
+&lt;p&gt;Let's define a quicksort function&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;quicksort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Sorts elements between indices lo and hi inclusive&lt;/span&gt;
+
+&lt;span class="sd"&gt;    L - a list to sort&lt;/span&gt;
+&lt;span class="sd"&gt;    lo - index of the lower end in the range&lt;/span&gt;
+&lt;span class="sd"&gt;    hi - index of the higher end&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Base case: lo and hi are equal, i.e. only one element in sublist&lt;/span&gt;
+    &lt;span class="c1"&gt;# In this case, nothing is done on the list&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# lo is less than hi, i.e. at least two elements in sublist&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# the partitioning step, p is the final position of the&lt;/span&gt;
+        &lt;span class="c1"&gt;# pivot after partitioning&lt;/span&gt;
+        &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;partition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Recursively sort the &amp;#39;less than&amp;#39; partition&lt;/span&gt;
+        &lt;span class="n"&gt;quicksort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Recursively sort the &amp;#39;greater than&amp;#39; partition&lt;/span&gt;
+        &lt;span class="n"&gt;quicksort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# and that&amp;#39;s it :-)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We then define the partition function that does the actual work. It picks an
+element in the list within the given range, and divides the list into segments
+less than or equal, and greater than the pivot.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;partition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Partitions the list within the given range&lt;/span&gt;
+&lt;span class="sd"&gt;    L - a list to partition&lt;/span&gt;
+&lt;span class="sd"&gt;    lo - index of the lower end in list to start partitioning from&lt;/span&gt;
+&lt;span class="sd"&gt;    hi - index of higher end in list to end the partitioning&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# There several schemes used to pick the pivot&lt;/span&gt;
+    &lt;span class="c1"&gt;# Here we shall use a one known as the &amp;#39;Lomuto partition scheme&amp;#39;&lt;/span&gt;
+    &lt;span class="c1"&gt;# Where we simply pick the last item in the range as the pivot&lt;/span&gt;
+
+    &lt;span class="n"&gt;pivot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# i is the next position in the list where we&lt;/span&gt;
+    &lt;span class="c1"&gt;# place an element less than or equal to the pivot&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# We begin at the lower end&lt;/span&gt;
+    &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# We iterate through the list from lo to hi - 1 (the pivot is at hi, remember?)&lt;/span&gt;
+    &lt;span class="c1"&gt;# separating elements less than or equal to the pivot&lt;/span&gt;
+    &lt;span class="c1"&gt;# from those greater than the pivot&lt;/span&gt;
+    &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lo&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# if element at j is less than or equal to the pivot&lt;/span&gt;
+        &lt;span class="c1"&gt;# swap it into location i&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;pivot&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="c1"&gt;# and increment i&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# increment j&lt;/span&gt;
+        &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# When the loop completes, we know that all elements before i are less than&lt;/span&gt;
+    &lt;span class="c1"&gt;# or equal to the pivot, and all elements from i onwards are greater than&lt;/span&gt;
+    &lt;span class="c1"&gt;# the pivot&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# swap the pivot into it&amp;#39;s correct position, separating these two parts&lt;/span&gt;
+    &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;L&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Now the pivot is at position i, and all elements after i are greater than&lt;/span&gt;
+    &lt;span class="c1"&gt;# it&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# return its position&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can now test our quicksort function.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Create a list of 10 unsorted integers between 1 and 100 inclusive&lt;/span&gt;
+&lt;span class="n"&gt;list_to_sort&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;List before sorting: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;list_to_sort&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Now let&amp;#39;s sort the list&lt;/span&gt;
+&lt;span class="n"&gt;last_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;list_to_sort&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;quicksort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;list_to_sort&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;last_index&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;List after sorting: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;list_to_sort&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can read more on quicksort in its 
+&lt;a href="https://en.wikipedia.org/wiki/Quicksort"&gt;wikipedia page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And &lt;a href="https://www.safaribooksonline.com/library/view/python-cookbook/0596001673/ch02s12.html"&gt;here's&lt;/a&gt; 
+an implementation in only 3 lines on python, if your into that sort of thing.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/krmboya/py-examples/blob/master/quicksort.py"&gt;Here's&lt;/a&gt; the source code.&lt;/p&gt;
+&lt;p&gt;Also posted &lt;a href="http://www.99nth.com/~krm/blog/quicksort-python.html"&gt;here&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="algorithms"></category><category term="quicksort"></category></entry></feed>

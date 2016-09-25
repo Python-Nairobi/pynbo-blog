@@ -60,7 +60,7 @@
 <h4>Data Capture</h4>
 <p>To begin the process I decided to test if is possible to capture Image from each camera. After exploration of the website I realized each camera had a url with a JPEG file extension at the end. I figured the cameras wrote a new image to the JPEG file on the URL. So, can I captured every new image? Yes - I used the <strong>urllib</strong> library to capture the image and store it on the disk.</p>
 <p>I organized the camera urls into a dict so as to have a means of calling and referencing each road.</p>
-<div class="highlight"><pre><span class="n">cameras</span> <span class="o">=</span> <span class="nb">dict</span> <span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">cameras</span> <span class="o">=</span> <span class="nb">dict</span> <span class="p">(</span>
 <span class="n">museum</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/purshotam.jpg&#39;</span><span class="p">,</span>
 <span class="n">ojijo</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/mhcojijo.jpg&#39;</span><span class="p">,</span>
 <span class="n">forest_limuru</span><span class="o">=</span><span class="s1">&#39;http://traffic.accesskenya.com/images/traffic/feeds/forestlimuru.jpg?&#39;</span><span class="p">,</span>
@@ -69,7 +69,7 @@
 
 
 <p>After that, I wrote a function that takes a url and extracts three images every 6 seconds.</p>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">capture_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">capture_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">way</span><span class="p">:</span>
                 <span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">way</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">],</span><span class="s1">&#39;img_&#39;</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span><span class="p">)</span>
@@ -79,7 +79,7 @@
 
 <h4>Image Processing</h4>
 <p>The images captured from the camera are stored on a folder with the name of the road. Next task involves processing the images for analysis. I utlize two libraries for this task; <strong>PIL</strong> for loading the images and <strong>numpy</strong> to convert pixel values to numerical array values. All these are wrapped in a function (shown below) that takes the image folder directory as input then proceeds to load all 3 images, converts them to numpy arrays, deletes the images and returns a python dict holding arrays on all the images.</p>
-<div class="highlight"><pre><span class="c1"># load images</span>
+<div class="highlight"><pre><span></span><span class="c1"># load images</span>
 <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -103,7 +103,7 @@
 
 <h4>Motion Detection</h4>
 <p>The first important step in analysis of the images is checking if there has been movements within the 6 second period. To achieve this, I utilized the concept of differential imaging - a means of measuring motion detection by subtracting the pixel values of subsquent images. In my function, I calculate the number of pixels that have moved, this helps in quantifying the movement (standstill, moderate traffic).</p>
-<div class="highlight"><pre><span class="c1"># differential imaging</span>
+<div class="highlight"><pre><span></span><span class="c1"># differential imaging</span>
 <span class="k">def</span> <span class="nf">diffImg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">img2</span><span class="p">,</span><span class="n">img3</span><span class="p">):</span>
 
     <span class="c1"># calculate absolute difference</span>
@@ -126,7 +126,7 @@
 
 <h4>Calibrating Movement</h4>
 <p>Once movement is detected, it is important to then quantify trafficc in km/h. To aid in this calculation is the optical flow algorithm. A concept in computer vision that allow tracking features in an image. I utilized this functionality to find features to track (cars) in the first images, and get their corresponding positions in the second and third image. I then proceeded to calculate the avaerage distance (euclidean distance) that the feature has moved. Dividing the pixel distance by 12 seconds gives me speed at which the objects(cars) are moving. My function returns this value.</p>
-<div class="highlight"><pre><span class="c1"># calculate optical flow of points on images</span>
+<div class="highlight"><pre><span></span><span class="c1"># calculate optical flow of points on images</span>
 <span class="k">def</span> <span class="nf">opticalFlow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">img2</span><span class="p">,</span><span class="n">img3</span><span class="p">):</span>
 
     <span class="c1">#set variables</span>
@@ -162,7 +162,7 @@
 
 <h4>The API</h4>
 <p>The API (underconstruction) is based on flask. By specifying a road name at the HTTP endpoint, the API returns speed of traffic and level of movement (stanstill, moderate rate, no traffic).</p>
-<div class="highlight"><pre><span class="c1"># load required libraries</span>
+<div class="highlight"><pre><span></span><span class="c1"># load required libraries</span>
 <span class="kn">import</span> <span class="nn">image_processing</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
