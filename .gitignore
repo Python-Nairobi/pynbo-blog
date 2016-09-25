@@ -62,6 +62,7 @@ venv
 output
 cache
 .DS_Store
+.ropeproject/
 
 # emacs
 *~
