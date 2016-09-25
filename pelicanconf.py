@@ -30,7 +30,7 @@ SOCIAL = (('github', 'https://github.com/Python-Nairobi/'),
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True 
+RELATIVE_URLS = True
 
 # global metadata to all the contents
 #DEFAULT_METADATA = (('key', 'val'),)
@@ -45,7 +45,6 @@ STATIC_PATHS = [
     'img',
     'js',
     'css',
-    'skulpt',
     'extra/robots.txt',
     'CNAME',
     'googlec9e1ed2a96ca548d.html',
@@ -58,7 +57,7 @@ PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 PDF_GENERATOR = False
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
-DEFAULT_DATE = (1969, 12, 31, 23, 59, 59) 
+DEFAULT_DATE = (1969, 12, 31, 23, 59, 59)
 THEME = "pure-pynbo"
 SHOW_ARTICLE_AUTHOR = True
 DISPLAY_PAGES_ON_MENU = False

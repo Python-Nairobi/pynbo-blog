@@ -1,9 +1,6 @@
 [submodule "pure-pynbo"]
 	path = pure-pynbo
 	url = git@github.com:Python-Nairobi/pure-pynbo.git
-[submodule "content/skulpt"]
-	path = content/skulpt
-	url = git@github.com:Python-Nairobi/skulpt-repl-barebones.git
 [submodule "pelican-plugins"]
 	path = pelican-plugins
 	url = git@github.com:Python-Nairobi/pelican-plugins.git
