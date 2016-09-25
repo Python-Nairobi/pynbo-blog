@@ -46,6 +46,7 @@ STATIC_PATHS = [
     'js',
     'css',
     'extra/robots.txt',
+    'googlec9e1ed2a96ca548d.html',
     'CNAME',
     'BingSiteAuth.xml',
     ]
