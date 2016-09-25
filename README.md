@@ -3,22 +3,22 @@ The Python Nairobi Blog Repo
 
 ## INTRO
 This repository contains the sources used to build the python nairobi blog.
-We use [pelican](http://docs.getpelican.com) to build the contents of this repository 
+We use [pelican](http://docs.getpelican.com) to build the contents of this repository
 into the site you see at http://blog.pynbo.or.ke or http://python-nairobi.github.io/pynbo-blog
 
 ## PREREQUIESITES
 To contribute, we recommend you install:-
 
-- [Python >= 2.7](https://www.python.org/download/releases/2.7) 
+- [Python >= 2.7](https://www.python.org/download/releases/2.7)
 - [PIP]("http://www.pip-installer.org/en/latest/installing.html)
-- [virtualenv](http://www.virtualenv.org/en/latest/virtualenv.html) 
+- [virtualenv](http://www.virtualenv.org/en/latest/virtualenv.html)
 
 ## CLONING
 1. <a href="https://github.com/Python-Nairobi/pynbo-blog/fork" target="_blank">Click here to fork this Repo</a>.
 2. Clone your fork and cd into it.
 3. Create a virtualenv for your repo:- `mkvirtualenv -a . pynbo-blog`.
 4. Install the remaining dependencies:- `pip install -r requirements.txt`.
-5. Initialize & update submodule dependencies (plugins, theme & skulpt interpreter): `git submodule init && git submodule update`.
+5. Initialize & update submodule dependencies (plugins, theme & skulpt interpreter): `git submodule update --init --recursive`.
 6. Then create a branch, naming it along the lines as your topic of contribution.
 
 ## EDITING
@@ -27,12 +27,12 @@ Any changes you make will automatically be reflected there.
 
 
 ### MARKDOWN
-![Markdown, do you speak it?](content/img/markdown!%20do%20you%20speak%20it%3F.jpg)  
+![Markdown, do you speak it?](content/img/markdown!%20do%20you%20speak%20it%3F.jpg)
 We write our articles in [MarkDown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-from the [`content`](content/) folder.  
-Your markdown files should end with a `.md`, `.markdown`, or `.mkd` file extension. 
-You should also include some metadata at the top of your markdown files.  
-Checkout the example bellow and adapt appropriately:-  
+from the [`content`](content/) folder.
+Your markdown files should end with a `.md`, `.markdown`, or `.mkd` file extension.
+You should also include some metadata at the top of your markdown files.
+Checkout the example bellow and adapt appropriately:-
 
 ```
 Title: Blog post title
@@ -47,9 +47,9 @@ email: used to display your [gravar](https://gravatar.com/) in the article.
 
 Blog Post Content Goes Here.
 ```
-You can also `cp content/article.md.template content/new_article.md` and `vi content/new_article.md` appropriately.  
+You can also `cp content/article.md.template content/new_article.md` and `vi content/new_article.md` appropriately.
 Feel free to write portions of your article in html to compensate for where markdown falls short
-e.g. opening links in new tabs. (Jules is ok with this)  
+e.g. opening links in new tabs. (Jules is ok with this)
 
 ## FINALLY
 1. Add, commit and push your changes.
