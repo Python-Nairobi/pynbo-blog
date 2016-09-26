@@ -121,7 +121,7 @@ You can read more on quicksort in its
 [wikipedia page](https://en.wikipedia.org/wiki/Quicksort).
 
 And [here's](https://www.safaribooksonline.com/library/view/python-cookbook/0596001673/ch02s12.html) 
-an implementation in only 3 lines on python, if your into that sort of thing.
+an implementation in only 3 lines of python, if your into that sort of thing.
 
 [Here's](https://github.com/krmboya/py-examples/blob/master/quicksort.py) the source code.
 
