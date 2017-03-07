@@ -7,7 +7,7 @@ Summary: A summary of the presentation on pypy Joannah Nanjekye gave.
 email: nanjekyejoannah@gmail.com
 about_author: <p> Software Engineer,  Aeronautical Engineer to be, Straight Outta 256 , I choose Results over Reasons, Passionate Aviator, Show me the code</p><p>I share my thoughts majorly here <a href="https://nanjekyejoannah.github.io/" target="_blank">https://nanjekyejoannah.github.io/</a></p>
 
-pypy is an alternate implementation of the python programming language. Pypy started  out as a python interpreter written in python. It is aimed at being compatible with cpython and currently with experimental compatibility for CPython C API extensions.
+Pypy is an alternate implementation of the python programming language. Pypy started  out as a python interpreter written in python. It is aimed at being compatible with cpython and currently with experimental compatibility for CPython C API extensions.
 
 Pypy originally refered to two things. one the python interpreter and Rpython Translation toolchain but currently pypy is always used torefer to the python interpreter. The translation framework is always refered to as the Rpython Translation Framework.
 
