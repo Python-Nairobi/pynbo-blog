@@ -32,7 +32,7 @@ pypy may also not be as fast for small scripts that do not give the Just-in -tim
 
 I ran this [code]() on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
 
-<img src="https://github.com/nanjekyejoannah/pynbo-blog/blob/jumbojet/content/img/pypy-vs_cpython.pypy1.PNG">
+<img src="https://github.com/nanjekyejoannah/pynbo-blog/blob/jumbojet/content/img/pypy1.PNG">
 
 Alot of benchmarks have shown pypy performing better than Cpython and its not getting slower with time. Each new version of pypy is faster than its predecessor. The pypy team have shared good insight at their [speed center](http://speed.pypy.org/).
 
@@ -103,7 +103,7 @@ It is easy to install
 
 <p> Windows </p>
 
-There is rich [Documentation](http://pypy.org/download.html) on installation.
+There is rich [Documentation](http://pypy.org/download.html) on installation for windows.
 
 
 # Check these out for more pypy inspiration
