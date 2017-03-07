@@ -32,7 +32,7 @@ pypy may also not be as fast for small scripts that do not give the Just-in -tim
 
 I ran this [code]() on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
 
-<img src="assets/pypy1.PNG" title="Profile Picture" >
+<img src="content/img/pypy1.PNG" title="Profile Picture" >
 
 Alot of benchmarks have shown pypy performing better than Cpython and its not getting slower with time. Each new version of pypy is faster than its predecessor. The pypy team have shared good insight at their [speed center](http://speed.pypy.org/).
 
@@ -82,7 +82,7 @@ Pypy exposes language features similar to the ones present in stackless python.
 
 Lets take a look at pypy and a reference python implementation called cpython.
 
-<img src="assets/pypy1.PNG" title="Profile Picture" >
+<img src="content/img/pypy1.PNG" title="Profile Picture" >
 
 # Way Forward
 
@@ -92,19 +92,20 @@ Lets take a look at pypy and a reference python implementation called cpython.
 
 It is easy to install
 
-Linux
-	:::python
-	sudo apt-get install pypy
+<p>Linux</p>
+	
+	`sudo apt-get install pypy`
 
-Mac
-	:::python
-	sudo brew install pypy
+<p>Mac</p>
+	
+	`sudo brew install pypy`
 
-Windows 
+<p> Windows </p>
+
 There is rich [Documentation](http://pypy.org/download.html) on installation.
 
 
-# For your further reading
+# Check these out for more pypy inspiration
 * http://pypy.org/
 * http://www.aosabook.org/en/pypy.html
 * http://uk.dice.com/technews/a-look-at-pypy/
