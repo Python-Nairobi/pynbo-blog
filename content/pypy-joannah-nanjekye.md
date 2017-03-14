@@ -22,24 +22,24 @@ The pypy intepreter offers a couple of distinct features namely;
 * Memory Usage
 * Stackless python features
 
-Speed 
+##Speed
 
 Pypy is magically faster due to its high performance Just-in-time compiler and garbage collector.
 
-It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster, it may be for pure python code but actually run slower than Cpython where the JIT cant help. 
+It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster, it may be for pure python code but actually run slower than Cpython where the JIT cant help.
 
 pypy may also not be as fast for small scripts that do not give the Just-in-time compiler enough warm up time.
 
 I ran this [code](https://gist.github.com/mrmoje/30bacf757e400ef28c56fdaecfb0b2a8) on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
 
-<img src="https://github.com/nanjekyejoannah/pynbo-blog/blob/jumbojet/content/img/pypy1.PNG">
+<img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy1.PNG">
 
 Alot of benchmarks have shown pypy performing better than Cpython and its not getting slower with time. Each new version of pypy is faster than its predecessor. The pypy team have shared good insight at their [speed center](http://speed.pypy.org/).
 
 
-Compatibility 
+##Compatibility
 
-Good news is pypy is compatible with most of the python Libraries. 
+Good news is pypy is compatible with most of the python Libraries.
 
 * Django
 * Flask
@@ -70,19 +70,19 @@ Good news is pypy is compatible with most of the python Libraries.
 
 Pypy has Experimental support for Extension modules through cpyext. It can run most C extensions these days.
 
-**Memory Usage**
+##Memory Usage
 
 Memory-intensive python programs take lesser space than when running on pypy . However this may not be the case always though due to some details.
 
-**Stackless python Features**
+##Stackless python Features
 
 Pypy exposes language features similar to the ones present in stackless python.
 
-# Differences between Cpython and Python
+#Differences between Cpython and Python
 
 Lets take a look at pypy and a reference python implementation called cpython.
 
-<img src="https://github.com/nanjekyejoannah/pynbo-blog/blob/jumbojet/content/img/pypy-vs_cpython.png">
+<img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy-vs_cpython.png">
 
 
 # Way Forward
@@ -93,21 +93,21 @@ Lets take a look at pypy and a reference python implementation called cpython.
 
 It is easy to install
 
-<p>Linux</p>
-	
+###Linux:-
+
 	`sudo apt-get install pypy`
 
-<p>Mac</p>
-	
+###Mac:-
+
 	`sudo brew install pypy`
 
-<p> Windows </p>
+###Windows:-
 
 There is rich [Documentation](http://pypy.org/download.html) on installation for windows.
 
 
 # Check these out for more pypy inspiration
-* http://pypy.org/
-* http://www.aosabook.org/en/pypy.html
-* http://uk.dice.com/technews/a-look-at-pypy/
-* http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27
+* <http://pypy.org/>
+* <http://www.aosabook.org/en/pypy.html>
+* <http://uk.dice.com/technews/a-look-at-pypy/>
+* <http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27>
