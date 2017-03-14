@@ -9,7 +9,7 @@ about_author: <p> Software Engineer,  Aeronautical Engineer to be, Straight Outt
 
 Pypy is an alternate implementation of the python programming language. Pypy started  out as a python interpreter written in python. It is aimed at being compatible with cpython and currently with experimental compatibility for CPython C API extensions.
 
-Pypy originally refered to two things. one the python interpreter and Rpython Translation toolchain but currently pypy is always used torefer to the python interpreter. The translation framework is always refered to as the Rpython Translation Framework.
+Pypy originally refered to two things. one the python interpreter and Rpython Translation toolchain but currently pypy is always used to refer to the python interpreter. The translation framework is always refered to as the Rpython Translation Framework.
 
 It is the distinct features embedded in pypy that give your python programs the magical performance. Lets have a look at some of them.
 
@@ -24,11 +24,11 @@ The pypy intepreter offers a couple of distinct features namely;
 
 Speed 
 
-Pypy is magically faster due to its high performance Just-in -time compiler and garbage collector.
+Pypy is magically faster due to its high performance Just-in-time compiler and garbage collector.
 
-It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster , it may be for pure python code but actually run slower than Cpython where the JIT cant help. 
+It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster, it may be for pure python code but actually run slower than Cpython where the JIT cant help. 
 
-pypy may also not be as fast for small scripts that do not give the Just-in -time compiler enough warm up time.
+pypy may also not be as fast for small scripts that do not give the Just-in-time compiler enough warm up time.
 
 I ran this [code]() on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
 
