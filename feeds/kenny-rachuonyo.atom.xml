@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/kenny-rachuonyo.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2016-09-19T19:51:00+03:00</updated><entry><title>Quicksort in python</title><link href="http://blog.pynbo.or.ke/quicksort-python.html" rel="alternate"></link><published>2016-09-19T19:51:00+03:00</published><updated>2016-09-19T19:51:00+03:00</updated><author><name>Kenny Rachuonyo</name></author><id>tag:blog.pynbo.or.ke,2016-09-19:quicksort-python.html</id><summary type="html">&lt;p&gt;Quicksort is one of the common sorting algorithms taught in computer science.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Kenny Rachuonyo</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/kenny-rachuonyo.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2016-09-19T19:51:00+03:00</updated><entry><title>Quicksort in python</title><link href="http://blog.pynbo.or.ke/quicksort-python.html" rel="alternate"></link><published>2016-09-19T19:51:00+03:00</published><updated>2016-09-19T19:51:00+03:00</updated><author><name>Kenny Rachuonyo</name></author><id>tag:blog.pynbo.or.ke,2016-09-19:/quicksort-python.html</id><summary type="html">&lt;p&gt;A brief demo of quicksort in python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Quicksort is one of the common sorting algorithms taught in computer science.&lt;/p&gt;
 &lt;p&gt;Here I shall attempt to give a brief and clear example in Python.&lt;/p&gt;
 &lt;p&gt;As a divide end conquer algorithm, three main steps are involved:&lt;/p&gt;
 &lt;ul&gt;
@@ -106,6 +106,6 @@ less than or equal, and greater than the pivot.&lt;/p&gt;
 &lt;p&gt;You can read more on quicksort in its 
 &lt;a href="https://en.wikipedia.org/wiki/Quicksort"&gt;wikipedia page&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;And &lt;a href="https://www.safaribooksonline.com/library/view/python-cookbook/0596001673/ch02s12.html"&gt;here's&lt;/a&gt; 
-an implementation in only 3 lines on python, if your into that sort of thing.&lt;/p&gt;
+an implementation in only 3 lines of python, if your into that sort of thing.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/krmboya/py-examples/blob/master/quicksort.py"&gt;Here's&lt;/a&gt; the source code.&lt;/p&gt;
-&lt;p&gt;Also posted &lt;a href="http://www.99nth.com/~krm/blog/quicksort-python.html"&gt;here&lt;/a&gt;&lt;/p&gt;</summary><category term="python"></category><category term="algorithms"></category><category term="quicksort"></category></entry></feed>
+&lt;p&gt;Also posted &lt;a href="http://www.99nth.com/~krm/blog/quicksort-python.html"&gt;here&lt;/a&gt;&lt;/p&gt;</content><category term="python"></category><category term="algorithms"></category><category term="quicksort"></category></entry></feed>

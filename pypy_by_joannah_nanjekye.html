@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Faster python programs with pypy by Joannah Nanjekye // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/joannah-nanjekye.html" title="See posts by Joannah Nanjekye">
+                    <img class="avatar" alt="Joannah Nanjekye" src="http://www.gravatar.com/avatar/e7e052a001d4b99e3852711d2d115f67">
+                    <h2 class="article-info">Joannah Nanjekye</h2>
+                </a>
+                <small class="about-author"><p> Software Engineer,  Aeronautical Engineer to be, Straight Outta 256 , I choose Results over Reasons, Passionate Aviator, Show me the code</p><p>I share my thoughts majorly here <a href="https://nanjekyejoannah.github.io/" target="_blank">https://nanjekyejoannah.github.io/</a></p></small>
+                <h5>Published</h5>
+                <p>March 06, 2017</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Faster python programs with pypy by Joannah Nanjekye</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/pypy.html">pypy</a>
+                                <a class="post-category" href="./tag/python.html">python</a>
+                        </p>
+                </header>
+            </section>
+            <p>Pypy is an alternate implementation of the python programming language. Pypy started  out as a python interpreter written in python. It is aimed at being compatible with cpython and currently with experimental compatibility for CPython C API extensions.</p>
+<p>Pypy originally refered to two things. one the python interpreter and Rpython Translation toolchain but currently pypy is always used to refer to the python interpreter. The translation framework is always refered to as the Rpython Translation Framework.</p>
+<p>It is the distinct features embedded in pypy that give your python programs the magical performance. Lets have a look at some of them.</p>
+<h1>Pypy Distinct Features</h1>
+<p>The pypy intepreter offers a couple of distinct features namely;</p>
+<ul>
+<li>Speed</li>
+<li>Compatibility</li>
+<li>Memory Usage</li>
+<li>Stackless python features</li>
+</ul>
+<h2>Speed</h2>
+<p>Pypy is magically faster due to its high performance Just-in-time compiler and garbage collector.</p>
+<p>It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster, it may be for pure python code but actually run slower than Cpython where the JIT cant help.</p>
+<p>pypy may also not be as fast for small scripts that do not give the Just-in-time compiler enough warm up time.</p>
+<p>I ran this <a href="https://gist.github.com/mrmoje/30bacf757e400ef28c56fdaecfb0b2a8">code</a> on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;</p>
+<p><img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy1.PNG"></p>
+<p>Alot of benchmarks have shown pypy performing better than Cpython and its not getting slower with time. Each new version of pypy is faster than its predecessor. The pypy team have shared good insight at their <a href="http://speed.pypy.org/">speed center</a>.</p>
+<h2>Compatibility</h2>
+<p>Good news is pypy is compatible with most of the python Libraries.</p>
+<ul>
+<li>Django</li>
+<li>Flask</li>
+<li>Bottle</li>
+<li>Pylons</li>
+<li>Pyramid</li>
+<li>Twisted</li>
+<li>lxml</li>
+<li>Beautiful Soup</li>
+<li>Sphinx</li>
+<li>IPyton</li>
+<li>PIL/Pillow</li>
+<li>Psycopg2</li>
+<li>MySQL-Python</li>
+<li>pysqlite</li>
+<li>pymongo</li>
+<li>cx_Oracle</li>
+<li>SQLAlchemy</li>
+<li>Gunicorn</li>
+<li>Requests</li>
+<li>nose</li>
+<li>pytest</li>
+<li>celery</li>
+<li>Pip</li>
+<li>Numpy</li>
+<li>Scipy</li>
+<li>Gevent</li>
+</ul>
+<p>Pypy has Experimental support for Extension modules through cpyext. It can run most C extensions these days.</p>
+<h2>Memory Usage</h2>
+<p>Memory-intensive python programs take lesser space than when running on pypy . However this may not be the case always though due to some details.</p>
+<h2>Stackless python Features</h2>
+<p>Pypy exposes language features similar to the ones present in stackless python.</p>
+<h1>Differences between Cpython and Python</h1>
+<p>Lets take a look at pypy and a reference python implementation called cpython.</p>
+<p><img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy-vs_cpython.png"></p>
+<h1>Way Forward</h1>
+<p>“If you want your code to run faster, you should probably just use PyPy.” — Guido van Rossum (creator of Python)</p>
+<h1>Installation</h1>
+<p>It is easy to install</p>
+<h3>Linux:-</h3>
+<div class="highlight"><pre><span></span>`sudo apt-get install pypy`
+</pre></div>
+
+
+<h3>Mac:-</h3>
+<div class="highlight"><pre><span></span>`sudo brew install pypy`
+</pre></div>
+
+
+<h3>Windows:-</h3>
+<p>There is rich <a href="http://pypy.org/download.html">Documentation</a> on installation for windows.</p>
+<h1>Check these out for more pypy inspiration</h1>
+<ul>
+<li><a href="http://pypy.org/">http://pypy.org/</a></li>
+<li><a href="http://www.aosabook.org/en/pypy.html">http://www.aosabook.org/en/pypy.html</a></li>
+<li><a href="http://uk.dice.com/technews/a-look-at-pypy/">http://uk.dice.com/technews/a-look-at-pypy/</a></li>
+<li><a href="http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27">http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27</a></li>
+</ul>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

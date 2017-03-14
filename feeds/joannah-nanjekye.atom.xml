@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Joannah Nanjekye</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/joannah-nanjekye.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2017-03-06T18:11:00+03:00</updated><entry><title>Faster python programs with pypy by Joannah Nanjekye</title><link href="http://blog.pynbo.or.ke/pypy_by_joannah_nanjekye.html" rel="alternate"></link><published>2017-03-06T18:11:00+03:00</published><updated>2017-03-06T18:11:00+03:00</updated><author><name>Joannah Nanjekye</name></author><id>tag:blog.pynbo.or.ke,2017-03-06:/pypy_by_joannah_nanjekye.html</id><summary type="html">&lt;p&gt;A summary of the presentation on pypy Joannah Nanjekye gave.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Pypy is an alternate implementation of the python programming language. Pypy started  out as a python interpreter written in python. It is aimed at being compatible with cpython and currently with experimental compatibility for CPython C API extensions.&lt;/p&gt;
+&lt;p&gt;Pypy originally refered to two things. one the python interpreter and Rpython Translation toolchain but currently pypy is always used to refer to the python interpreter. The translation framework is always refered to as the Rpython Translation Framework.&lt;/p&gt;
+&lt;p&gt;It is the distinct features embedded in pypy that give your python programs the magical performance. Lets have a look at some of them.&lt;/p&gt;
+&lt;h1&gt;Pypy Distinct Features&lt;/h1&gt;
+&lt;p&gt;The pypy intepreter offers a couple of distinct features namely;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Speed&lt;/li&gt;
+&lt;li&gt;Compatibility&lt;/li&gt;
+&lt;li&gt;Memory Usage&lt;/li&gt;
+&lt;li&gt;Stackless python features&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Speed&lt;/h2&gt;
+&lt;p&gt;Pypy is magically faster due to its high performance Just-in-time compiler and garbage collector.&lt;/p&gt;
+&lt;p&gt;It is therefore faster for programs that are JIT susceptible. This means that pypy may not always run faster, it may be for pure python code but actually run slower than Cpython where the JIT cant help.&lt;/p&gt;
+&lt;p&gt;pypy may also not be as fast for small scripts that do not give the Just-in-time compiler enough warm up time.&lt;/p&gt;
+&lt;p&gt;I ran this &lt;a href="https://gist.github.com/mrmoje/30bacf757e400ef28c56fdaecfb0b2a8"&gt;code&lt;/a&gt; on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy1.PNG"&gt;&lt;/p&gt;
+&lt;p&gt;Alot of benchmarks have shown pypy performing better than Cpython and its not getting slower with time. Each new version of pypy is faster than its predecessor. The pypy team have shared good insight at their &lt;a href="http://speed.pypy.org/"&gt;speed center&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Compatibility&lt;/h2&gt;
+&lt;p&gt;Good news is pypy is compatible with most of the python Libraries.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Django&lt;/li&gt;
+&lt;li&gt;Flask&lt;/li&gt;
+&lt;li&gt;Bottle&lt;/li&gt;
+&lt;li&gt;Pylons&lt;/li&gt;
+&lt;li&gt;Pyramid&lt;/li&gt;
+&lt;li&gt;Twisted&lt;/li&gt;
+&lt;li&gt;lxml&lt;/li&gt;
+&lt;li&gt;Beautiful Soup&lt;/li&gt;
+&lt;li&gt;Sphinx&lt;/li&gt;
+&lt;li&gt;IPyton&lt;/li&gt;
+&lt;li&gt;PIL/Pillow&lt;/li&gt;
+&lt;li&gt;Psycopg2&lt;/li&gt;
+&lt;li&gt;MySQL-Python&lt;/li&gt;
+&lt;li&gt;pysqlite&lt;/li&gt;
+&lt;li&gt;pymongo&lt;/li&gt;
+&lt;li&gt;cx_Oracle&lt;/li&gt;
+&lt;li&gt;SQLAlchemy&lt;/li&gt;
+&lt;li&gt;Gunicorn&lt;/li&gt;
+&lt;li&gt;Requests&lt;/li&gt;
+&lt;li&gt;nose&lt;/li&gt;
+&lt;li&gt;pytest&lt;/li&gt;
+&lt;li&gt;celery&lt;/li&gt;
+&lt;li&gt;Pip&lt;/li&gt;
+&lt;li&gt;Numpy&lt;/li&gt;
+&lt;li&gt;Scipy&lt;/li&gt;
+&lt;li&gt;Gevent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pypy has Experimental support for Extension modules through cpyext. It can run most C extensions these days.&lt;/p&gt;
+&lt;h2&gt;Memory Usage&lt;/h2&gt;
+&lt;p&gt;Memory-intensive python programs take lesser space than when running on pypy . However this may not be the case always though due to some details.&lt;/p&gt;
+&lt;h2&gt;Stackless python Features&lt;/h2&gt;
+&lt;p&gt;Pypy exposes language features similar to the ones present in stackless python.&lt;/p&gt;
+&lt;h1&gt;Differences between Cpython and Python&lt;/h1&gt;
+&lt;p&gt;Lets take a look at pypy and a reference python implementation called cpython.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/nanjekyejoannah/pynbo-blog/jumbojet/content/img/pypy-vs_cpython.png"&gt;&lt;/p&gt;
+&lt;h1&gt;Way Forward&lt;/h1&gt;
+&lt;p&gt;“If you want your code to run faster, you should probably just use PyPy.” — Guido van Rossum (creator of Python)&lt;/p&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
+&lt;p&gt;It is easy to install&lt;/p&gt;
+&lt;h3&gt;Linux:-&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;`sudo apt-get install pypy`
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Mac:-&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;`sudo brew install pypy`
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Windows:-&lt;/h3&gt;
+&lt;p&gt;There is rich &lt;a href="http://pypy.org/download.html"&gt;Documentation&lt;/a&gt; on installation for windows.&lt;/p&gt;
+&lt;h1&gt;Check these out for more pypy inspiration&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://pypy.org/"&gt;http://pypy.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.aosabook.org/en/pypy.html"&gt;http://www.aosabook.org/en/pypy.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://uk.dice.com/technews/a-look-at-pypy/"&gt;http://uk.dice.com/technews/a-look-at-pypy/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27"&gt;http://slides.com/totalorder/what-is-pypy-and-why-should-i-use-it#/27&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="pypy"></category><category term="python"></category></entry></feed>

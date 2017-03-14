@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2016-09-25T21:39:13-00:00</lastmod>
+<lastmod>2017-03-14T23:37:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2016-09-25T21:39:13-00:00</lastmod>
+<lastmod>2017-03-14T23:37:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2016-09-25T21:39:13-00:00</lastmod>
+<lastmod>2017-03-14T23:37:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2016-09-25T21:39:13-00:00</lastmod>
+<lastmod>2017-03-14T23:37:16-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/pypy_by_joannah_nanjekye.html</loc>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -54,7 +61,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/category/misc.html</loc>
-<lastmod>2016-09-19T19:51:00:%s</lastmod>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -68,7 +75,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/tag/python.html</loc>
-<lastmod>2016-09-19T19:51:00:%s</lastmod>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -137,6 +144,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.pynbo.or.ke/tag/pypy.html</loc>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.pynbo.or.ke/author/brian-suda.html</loc>
 <lastmod>2014-12-16T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -146,6 +160,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/author/chris-orwa.html</loc>
 <lastmod>2016-01-09T18:11:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/joannah-nanjekye.html</loc>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -171,7 +171,7 @@
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
 
 <span class="c1"># create flask web server</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># create HTTP endpoint</span>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/ImPro/&lt;road&gt;&#39;</span><span class="p">)</span>
@@ -197,12 +197,12 @@
     <span class="c1"># calculate optical flow</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">traffic</span><span class="o">.</span><span class="n">opticalFlow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_a.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_b.jpg&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;img_c.jpg&#39;</span><span class="p">])</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 
 
-<p>The code is available at <a href="https://github.com/Python-Nairobi/ImPro">https://github.com/Python-Nairobi/ImPro</a>. Feel free to modify and improve as you see fit.<br />
+<p>The code is available at <a href="https://github.com/Python-Nairobi/ImPro">https://github.com/Python-Nairobi/ImPro</a>. Feel free to modify and improve as you see fit.<br>
 I hope you enjoyed the article. Feel free to drop me an e-mail at chrisorwa@gmail.com for any queries.</p>
             <div class="hr"></div>
             <a href="#" class="go-top">Go Top</a>
