@@ -30,7 +30,7 @@ It is therefore faster for programs that are JIT susceptible. This means that py
 
 pypy may also not be as fast for small scripts that do not give the Just-in-time compiler enough warm up time.
 
-I ran this [code]() on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
+I ran this [code](https://gist.github.com/mrmoje/30bacf757e400ef28c56fdaecfb0b2a8) on pypy and on normal python and the results show pypy is actually faster. I will go on share the outcomes below;
 
 <img src="https://github.com/nanjekyejoannah/pynbo-blog/blob/jumbojet/content/img/pypy1.PNG">
 
