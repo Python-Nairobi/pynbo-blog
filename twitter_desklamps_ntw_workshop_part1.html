@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python::Nairobi Blog">
+
+
+        <title>Toggling desklamps via twitter with Python at NTW (Part 1) // #PyNBO // The Python::Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/james-nzomo.html" title="See posts by James Nzomo">
+                    <img class="avatar" alt="James Nzomo" src="http://www.gravatar.com/avatar/e8455ce506aeb66ef468d9c8700880e0">
+                    <h2 class="article-info">James Nzomo</h2>
+                </a>
+                <small class="about-author">I dedicate my mind to thoughts and deeds on tech:- software and hardware development.</small>
+                <h5>Published</h5>
+                <p>March 25, 2017</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Toggling desklamps via twitter with Python at NTW (Part 1)</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/iot.html">IoT</a>
+                                <a class="post-category" href="./tag/micropython.html">micropython</a>
+                        </p>
+                </header>
+            </section>
+            <h1>,</h1>
+<p>Few days ago, at work, our head of engineering tasked us to come up with content for
+a workshop at <a href="http://nairobitechweek.com/">Nairobi Tech Week</a> where we would demo some mob programming methodologies.</p>
+<p>So we decided to "adapt" a previous <a href="uPyMoringa">micropython presentation</a> I gave
+where we demo'd how to turn desklamps (plugged into a "modified" extension) on and off
+using python.
+and have the attendees devided into mob program</p>
+<p>Thus, for our hardware:-
+ - The brains behind esp8266 <a href="https://micropython.org/download#esp8266">(flashed with uPy)</a>, afew relays and one 6-port electrical extension</p>
+<p>But this time since the crowd wou, (easier to) package into the extension's housing</p>
+<p>BOM:-
+- SSRs</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
