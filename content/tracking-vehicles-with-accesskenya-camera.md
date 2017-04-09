@@ -1,4 +1,4 @@
-Title: Tracking Vehicles on Access Kenya Camera's
+Title: Tracking Vehicles on Access Kenya Cameras
 Date: 2016-01-09 18:11:00
 Tags: python, image analysis, opencv, access kenya, traffic
 Slug: image_analysis_by_chris_orwa
@@ -155,5 +155,5 @@ The API (underconstruction) is based on flask. By specifying a road name at the 
     if __name__ == "__main__":
     app.run()
 
-The code is available at <https://github.com/Python-Nairobi/ImPro>. Feel free to modify and improve as you see fit.  
+The code is available at <https://github.com/Python-Nairobi/ImPro>. Feel free to modify and improve as you see fit.
 I hope you enjoyed the article. Feel free to drop me an e-mail at chrisorwa@gmail.com for any queries.
