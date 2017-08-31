@@ -1,0 +1,23 @@
+checkout:
+  post:
+    - sed -i '/Host pure-pynbo/aHostname github.com' ~/.ssh/config
+    - git submodule sync
+    - git submodule update --init
+
+dependencies:
+  override:
+    - cd ~/pynbo-blog
+    - pip install -r requirements.txt
+
+test:
+  override:
+    - ./develop_server.sh start
+    - sleep 5
+    - ./develop_server.sh stop
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - sed -i s/circleci_github/cideploy/g ~/.ssh/config
+      - ghp-import -p output
