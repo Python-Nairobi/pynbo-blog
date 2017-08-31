@@ -9,6 +9,9 @@ Summary: What decorators are and how to use them for DRYer code
 about_author: Mbithe is a software developer at Andela, and a co-organiser and coach at Django Girls Nairobi. She blogs at deCODEgirl.com and tweets at @mbithenzomo.
 email: mbithe.nzomo@gmail.com
 ---
+*This article first appeared <a href="http://www.decodegirl.com/lessons-in-dryness-decorators/" target="_blank">
+on deCODEgirl.com</a>.*
+
 <img src="/img/lessons-in-dryness.jpg" width="100%" alt="Troll Face" />
 
 What do clothes and code (and my jokes) have in common? Answer: They're so
@@ -21,9 +24,9 @@ basically sugar, spice, and everything nice. :) In this post, I'm going to demon
 your code DRY.
 
 Once upon a time, I was building a RESTful API with <a
-href="http://flask.pocoo.org/" target="_ blank">Flask</a> (which
+href="http://flask.pocoo.org/" target="_blank">Flask</a> (which
 you can check it out on GitHub <a
-href="https://github.com/mbithenzomo/flask-bucketlist-api" target="_ blank">
+href="https://github.com/mbithenzomo/flask-bucketlist-api" target="_blank">
 here</a>) for an online bucket list service. Users could:
 
 1. Sign up and login
@@ -222,7 +225,7 @@ The code is much DRYer now! Mission accomplished! It's not perfect, but it's
 way better than it was. :) This project is several months old now, and no longer
 being maintained, but feel free to <a
 href="https://github.com/mbithenzomo/flask-bucketlist-api"
-target="_ blank">clone the repo</a> and test my API!
+target="_blank">clone the repo</a> and test my API!
 
 Also, you can learn more about decorators in Python <a href="https://realpython.com/blog/python/primer-on-python-decorators/"
 target="_blank">here</a> and <a
