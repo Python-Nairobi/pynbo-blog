@@ -1,3 +1,8 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+
 checkout:
   post:
     - sed -i '/Host pure-pynbo/aHostname github.com' ~/.ssh/config
