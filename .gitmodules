@@ -3,4 +3,4 @@
 	url = git@github.com:Python-Nairobi/pure-pynbo.git
 [submodule "pelican-plugins"]
 	path = pelican-plugins
-	url = git@github.com:Python-Nairobi/pelican-plugins.git
+	url = https://github.com/Python-Nairobi/pelican-plugins.git
