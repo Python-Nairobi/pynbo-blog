@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-08-31T15:45:54-00:00</lastmod>
+<lastmod>2017-08-31T17:25:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-08-31T15:45:54-00:00</lastmod>
+<lastmod>2017-08-31T17:25:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-08-31T15:45:54-00:00</lastmod>
+<lastmod>2017-08-31T17:25:09-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-08-31T15:45:54-00:00</lastmod>
+<lastmod>2017-08-31T17:25:09-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/decorators_in_python.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -61,7 +68,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/category/misc.html</loc>
-<lastmod>2017-03-06T18:11:00:%s</lastmod>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -74,15 +81,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/python.html</loc>
-<lastmod>2017-03-06T18:11:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/opencv.html</loc>
+<lastmod>2016-01-09T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/iceland.html</loc>
-<lastmod>2014-12-16T18:11:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/python.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/tag/decorators.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -95,6 +109,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.pynbo.or.ke/tag/dry-code.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.pynbo.or.ke/tag/quicksort.html</loc>
 <lastmod>2016-09-19T19:51:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -102,14 +123,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/opencv.html</loc>
+<loc>http://blog.pynbo.or.ke/tag/image-analysis.html</loc>
 <lastmod>2016-01-09T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/deterministic-design.html</loc>
+<loc>http://blog.pynbo.or.ke/tag/iceland.html</loc>
 <lastmod>2014-12-16T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -123,8 +144,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/image-analysis.html</loc>
-<lastmod>2016-01-09T18:11:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/deterministic-design.html</loc>
+<lastmod>2014-12-16T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -174,6 +195,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/author/kenny-rachuonyo.html</loc>
 <lastmod>2016-09-19T19:51:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/mbithe-nzomo.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

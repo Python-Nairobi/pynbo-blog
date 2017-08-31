@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python-Nairobi Blog">
+
+
+        <title>Lessons in DRYness - Decorators in Python // #PyNBO // The Python-Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/mbithe-nzomo.html" title="See posts by Mbithe Nzomo">
+                    <img class="avatar" alt="Mbithe Nzomo" src="http://www.gravatar.com/avatar/882780d480194a704f63843fdc170f15">
+                    <h2 class="article-info">Mbithe Nzomo</h2>
+                </a>
+                <small class="about-author">Mbithe is a software developer at Andela, and a co-organiser and coach at Django Girls Nairobi. She blogs at deCODEgirl.com and tweets at @mbithenzomo.</small>
+                <h5>Published</h5>
+                <p>August 30, 2017</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Lessons in DRYness - Decorators in Python</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/decorators.html">decorators</a>
+                                <a class="post-category" href="./tag/dry-code.html">dry code</a>
+                                <a class="post-category" href="./tag/python.html">python</a>
+                        </p>
+                </header>
+            </section>
+            <p><em>This article first appeared <a href="http://www.decodegirl.com/lessons-in-dryness-decorators/" target="_blank">
+on deCODEgirl.com</a>.</em></p>
+<p><img src="/img/lessons-in-dryness.jpg" width="100%" alt="Troll Face" /></p>
+<p>What do clothes and code (and my jokes) have in common? Answer: They're so
+much better when they're dry. <img src="/img/troll-face.jpg" width="5%" style="vertical-align: middle;" alt="Troll Face" /></p>
+<p>What does it mean for code to be <strong>DRY</strong>? Simple: <strong>Don't Repeat Yourself</strong>.
+The DRY Principle is key when writing efficient code. It helps keep your
+codebase smaller and less complex, saves you time, reduces redundancy... it's
+basically sugar, spice, and everything nice. :) In this post, I'm going to demonstrate how decorators in Python can help keep
+your code DRY.</p>
+<p>Once upon a time, I was building a RESTful API with <a
+href="http://flask.pocoo.org/" target="_blank">Flask</a> (which
+you can check it out on GitHub <a
+href="https://github.com/mbithenzomo/flask-bucketlist-api" target="_blank">
+here</a>) for an online bucket list service. Users could:</p>
+<ol>
+<li>Sign up and login</li>
+<li>Create, edit, view, and delete bucket lists</li>
+<li>Create, edit, view, and delete bucket list items</li>
+</ol>
+<p>Some endpoints were protected and could only be accessed by authorized users.
+For instance, only the user who created a bucket list or bucket list item could
+edit, view, or delete it.</p>
+<p>Here's how I initially tackled it. First, I created a method to display an
+error message, with the default being "Error: You are not authorized to access
+this resource."</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">unauthorized</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns an error message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Error: You are not authorized to access this resource.&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span>
+    <span class="p">}),</span> <span class="mi">403</span>
+</pre></div>
+
+
+<p>Then, I went ahead and wrote the methods for the endpoints:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BucketListAPI</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+      <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      URL: /api/v1/bucketlists/&lt;id&gt;</span>
+<span class="sd">      Request methods: GET, PUT, DELETE</span>
+<span class="sd">      &quot;&quot;&quot;</span>
+
+      <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+          <span class="sd">&quot;&quot;&quot; Get a bucket list &quot;&quot;&quot;</span>
+          <span class="n">bucketlist</span> <span class="o">=</span> <span class="n">Bucketlist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+          <span class="k">if</span> <span class="n">bucketlist</span><span class="p">:</span>
+              <span class="k">if</span> <span class="n">bucketlist</span><span class="o">.</span><span class="n">created_by</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="n">marshal</span><span class="p">(</span><span class="n">bucketlist</span><span class="p">,</span> <span class="n">bucketlist_serializer</span><span class="p">)</span>
+              <span class="k">else</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="n">unauthorized</span><span class="p">()</span>
+          <span class="k">else</span><span class="p">:</span>
+              <span class="k">return</span> <span class="n">unauthorized</span><span class="p">(</span><span class="s2">&quot;Error: The bucket list specified doesn&#39;t &quot;</span>
+                                  <span class="s2">&quot;exist. Please try again!&quot;</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+          <span class="sd">&quot;&quot;&quot; Edit a bucket list &quot;&quot;&quot;</span>
+          <span class="n">bucketlist</span> <span class="o">=</span> <span class="n">Bucketlist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+          <span class="k">if</span> <span class="n">bucketlist</span><span class="p">:</span>
+              <span class="k">if</span> <span class="n">bucketlist</span><span class="o">.</span><span class="n">created_by</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+                  <span class="n">parser</span> <span class="o">=</span> <span class="n">reqparse</span><span class="o">.</span><span class="n">RequestParser</span><span class="p">()</span>
+                  <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
+                                      <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                      <span class="n">help</span><span class="o">=</span><span class="s2">&quot;No title provided.&quot;</span><span class="p">)</span>
+                  <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                  <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+                  <span class="n">title</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+                  <span class="n">bucketlist</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+                  <span class="n">bucketlist</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+                  <span class="k">return</span> <span class="n">edit_item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
+                                   <span class="n">item</span><span class="o">=</span><span class="n">bucketlist</span><span class="p">,</span>
+                                   <span class="n">serializer</span><span class="o">=</span><span class="n">bucketlist_serializer</span><span class="p">,</span>
+                                   <span class="n">is_user</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                   <span class="n">is_bucketlist</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                   <span class="n">is_item</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+              <span class="k">else</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="n">unauthorized</span><span class="p">()</span>
+          <span class="k">else</span><span class="p">:</span>
+              <span class="k">return</span> <span class="n">unauthorized</span><span class="p">(</span><span class="s2">&quot;Error: The bucket list you are trying to &quot;</span>
+                                  <span class="s2">&quot;edit doesn&#39;t exist. Please try again!&quot;</span><span class="p">)</span>
+
+      <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+          <span class="sd">&quot;&quot;&quot; Delete a bucket list &quot;&quot;&quot;</span>
+          <span class="n">bucketlist</span> <span class="o">=</span> <span class="n">Bucketlist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+          <span class="k">if</span> <span class="n">bucketlist</span><span class="p">:</span>
+              <span class="k">if</span> <span class="n">bucketlist</span><span class="o">.</span><span class="n">created_by</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="n">delete_item</span><span class="p">(</span><span class="n">bucketlist</span><span class="p">,</span>
+                                     <span class="n">bucketlist</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                                     <span class="n">is_user</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                     <span class="n">is_bucketlist</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                     <span class="n">is_item</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+              <span class="k">else</span><span class="p">:</span>
+                  <span class="k">return</span> <span class="n">unauthorized</span><span class="p">()</span>
+          <span class="k">else</span><span class="p">:</span>
+              <span class="k">return</span> <span class="n">unauthorized</span><span class="p">(</span><span class="s2">&quot;Error: The bucket list you are trying to &quot;</span>
+                                  <span class="s2">&quot;delete doesn&#39;t exist. Please try again!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>You can see the problem already: in each of these methods, I basically repeated
+the same chunk of code to ensure that:</p>
+<ol>
+<li>The bucket list existed</li>
+<li>The current user was authorized to access the endpoint</li>
+<li>Appropriate error messages were displayed if the above conditions were false</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># Check whether bucket list exists</span>
+<span class="k">if</span> <span class="n">bucketlist</span><span class="p">:</span>
+    <span class="c1"># Check whether bucket list was created by the current user</span>
+    <span class="k">if</span> <span class="n">bucketlist</span><span class="o">.</span><span class="n">created_by</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+        <span class="c1"># Do something here</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Return unauthorized error message</span>
+        <span class="k">return</span> <span class="n">unauthorized</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Return non-existent bucket list error message</span>
+    <span class="k">return</span> <span class="n">unauthorized</span><span class="p">(</span><span class="s2">&quot;Error: The bucket list you are trying to &quot;</span>
+                        <span class="s2">&quot;delete doesn&#39;t exist. Please try again!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Not DRY at all. Fret not, though: decorators to the rescue!</p>
+<p>A decorator is basically a function that takes a callable (a function or a
+class) as a parameter, modifies it, and returns it. You could also say that decorators wrap a callable, modifying its behavior.</p>
+<p>Here's how I used a decorator to eliminate my duplicate code. First, I wrote
+the decorator function:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">authorized_user_bucketlist</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">auth_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span> <span class="o">=</span> <span class="n">Bucketlist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="o">.</span><span class="n">created_by</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">unauthorized</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">unauthorized</span><span class="p">(</span><span class="s2">&quot;Error: The bucket list specified doesn&#39;t &quot;</span>
+                                <span class="s2">&quot;exist. Please try again!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auth_wrapper</span>
+</pre></div>
+
+
+<p>So here's what's going on in there: The decorator is
+<code>authorized_user_bucketlist</code>, and it takes some function as a parameter. It has
+another function, <code>auth_wrapper</code>, where a variable <code>g.bucketlist</code> is defined as
+the bucket list whose ID is passed to the function as a key word argument. It
+then checks if the bucket list was created by the current user. If so, it
+invokes the function and returns the result. If not, it returns an unauthorized error message. If the bucket list doesn't exist, it returns a non-existent
+bucket list error message. Basically, it does the same thing my duplicated
+chunk of code was doing, but with a little more finesse (like, using a
+try-except block as opposed to an if-else block, because it's better to ask for forgiveness than to ask for permission).</p>
+<p>The refactored code:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">base</span> <span class="kn">import</span> <span class="n">authorized_user_bucketlist</span>
+
+<span class="k">class</span> <span class="nc">BucketListAPI</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    URL: /api/v1/bucketlists/&lt;id&gt;</span>
+<span class="sd">    Request methods: GET, PUT, DELETE</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@authorized_user_bucketlist</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get a bucket list &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">marshal</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="p">,</span> <span class="n">bucketlist_serializer</span><span class="p">)</span>
+
+    <span class="nd">@authorized_user_bucketlist</span>
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Edit a bucket list &quot;&quot;&quot;</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">reqparse</span><span class="o">.</span><span class="n">RequestParser</span><span class="p">()</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
+                            <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;No title provided.&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="n">title</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="k">return</span> <span class="n">edit_item</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
+                         <span class="n">item</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="p">,</span>
+                         <span class="n">serializer</span><span class="o">=</span><span class="n">bucketlist_serializer</span><span class="p">,</span>
+                         <span class="n">is_user</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                         <span class="n">is_bucketlist</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                         <span class="n">is_item</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="nd">@authorized_user_bucketlist</span>
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Delete a bucket list &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">delete_item</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="p">,</span>
+                           <span class="n">g</span><span class="o">.</span><span class="n">bucketlist</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                           <span class="n">is_user</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                           <span class="n">is_bucketlist</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                           <span class="n">is_item</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I imported the decorator function, and then called the decorator using the <code>@</code>
+symbol before each method. This is some <a
+href="https://en.wikipedia.org/wiki/Syntactic_sugar" target="_blank">
+syntactic sugar</a> that Python provides,
+making the calling of decorators much simpler than it otherwise would be.</p>
+<p>The code is much DRYer now! Mission accomplished! It's not perfect, but it's
+way better than it was. :) This project is several months old now, and no longer
+being maintained, but feel free to <a
+href="https://github.com/mbithenzomo/flask-bucketlist-api"
+target="_blank">clone the repo</a> and test my API!</p>
+<p>Also, you can learn more about decorators in Python <a href="https://realpython.com/blog/python/primer-on-python-decorators/"
+target="_blank">here</a> and <a
+href="http://thecodeship.com/patterns/guide-to-python-function-decorators/"
+target="_blank">here</a>.</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
