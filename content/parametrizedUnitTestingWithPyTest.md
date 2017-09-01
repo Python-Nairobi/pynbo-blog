@@ -22,12 +22,17 @@ I really did not get a hang of TDD the first time I heard about it. I saw it as 
 TDD (Test Driven Development) is a software design methodology. This generally means writing UnitTests for your code even before you write it yourself. TDD, now that you are farmiliar with the acronym, is not limited to a particular language stack but for this instance we will stick to python as our language of choice. 
 
 # Parametrizing your tests with Pytest
-There are a couple of UnitTesting frameworks in python: Python Unittest (that come with the standard python library distribution), Python Pytest and Python-nose just to list a few. Python UnitTest framework is a member of the XUnit family of testing tools that use a similar pattern for defining testCases. With UnitTest following XUnit Conventions, it makes Pytest and Python-nose a more Pythonic way to write tests that follow Pep8 style guide. I will focus on parametrization of tests using Pytest. 
+There are a couple of UnitTesting frameworks in python:
+- Python Unittest (that comes with the standard python library distribution)
+- Python Pytest 
+- Python-nose
+
+Python UnitTest framework is a member of the XUnit family of testing tools that use a similar pattern for defining testCases. With UnitTest following XUnit Conventions, it makes Pytest and Python-nose a more - Pythonic way to write tests that follow Pep8 style guide. I will focus on paramet`rization of tests using Pytest. 
 
 #### Why parametrize my tests?
-Let's think of a scenario where we have to write tests for a particular function but with multiple input values/arguments. Rewriting my assertion statements with the different arguments works quite well but what if we could simplify this to only one assertion statement for that function? Then run the test multiple times with the an array of parameters? Smart right? Python's Pytest provides an excellent Pythonic way to achieve this.
+Let's think of a scenario where we have to write tests for a particular function but with multiple input values/arguments. Rewriting my assertion statements with the different arguments works quite well but what if we could simplify this to only one assertion statement for that function? Then run the test multiple times with an array of parameters? Smart right? Python's Pytest provides an excellent Pythonic way to achieve this.
 
-@pytest.mark.parametrize allows one to define multiple sets of arguments and fixtures at the test function or class.
+`@pytest.mark.parametrize` allows one to define multiple sets of arguments and fixtures at the test function or class.
 
 Let us write parametrized tests for a function that accepts integer input from the user and determines whether the input is odd or even.
 ```python
