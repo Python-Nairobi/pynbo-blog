@@ -7,7 +7,7 @@ checkout:
   post:
     - sed -i '/Host pure-pynbo/aHostname github.com' ~/.ssh/config
     - git submodule sync
-    - git submodule update --init
+    - git submodule update --init --recursive
 
 dependencies:
   override:
