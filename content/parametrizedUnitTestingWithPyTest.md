@@ -3,7 +3,7 @@ Title: Python parametrized unit testing with Pytest
 Date: 2017-09-04 19:00
 Tags: python, pytest
 Category: unit testing
-Slug: test parameterization
+Slug: test_parameterization
 Author: Paul Upendo
 Summary: Create pythonic parametrized tests with pytest
 about_author: Upendo is a Software Developer at Andela Kenya
