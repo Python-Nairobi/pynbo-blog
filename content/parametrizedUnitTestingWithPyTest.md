@@ -1,6 +1,6 @@
 ---
 Title: Python parametrized unit testing with Pytest
-Date: 2017-08-01 13:00
+Date: 2017-09-04 19:00
 Tags: python, pytest
 Category: unit testing
 Slug: test parameterization
