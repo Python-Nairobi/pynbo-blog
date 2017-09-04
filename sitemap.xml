@@ -5,34 +5,34 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-09-04T15:53:40-00:00</lastmod>
+<lastmod>2017-09-04T16:59:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-09-04T15:53:40-00:00</lastmod>
+<lastmod>2017-09-04T16:59:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-09-04T15:53:40-00:00</lastmod>
+<lastmod>2017-09-04T16:59:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-09-04T15:53:40-00:00</lastmod>
+<lastmod>2017-09-04T16:59:59-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/test parameterization.html</loc>
+<loc>http://blog.pynbo.or.ke/test_parameterization.html</loc>
 <lastmod>2017-09-04T19:00:00:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
