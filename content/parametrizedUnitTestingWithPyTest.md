@@ -3,7 +3,7 @@ Title: Python parametrized unit testing with Pytest
 Date: 2017-08-01 13:00
 Tags: python, pytest
 Category: unit testing
-Slug: test parametrization
+Slug: test parameterization
 Author: Paul Upendo
 Summary: Create pythonic parametrized tests with pytest
 about_author: Upendo is a Software Developer at Andela Kenya
@@ -50,7 +50,7 @@ def test_even_and_odd_numbers(test_input, expected):
     assert (runOddEvenCheck(test_input)) == expected
 
 ```
-To run this use the command `pytest`, which executes the pytest test runner for us. The result for this would be a series of failing tests as we can see below. The beaitiful thing about this is that by implementing test parametrization, Pytest created 3 individual tests for us from our test function :smile: .
+To run this, use the command `pytest`, which executes the pytest test runner for us. The result for this would be a series of failing tests as we can see below. The beautiful thing about this is that by implementing test parameterization, Pytest created 3 individual tests for us from our test function :smile: .
 ```python
 # Commandline output
 (pytest_blog) ~/D/t/p/parameterized_testing ❯❯❯ pytest                                                                                                                                                                                                                       ⏎ develop ✱ ◼
