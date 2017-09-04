@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-09-01T11:50:48-00:00</lastmod>
+<lastmod>2017-09-04T15:53:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-09-01T11:50:48-00:00</lastmod>
+<lastmod>2017-09-04T15:53:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-09-01T11:50:48-00:00</lastmod>
+<lastmod>2017-09-04T15:53:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-09-01T11:50:48-00:00</lastmod>
+<lastmod>2017-09-04T15:53:40-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/test parameterization.html</loc>
+<lastmod>2017-09-04T19:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -67,6 +74,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.pynbo.or.ke/category/unit-testing.html</loc>
+<lastmod>2017-09-04T19:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.pynbo.or.ke/category/misc.html</loc>
 <lastmod>2017-08-30T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
@@ -89,7 +103,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/tag/python.html</loc>
-<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<lastmod>2017-09-04T19:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -132,6 +146,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/tag/iceland.html</loc>
 <lastmod>2014-12-16T18:11:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/tag/pytest.html</loc>
+<lastmod>2017-09-04T19:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -202,6 +223,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/author/mbithe-nzomo.html</loc>
 <lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/paul-upendo.html</loc>
+<lastmod>2017-09-04T19:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
