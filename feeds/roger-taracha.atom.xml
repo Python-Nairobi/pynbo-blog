@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Roger Taracha</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/roger-taracha.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2017-09-05T10:40:00+03:00</updated><entry><title>Introduction to Web Scraping using Selenium</title><link href="http://blog.pynbo.or.ke/selenium-webscraping-tutorial.html" rel="alternate"></link><published>2017-09-05T10:40:00+03:00</published><updated>2017-09-05T10:40:00+03:00</updated><author><name>Roger Taracha</name></author><id>tag:blog.pynbo.or.ke,2017-09-05:/selenium-webscraping-tutorial.html</id><summary type="html">&lt;p&gt;In this tutorial you’ll learn how to scrape websites with Selenium and ChromeDriver.&lt;/p&gt;</summary><content type="html">&lt;h3&gt;Title&lt;/h3&gt;
+&lt;p&gt;Introduction to Web Scraping using Selenium&lt;/p&gt;
+&lt;p&gt;This article first appeared on &lt;a href="https://medium.com/@NabweraTaracha/introduction-to-web-scraping-using-selenium-7ec377a8cf72"&gt;Medium.com&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;What is Web Scraping?&lt;/h3&gt;
+&lt;p&gt;As the name suggests, this is a data extraction technique used for extracting data from websites. It is an automated process where an application processes the HTML of a Web Page to extract data for manipulation such as converting the Web page to another format and copying into a local database or spreadsheet for later retrieval or analysis.&lt;/p&gt;
+&lt;h3&gt;What will we build?&lt;/h3&gt;
+&lt;p&gt;In this tutorial we will build a web scraping program that will scrape a Github user profile and get the Repository Names and the Languages for the Pinned Repositories.
+If you would like to jump straight into the project, here is link to the repo on Github.
+https://github.com/TheDancerCodes/Selenium-Webscraping-Example&lt;/p&gt;
+&lt;h3&gt;What will we require?&lt;/h3&gt;
+&lt;p&gt;We will also use the following packages and driver.
+&lt;em&gt; &lt;a href="https://pypi.python.org/pypi/selenium"&gt;selenium package&lt;/a&gt; — used to automate web browser interaction from Python
+&lt;/em&gt; &lt;a href="https://sites.google.com/a/chromium.org/chromedriver/downloads"&gt;ChromeDriver&lt;/a&gt; — provides a platform to open up and perform tasks in specified browser.
+&lt;em&gt; &lt;a href="https://virtualenv.pypa.io/en/stable/"&gt;Virtualenv&lt;/a&gt; — to create an isolated Python environment for our project.
+&lt;/em&gt; &lt;a href="http://selenium-python.readthedocs.io/"&gt;Extras&lt;/a&gt; - Selenium-Python ReadTheDocs Resource.&lt;/p&gt;
+&lt;h3&gt;Steps&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup project&lt;/li&gt;
+&lt;li&gt;Import Modules&lt;/li&gt;
+&lt;li&gt;Make The Request&lt;/li&gt;
+&lt;li&gt;Get the Response&lt;/li&gt;
+&lt;li&gt;Run the program&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Set up the project&lt;/h3&gt;
+&lt;p&gt;Create a new project folder. Within that folder create an &lt;code&gt;setup.py&lt;/code&gt; file.
+In this file, type in our dependency &lt;code&gt;selenium&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Open up your command line &amp;amp; create a virtual environment using the basic command:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$ virtualenv webscraping_example&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Next, install the dependency into your virtualenv by running the following command in the terminal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$(webscraping_example) pip install -r setup.py&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Import Required Modules&lt;/h3&gt;
+&lt;p&gt;Specify the modules required for the project.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sb"&gt;``&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;webdriver&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium.webdriver.common.by&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;By&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium.webdriver.support.ui&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;WebDriverWait&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium.webdriver.support&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;expected_conditions&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;EC&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium.common.exceptions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TimeoutException&lt;/span&gt;
+
+&lt;span class="sb"&gt;``&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Make The Request&lt;/h3&gt;
+&lt;p&gt;When making the request we need to consider the following:
+1. Pass in the desired website url.
+2. Implement a Try and Except for handling a timeout situation should it occur.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;```&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="cp"&gt;# Specifying incognito mode as you launch your browser[OPTIONAL]&lt;/span&gt;
+&lt;span class="n"&gt;option&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;webdriver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ChromeOptions&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;“&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="n"&gt;incognito&lt;/span&gt;&lt;span class="err"&gt;”&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Create new Instance of Chrome in incognito mode&lt;/span&gt;
+&lt;span class="n"&gt;browser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;webdriver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chrome&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;executable_path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Library&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Application&lt;/span&gt; &lt;span class="n"&gt;Support&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Google&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;chromedriver&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;chrome_options&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Go to desired website&lt;/span&gt;
+&lt;span class="n"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://github.com/TheDancerCodes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Wait 20 seconds for page to load&lt;/span&gt;
+&lt;span class="n"&gt;timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+
+&lt;span class="nl"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="cp"&gt;# Wait until the final element [Avatar link] is loaded.&lt;/span&gt;
+    &lt;span class="cp"&gt;# Assumption: If Avatar link is loaded, the whole page would be relatively loaded because it is among&lt;/span&gt;
+    &lt;span class="cp"&gt;# the last things to be loaded.&lt;/span&gt;
+    &lt;span class="n"&gt;WebDriverWait&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;until&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EC&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;visibility_of_element_located&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;By&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;XPATH&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;//img[@class=&amp;#39;avatar width-full rounded-2&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="n"&gt;except&lt;/span&gt; &lt;span class="nl"&gt;TimeoutException&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Timed out waiting for page to load&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;browser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;quit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="err"&gt;```&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Get the Response&lt;/h3&gt;
+&lt;p&gt;Once we make a request and it is successful, we need to get a response.
+We will break the response into 2 and combine it at the end.
+The response is the title and language of the pinned repositories of the Github profile.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
+# find_elements_by_xpath - Returns an array of selenium objects.
+titles_element = browser.find_elements_by_xpath(&amp;quot;//a[@class=&amp;#39;text-bold&amp;#39;]&amp;quot;)
+
+# List Comprehension to get the actual repo titles and not the selenium objects.
+titles = [x.text for x in titles_element]
+
+
+print(&amp;#39;TITLES:&amp;#39;)
+print(titles, &amp;#39;\n&amp;#39;)
+
+
+# Get all of the pinned repo languages
+language_element = browser.find_elements_by_xpath(&amp;quot;//p[@class=&amp;#39;mb-0 f6 text-gray&amp;#39;]&amp;quot;)
+languages = [x.text for x in language_element] # same concept as for-loop/ list-comprehension above.
+
+print(&amp;quot;LANGUAGES:&amp;quot;)
+print(languages, &amp;#39;\n&amp;#39;)
+
+# Pair each title with its corresponding language using zip function and print each pair
+for title, language in zip(titles, languages):
+    print(&amp;quot;RepoName : Language&amp;quot;)
+    print(title + &amp;quot;: &amp;quot; + language, &amp;#39;\n&amp;#39;)
+
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Run the program&lt;/h3&gt;
+&lt;p&gt;Finally execute the program by running it directly in your IDE or by using the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
+$ (webscraping_example) python webscraping_example.py
+
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can read more on Web Scraping here
+* &lt;a href="https://en.wikipedia.org/wiki/Web_scraping"&gt;Wikipedia Page&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you would like to try out this example, &lt;a href="https://github.com/TheDancerCodes/Selenium-Webscraping-Example"&gt;here's the link to the source code on github&lt;/a&gt;. &lt;code&gt;Fork&lt;/code&gt;, &lt;code&gt;Clone&lt;/code&gt;, &lt;code&gt;Install requirements&lt;/code&gt; and &lt;code&gt;Scrape&lt;/code&gt;. &lt;/li&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="webscraping"></category><category term="selenium"></category><category term="chromedriver"></category></entry></feed>
