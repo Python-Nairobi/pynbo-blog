@@ -1,23 +1,25 @@
 Title: Introduction to Web Scraping using Selenium
-Date: 2017-09-05 09:00:00
+Date: 2017-09-05 10:40:00
 Tags: python, webscraping, selenium, chromedriver
 Category: Relevant_Category
 Slug: selenium-webscraping-tutorial
 Author: Roger Taracha
 Summary: In this tutorial you’ll learn how to scrape websites with Selenium and ChromeDriver.
-about_author: Taracha is a Software Developer & Mentor based in Nairobi. For more catch me on [Medium](https://medium.com/@NabweraTaracha) and on twitter @thedancercodes.  
+about_author: Taracha is a Software Developer & Mentor based in Nairobi. For more catch me on [Medium](https://medium.com/@NabweraTaracha) and on Twitter @thedancercodes.  
 email: rojtaracha@gmail.com
 
 
-### Intoduction
+### Title
 Introduction to Web Scraping using Selenium
+
+This article first appeared on [Medium.com](https://medium.com/@NabweraTaracha/introduction-to-web-scraping-using-selenium-7ec377a8cf72)
 
 ### What is Web Scraping?
 As the name suggests, this is a data extraction technique used for extracting data from websites. It is an automated process where an application processes the HTML of a Web Page to extract data for manipulation such as converting the Web page to another format and copying into a local database or spreadsheet for later retrieval or analysis.
 
 ### What will we build?
-In this tutorial we will build a web scraping program that will scrape a Github user profile and get the Repository names and the Languages for the pinned repositories.
-If you would like to jump straight into the project, here is link to the repo on github.
+In this tutorial we will build a web scraping program that will scrape a Github user profile and get the Repository Names and the Languages for the Pinned Repositories.
+If you would like to jump straight into the project, here is link to the repo on Github.
 https://github.com/TheDancerCodes/Selenium-Webscraping-Example
 
 ### What will we require?
@@ -52,12 +54,14 @@ Next, install the dependency into your virtualenv by running the following comma
 Specify the modules required for the project.
 
 
-    :::python
+    ```python
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
     from selenium.common.exceptions import TimeoutException
+
+    ```
 
 
 ### Make The Request
@@ -66,7 +70,8 @@ When making the request we need to consider the following:
 2. Implement a Try and Except for handling a timeout situation should it occur.
 
 
-    :::python
+
+    ```python
     # Specifying incognito mode as you launch your browser[OPTIONAL]
     option = webdriver.ChromeOptions()
     option.add_argument(“ — incognito”)
@@ -90,6 +95,8 @@ When making the request we need to consider the following:
         print("Timed out waiting for page to load")
         browser.quit()
 
+    ```
+
 
 ### Get the Response
 Once we make a request and it is successful, we need to get a response.
@@ -97,7 +104,7 @@ We will break the response into 2 and combine it at the end.
 The response is the title and language of the pinned repositories of the Github profile.
 
 
-    :::python
+    ```python
     # find_elements_by_xpath - Returns an array of selenium objects.
     titles_element = browser.find_elements_by_xpath("//a[@class='text-bold']")
 
@@ -121,18 +128,20 @@ The response is the title and language of the pinned repositories of the Github 
         print("RepoName : Language")
         print(title + ": " + language, '\n')
 
+    ```
+
 
 ### Run the program
-Finally run the program by using the following command or by running it directly in your IDE:
+Finally execute the program by running it directly in your IDE or by using the following command:
 
 
-    :::python
+    ```python
     $ (webscraping_example) python webscraping_example.py
+
+    ```
 
 
 You can read more on Web Scraping here
-[wikipedia page](https://en.wikipedia.org/wiki/Web_scraping).
+* [Wikipedia Page](https://en.wikipedia.org/wiki/Web_scraping).
 
-[Here's](https://github.com/TheDancerCodes/Selenium-Webscraping-Example) the source code.
-
-Also posted [here](https://medium.com/@NabweraTaracha/introduction-to-web-scraping-using-selenium-7ec377a8cf72)
+* If you would like to try out this example, [here's the link to the source code on github](https://github.com/TheDancerCodes/Selenium-Webscraping-Example). `Fork`, `Clone`, `Install requirements` and `Scrape`. 
