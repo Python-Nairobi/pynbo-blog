@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-09-05T19:02:11-00:00</lastmod>
+<lastmod>2017-09-05T22:07:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-09-05T19:02:11-00:00</lastmod>
+<lastmod>2017-09-05T22:07:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-09-05T19:02:11-00:00</lastmod>
+<lastmod>2017-09-05T22:07:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-09-05T19:02:11-00:00</lastmod>
+<lastmod>2017-09-05T22:07:12-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/selenium-webscraping-tutorial.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -81,8 +88,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://blog.pynbo.or.ke/category/relevant_category.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://blog.pynbo.or.ke/category/misc.html</loc>
 <lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/tag/quicksort.html</loc>
+<lastmod>2016-09-19T19:51:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/tag/webscraping.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -103,14 +131,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/tag/python.html</loc>
-<lastmod>2017-09-04T19:00:00:%s</lastmod>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/decorators.html</loc>
-<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/pypy.html</loc>
+<lastmod>2017-03-06T18:11:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -130,8 +158,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/quicksort.html</loc>
-<lastmod>2016-09-19T19:51:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/selenium.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/tag/chromedriver.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -186,8 +221,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://blog.pynbo.or.ke/tag/pypy.html</loc>
-<lastmod>2017-03-06T18:11:00:%s</lastmod>
+<loc>http://blog.pynbo.or.ke/tag/decorators.html</loc>
+<lastmod>2017-08-30T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -230,6 +265,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/author/paul-upendo.html</loc>
 <lastmod>2017-09-04T19:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/roger-taracha.html</loc>
+<lastmod>2017-09-05T10:40:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
