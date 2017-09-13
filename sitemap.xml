@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-09-05T22:07:12-00:00</lastmod>
+<lastmod>2017-09-13T22:29:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-09-05T22:07:12-00:00</lastmod>
+<lastmod>2017-09-13T22:29:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-09-05T22:07:12-00:00</lastmod>
+<lastmod>2017-09-13T22:29:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-09-05T22:07:12-00:00</lastmod>
+<lastmod>2017-09-13T22:29:25-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/lisp_pairs_in_python.html</loc>
+<lastmod>2017-09-07T09:00:00:%s</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -96,7 +103,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/category/misc.html</loc>
-<lastmod>2017-08-30T09:00:00:%s</lastmod>
+<lastmod>2017-09-07T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -223,6 +230,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/tag/decorators.html</loc>
 <lastmod>2017-08-30T09:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/bonface-k-munyoki.html</loc>
+<lastmod>2017-09-07T09:00:00:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

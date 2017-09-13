@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Bonface K. Munyoki</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/bonface-k-munyoki.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2017-09-07T09:00:00+03:00</updated><entry><title>Implementing Lisp pairs in Python 3.6.1</title><link href="http://blog.pynbo.or.ke/lisp_pairs_in_python.html" rel="alternate"></link><published>2017-09-07T09:00:00+03:00</published><updated>2017-09-07T09:00:00+03:00</updated><author><name>Bonface K. Munyoki</name></author><id>tag:blog.pynbo.or.ke,2017-09-07:/lisp_pairs_in_python.html</id><summary type="html">&lt;p&gt;I discuss how to implement Scheme's basic pair data structure in Python for fun using Message Passing [Scheme is a Lisp dialect]&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;I wrote this article earlier on my blog &lt;a href="https://bonfacemunyoki.com/post/2017-08-28-implementing-scheme-pairs-in-python/" target="_blank"&gt; here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;I've come to like Python. It makes rapid prototyping things way easier. I also appreciate that it treats functions as first class citizens, something that (maybe) many Python hackers do not know. I thought it'd be cool to implement one of Scheme's(Scheme is a Lisp variant) basic structures, the &lt;strong&gt;&lt;em&gt;pair&lt;/em&gt;&lt;/strong&gt;, in Python. I'll use a form of Message Passing to do this(more on this later).&lt;/p&gt;
+&lt;p&gt;First, here's what a pair looks like in Scheme:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; We define a as a pair comprising 1 and 3&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cons&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; We access the first element of a pair by&lt;/span&gt;
+&lt;span class="c1"&gt;;; running (car &amp;lt;element&amp;gt;). In our case, this&lt;/span&gt;
+&lt;span class="c1"&gt;;; would give: 1&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;car&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; We access the second element of a pair by&lt;/span&gt;
+&lt;span class="c1"&gt;;; running (cdr &amp;lt;element&amp;gt;). This will give: 3&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cdr&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here's how our implementation of &lt;code&gt;cons&lt;/code&gt;, &lt;code&gt;car&lt;/code&gt;, &lt;code&gt;cdr&lt;/code&gt; looks like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def cons(x, y):
+    def dispatch(m):
+        if m == &amp;quot;car&amp;quot;:
+            return x
+        elif m == &amp;quot;cdr&amp;quot;:
+            return y
+        else:
+            print(&amp;quot;error dude&amp;quot;)
+    return dispatch
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here, we define an internal procedure &lt;code&gt;dispatch&lt;/code&gt; that receives some "message" and acts on it. If the "message" is a &lt;code&gt;car&lt;/code&gt; it will return the first element of cons' arguments. If it's a &lt;code&gt;cdr&lt;/code&gt;, it'll return the second element; otherwise, a simple error message is printed. Our &lt;code&gt;cons&lt;/code&gt; function returns a procedure as its return value. As we shall see later, our "message" will be passed to this return value. Now let's create our &lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; functions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def car(z):
+    return z(&amp;quot;car&amp;quot;)
+
+def cdr(z):
+    return z(&amp;quot;cdr&amp;quot;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Both &lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; take a pair(a cons object) as it's arguments. The right value is returned depending on the "message passed". The name "message passing" comes from the image that a data object(in our case the pairs) is an entity that receives the requested operation name as a "message". Let's create some fancy pairs :)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x = cons(2, 3)
+
+# Let&amp;#39;s print the first element of x:
+print(car(x))
+
+# Let&amp;#39;s print the second element of x:
+print(cdr(x))
+&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>

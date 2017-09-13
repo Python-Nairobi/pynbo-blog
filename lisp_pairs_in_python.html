@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python-Nairobi Blog">
+
+
+        <title>Implementing Lisp pairs in Python 3.6.1 // #PyNBO // The Python-Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/bonface-k-munyoki.html" title="See posts by Bonface K. Munyoki">
+                    <img class="avatar" alt="Bonface K. Munyoki" src="http://www.gravatar.com/avatar/61617b313e821e9b0e6d5096064bf8df">
+                    <h2 class="article-info">Bonface K. Munyoki</h2>
+                </a>
+                <small class="about-author">Linux enthusiast. Audiophile. Huge anime fan. "Retired" amateur competitive swimmer. Tinkeror. Former typography nerd.</small>
+                <h5>Published</h5>
+                <p>September 07, 2017</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Implementing Lisp pairs in Python 3.6.1</h1>
+                        <p class="post-meta">
+                            // under                         </p>
+                </header>
+            </section>
+            <hr>
+<p><em>I wrote this article earlier on my blog <a href="https://bonfacemunyoki.com/post/2017-08-28-implementing-scheme-pairs-in-python/" target="_blank"> here</a>.</em></p>
+<p>I've come to like Python. It makes rapid prototyping things way easier. I also appreciate that it treats functions as first class citizens, something that (maybe) many Python hackers do not know. I thought it'd be cool to implement one of Scheme's(Scheme is a Lisp variant) basic structures, the <strong><em>pair</em></strong>, in Python. I'll use a form of Message Passing to do this(more on this later).</p>
+<p>First, here's what a pair looks like in Scheme:</p>
+<div class="highlight"><pre><span></span><span class="c1">;; We define a as a pair comprising 1 and 3</span>
+<span class="p">(</span><span class="nv">def</span> <span class="nv">a</span> <span class="p">(</span><span class="nb">cons</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1">;; We access the first element of a pair by</span>
+<span class="c1">;; running (car &lt;element&gt;). In our case, this</span>
+<span class="c1">;; would give: 1</span>
+<span class="p">(</span><span class="nb">car</span> <span class="nv">a</span><span class="p">)</span>
+
+<span class="c1">;; We access the second element of a pair by</span>
+<span class="c1">;; running (cdr &lt;element&gt;). This will give: 3</span>
+<span class="p">(</span><span class="nb">cdr</span> <span class="nv">a</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Here's how our implementation of <code>cons</code>, <code>car</code>, <code>cdr</code> looks like:</p>
+<div class="highlight"><pre><span></span>def cons(x, y):
+    def dispatch(m):
+        if m == &quot;car&quot;:
+            return x
+        elif m == &quot;cdr&quot;:
+            return y
+        else:
+            print(&quot;error dude&quot;)
+    return dispatch
+</pre></div>
+
+
+<p>Here, we define an internal procedure <code>dispatch</code> that receives some "message" and acts on it. If the "message" is a <code>car</code> it will return the first element of cons' arguments. If it's a <code>cdr</code>, it'll return the second element; otherwise, a simple error message is printed. Our <code>cons</code> function returns a procedure as its return value. As we shall see later, our "message" will be passed to this return value. Now let's create our <code>car</code> and <code>cdr</code> functions.</p>
+<div class="highlight"><pre><span></span>def car(z):
+    return z(&quot;car&quot;)
+
+def cdr(z):
+    return z(&quot;cdr&quot;)
+</pre></div>
+
+
+<p>Both <code>car</code> and <code>cdr</code> take a pair(a cons object) as it's arguments. The right value is returned depending on the "message passed". The name "message passing" comes from the image that a data object(in our case the pairs) is an entity that receives the requested operation name as a "message". Let's create some fancy pairs :)</p>
+<div class="highlight"><pre><span></span>x = cons(2, 3)
+
+# Let&#39;s print the first element of x:
+print(car(x))
+
+# Let&#39;s print the second element of x:
+print(cdr(x))
+</pre></div>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>
