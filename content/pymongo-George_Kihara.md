@@ -9,7 +9,7 @@ email: gegohcomp@gmail.com
 about_author: <p>A software developer at Cysect Solution and loves Python. Check out <a href="https://georgekihara.github.io/">George Kihara</a>
 ---
 
-<img src="img/pymongo.jpeg" margin-left="30%" />
+<img src="img/pymongo.jpeg" margin-left="30%" alt="pymongo illustration" />
  
 Pymongo has become one of the easiest ways to store data from python-flask web apps.
 
@@ -18,7 +18,7 @@ I'm sure nobody would want to stress up doing hard stuff if there are other easi
 I discovered pymongo when i was developing a small website for a project in school, and after discovering how simple it is, i've been using it for my small projects.
 After going through this tutorial, I'm hoping you will feel the same.
 
-<h2><b>Prerequisites</b></h2>
+##Prerequisites
 So to begin with, make sure you have the PyMongo distribution installed. In the python shell, run the following:
 
 ``` python
@@ -28,7 +28,7 @@ I'm hoping that MongoDB instance is running on the default host and port. So if 
 ``` python
 $ mongod
 ```
-<h2>Set up connection with Mongoclient</h2>
+##Set up connection with Mongoclient
 After the prerequisites, the next step is to create a MongoClient to the running  mongod instance.
 ```python 
 >>> from pymongo import MongoClient
@@ -42,14 +42,14 @@ You can specify the host and port as follows:
 ```
 
 Now that we are done with the necessary connections, lets get into the more interesting part:
-<h2> Creating a database</h2>
+##Creating a database
 With PyMongo you access databases using attribute style access on MongoClient instances, as follows:
 ```python
 >>> db = client.database1
 #or if that does not work use the following
 >>> db = client['database1']
 ```
-<h2> Creating a collection</h2>
+##Creating a collection
 A collection is a group of documents that are stored in MongoDB, its the equivalent of a table in relational databases. To create the collection:
 ```python
 >>> collection = db.collection1
@@ -57,7 +57,7 @@ A collection is a group of documents that are stored in MongoDB, its the equival
 >>> collection = db['collecion1']
 ```
 
-<h2>Documents</h2>
+##Documents
 We represent data in MongoDB using JSON-style documents. In PyMongo we use dictionaries to represent documents. For example:
 ```python
 >>> post = {"author": "George",
@@ -65,7 +65,7 @@ We represent data in MongoDB using JSON-style documents. In PyMongo we use dicti
 ...         "tags": ["mongodb", "python", "pymongo"]}
 
 ```
-<h2>Inserting a Document</h2>
+##Inserting a Document
 To insert a document into a collection we can use the insert_one() method:
 ```python
 >>> posts = db.posts
@@ -77,5 +77,5 @@ ObjectId('...')
 
  
  Thanks for going through my tutorial, I hope it will help you create better databases.
- <p>For more information, you can visit <a href="http://api.mongodb.com/python/current/tutorial.html">MONGODB</a></p>
+ For more information, you can visit <a href="http://api.mongodb.com/python/current/tutorial.html">MONGODB</a>
  Bye!
