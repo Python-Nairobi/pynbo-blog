@@ -1,6 +1,6 @@
 Title: Scraping The Python Nairobi Blog
 
-Date: 2017-09-7 00:00
+Date: 2017-09-17 00:00
 
 Tags: scrapy, web, spiders
 
