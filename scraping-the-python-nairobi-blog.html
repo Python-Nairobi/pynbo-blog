@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python-Nairobi Blog">
+
+
+        <title>Scraping The Python Nairobi Blog // #PyNBO // The Python-Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/python-nairobi.html" title="See posts by Python Nairobi">
+                    <h2 class="article-info">Python Nairobi</h2>
+                </a>
+                <small class="about-author"></small>
+                <h5>Published</h5>
+                <p>December 31, 1969</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Scraping The Python Nairobi Blog</h1>
+                        <p class="post-meta">
+                            // under                         </p>
+                </header>
+            </section>
+            <p>Date: 2017-09-17 00:00</p>
+<p>Tags: scrapy, web, spiders</p>
+<p>Category: Web Scraping</p>
+<p>Slug: scraping-the-python-nairobi-blog</p>
+<p>Author: Gideon Kimutai (https://github.com/gr1d99)</p>
+<p>Summary: This post will show you how to scrape the Python Nairobi blog using scrapy framework. </p>
+<p>about_author: A freelance Django web developer</p>
+<p>email: <a href="gideonkimutai9@gmail.com">gravar</a></p>
+<p>Scrapy is an application framework for crawling web sites and extracting structured data which can be used for a wide
+range of useful applications, like data mining, information processing or historical archival.</p>
+<p>so lets get started.</p>
+<h2>Requirements</h2>
+<ol>
+<li>you need to have python installed on your computer. here is the link to the official site <a href="https://www.python.org/downloads/">python.org</a></li>
+<li>create a virtual enviroment, steps can be found here <a href="https://virtualenv.pypa.io/en/stable/">click me</a></li>
+<li>activate your created virtualenvironment and install scrapy framework by running the command
+<code>pip install scrapy</code>.</li>
+</ol>
+<p><strong>NB</strong> if everything is installed correctly you are good to start scraping some data.</p>
+<blockquote>
+<p><strong>In this tutorial we will be scraping the Python Nairobi Blog, you may apply the concepts in this tutorial to scrape 
+other websites too. You will also have to read further on your own since i will only cover the basics</strong></p>
+</blockquote>
+<ol>
+<li>step one.</li>
+</ol>
+<p>check again if <code>scrapy</code> is available in your current environment by typing <code>scrapy</code> in your terminal. If you see some 
+bunch of help options then you are good to go.</p>
+<blockquote>
+<p>we are going to create our project. to do that type 
+<code>bash
+$ scrapy createproject naiblog</code>
+after creating the project minimize your terminal and you should see a directory named <code>naiblog</code>.</p>
+<p>the directory structure of naiblob should look like this.</p>
+<p>```
+naiblog/
+   scrapy.cfg
+   naiblog/
+       <strong>init</strong>.py # deploy configuration file project's Python module, you'll import your code from here
+       items.py # project items definition file
+       pipelines.py # project pipelines file
+       settings.py # project settings file
+       spiders/
+           <strong>init</strong>.py # a directory where you'll later put your spiders</p>
+</blockquote>
+<p>create a file named <code>naiblog_spider.py</code> inside the folder <code>naiblog/spiders/naiblog_spider.py</code></p>
+<blockquote>
+<p>now copy the contents below to the new file.</p>
+<p>```python
+import scrapy</p>
+<p>class NailblogSpider(scrapy.Spider):
+   name = 'naiblog'</p>
+<p>start_urls = [
+       'http://blog.pynbo.or.ke/'
+   ]</p>
+<p>def parse(self, response):
+       pass
+```</p>
+</blockquote>
+<p>you need to note some few things here.</p>
+<blockquote>
+<ul>
+<li>our spider subcalsses <code>scrapy.Spider</code>.</li>
+<li><code>name=naiblog</code> this is the name of our spider, it should be unique within this project.</li>
+<li><code>start_urls[]</code> is a class attribute and this where you write a list of urls that you will crawl. <strong>this is just one of 
+the ways</strong>.</li>
+<li><code>parse()</code> is a method that will be called to handle response download from each request.</li>
+</ul>
+</blockquote>
+<p>now you atleast have the basics, so change the contents of the <code>parse()</code> method to be the same as the one below.</p>
+<blockquote>
+<p>```python
+class NaiblogSpider(spider.Spider):
+  ...</p>
+<p>def parse(self, response):
+       sub_header = response.xpath("//div//h1[@class='content-subhead']/text()").extract_first()
+       print sub_header
+```</p>
+</blockquote>
+<p>on your terminal navigate to the root/base directory of the <code>naiblog</code> project and type</p>
+<blockquote>
+<p>```bash
+$ scrapy crawl naiblog --nolog
+````</p>
+</blockquote>
+<p>output</p>
+<blockquote>
+<p><code>bash
+$ Latest posts</code></p>
+</blockquote>
+<p><strong>yeey you just extracted the content subheading of the <a href="http://blog.pynbo.or.ke/">http://blog.pynbo.or.ke/</a></strong></p>
+<p>just open the above url in your browser and right click on the heading <code>Latest Posts</code> then select the option inspect.
+you will see that the <code>Post List</code> is wrapped inside </p>
+<blockquote>
+<p><code>html
+&lt;div class="posts"
+   &lt;h1 class="content-subhead"&gt;
+       Latest posts
+   &lt;/h1&gt;
+   ...</code></p>
+</blockquote>
+<p><strong>NB:</strong> when extracting contents from a response we use <code>css</code> or <code>xpath</code> Selectors to select elements from the downloaded
+response.</p>
+<p>I find <code>xpath</code> more powerful rather than using <code>css</code>, you will also have to read more on yourself to understand <code>Xpath</code>
+expressions.</p>
+<p>now to the final part of our spider, comments on the code will help you get the idea of what is happening</p>
+<blockquote>
+<p>```python
+import scrapy</p>
+<p>class NaiblogSpider(scrapy.Spider):
+   name = 'naiblog'</p>
+<p>start_urls = [
+       'http://blog.pynbo.or.ke/'
+   ]</p>
+<p>def parse(self, response):
+       # lets start by extracting the root node /html
+       # from the response.
+       html = response.xpath("/html")</p>
+<div class="highlight"><pre><span></span>   # select the body element which is inside
+   # the root node html
+   body = html.xpath(&quot;//body&quot;)
+
+   # lets now get the content element
+   content = body.xpath(&quot;//div[@class=&#39;content&#39;]&quot;)
+
+   # extract the posts element
+   posts = content.xpath(&quot;//div[@class=&#39;posts&#39;]&quot;)
+
+   # iterate over the posts element in order to get
+   # each individual post by extracting section node
+
+   for post in posts.xpath(&quot;section[@class=&#39;post&#39;]&quot;):
+
+       # get the node header
+       header = post.xpath(&quot;header[@class=&#39;post-header&#39;]&quot;)
+       # finally get the title text
+       title = header.xpath(&quot;h3 /a/text()&quot;).extract_first()
+
+       # to get the description is the hardest part, if you inspect the element
+       # of the page you will notice that there are two &lt;p class=&#39;post-meta&#39;&gt; and there
+       # is a &lt;p&gt; element without any attribute between them which holds a simple description
+       # of the post. Basically it makes it hard to extract the description of the post.
+       # I suggest the developers of the web app should look into it.
+       # with that issue in mind I did some tweak below in order to get the empty &lt;p&gt;
+       # tag.
+       description = header.xpath(&quot;p[@class=&#39;post-meta&#39;]|p/text()&quot;).extract()[1]
+
+       # extract post category
+       category = header.xpath(&quot;p[@class=&#39;post-meta&#39;] /a/text()&quot;).extract_first()
+
+       # extract post date
+       date = header.xpath(&quot;p[@class=&#39;post-meta&#39;] /text()&quot;)[-1].extract()
+
+       # finally lets return some data
+       yield {
+             &#39;description&#39;: description, &#39;category&#39;: category, &#39;title&#39;: title, &#39;date&#39;: date
+       }
+</pre></div>
+
+
+<p>```</p>
+</blockquote>
+<p>lets execute our spider</p>
+<blockquote>
+<p><code>bash
+$ scrapy crawl naiblog -o posts.json</code></p>
+</blockquote>
+<p>you will see lots of logs being displayed on your terminal, when there are no more logs displayed navigate to the root of 
+<code>naiblog</code> project and you will see a file named <code>posts.json</code>, open it and you will see all the posts in <code>pynbo blog</code>.</p>
+<p>Thats all!!</p>
+<p>find the entire project on my git repo <a href="https://github.com/gr1d99/naiblog-spider.git">naiblog</a>.</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

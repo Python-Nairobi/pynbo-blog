@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://blog.pynbo.or.ke/index.html</loc>
-<lastmod>2017-09-13T22:29:25-00:00</lastmod>
+<lastmod>2017-10-13T12:43:07-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/archives.html</loc>
-<lastmod>2017-09-13T22:29:25-00:00</lastmod>
+<lastmod>2017-10-13T12:43:07-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/tags.html</loc>
-<lastmod>2017-09-13T22:29:25-00:00</lastmod>
+<lastmod>2017-10-13T12:43:07-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://blog.pynbo.or.ke/categories.html</loc>
-<lastmod>2017-09-13T22:29:25-00:00</lastmod>
+<lastmod>2017-10-13T12:43:07-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -83,6 +83,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/data_viz_by_brian_suda.html</loc>
 <lastmod>2014-12-16T18:11:00:%s</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/scraping-the-python-nairobi-blog.html</loc>
+<lastmod>1969-12-31T23:59:59:%s</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -279,6 +286,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://blog.pynbo.or.ke/author/paul-upendo.html</loc>
 <lastmod>2017-09-04T19:00:00:%s</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://blog.pynbo.or.ke/author/python-nairobi.html</loc>
+<lastmod>1969-12-31T23:59:59:%s</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
