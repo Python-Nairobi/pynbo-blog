@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Python Nairobi</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/python-nairobi.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>1969-12-31T23:59:59+03:00</updated><entry><title>Scraping The Python Nairobi Blog</title><link href="http://blog.pynbo.or.ke/scraping-the-python-nairobi-blog.html" rel="alternate"></link><published>1969-12-31T23:59:59+03:00</published><updated>1969-12-31T23:59:59+03:00</updated><author><name>Python Nairobi</name></author><id>tag:blog.pynbo.or.ke,1969-12-31:/scraping-the-python-nairobi-blog.html</id><summary type="html">&lt;p&gt;Date: 2017-09-17 00:00&lt;/p&gt;
-&lt;p&gt;Tags: scrapy, web, spiders&lt;/p&gt;
-&lt;p&gt;Category: Web Scraping&lt;/p&gt;
-&lt;p&gt;Slug: scraping-the-python-nairobi-blog&lt;/p&gt;
-&lt;p&gt;Author: Gideon Kimutai (https://github.com/gr1d99)&lt;/p&gt;
-&lt;p&gt;Summary: This post will show you how to scrape the Python Nairobi blog using scrapy framework. &lt;/p&gt;
-&lt;p&gt;about_author: A freelance Django web developer&lt;/p&gt;
-&lt;p&gt;email: &lt;a href="gideonkimutai9@gmail.com"&gt;gravar&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Scrapy is an application framework for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Date: 2017-09-17 00:00&lt;/p&gt;
-&lt;p&gt;Tags: scrapy, web, spiders&lt;/p&gt;
-&lt;p&gt;Category: Web Scraping&lt;/p&gt;
-&lt;p&gt;Slug: scraping-the-python-nairobi-blog&lt;/p&gt;
-&lt;p&gt;Author: Gideon Kimutai (https://github.com/gr1d99)&lt;/p&gt;
-&lt;p&gt;Summary: This post will show you how to scrape the Python Nairobi blog using scrapy framework. &lt;/p&gt;
-&lt;p&gt;about_author: A freelance Django web developer&lt;/p&gt;
-&lt;p&gt;email: &lt;a href="gideonkimutai9@gmail.com"&gt;gravar&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Scrapy is an application framework for crawling web sites and extracting structured data which can be used for a wide
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - Gideon Kimutai (https://github.com/gr1d99)</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/gideon-kimutai-httpsgithubcomgr1d99.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2017-09-17T00:00:00+03:00</updated><entry><title>Scraping The Python Nairobi Blog</title><link href="http://blog.pynbo.or.ke/scraping-the-python-nairobi-blog.html" rel="alternate"></link><published>2017-09-17T00:00:00+03:00</published><updated>2017-09-17T00:00:00+03:00</updated><author><name>Gideon Kimutai (https://github.com/gr1d99)</name></author><id>tag:blog.pynbo.or.ke,2017-09-17:/scraping-the-python-nairobi-blog.html</id><summary type="html">&lt;p&gt;This post will show you how to scrape the Python Nairobi blog using scrapy framework.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Scrapy is an application framework for crawling web sites and extracting structured data which can be used for a wide
 range of useful applications, like data mining, information processing or historical archival.&lt;/p&gt;
 &lt;p&gt;so lets get started.&lt;/p&gt;
 &lt;h2&gt;Requirements&lt;/h2&gt;
@@ -177,4 +161,4 @@ $ scrapy crawl naiblog -o posts.json&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;you will see lots of logs being displayed on your terminal, when there are no more logs displayed navigate to the root of 
 &lt;code&gt;naiblog&lt;/code&gt; project and you will see a file named &lt;code&gt;posts.json&lt;/code&gt;, open it and you will see all the posts in &lt;code&gt;pynbo blog&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Thats all!!&lt;/p&gt;
-&lt;p&gt;find the entire project on my git repo &lt;a href="https://github.com/gr1d99/naiblog-spider.git"&gt;naiblog&lt;/a&gt;.&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;find the entire project on my git repo &lt;a href="https://github.com/gr1d99/naiblog-spider.git"&gt;naiblog&lt;/a&gt;.&lt;/p&gt;</content><category term="scrapy"></category><category term="web"></category><category term="spiders"></category></entry></feed>
