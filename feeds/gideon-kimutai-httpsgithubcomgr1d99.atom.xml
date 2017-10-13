@@ -7,51 +7,52 @@ range of useful applications, like data mining, information processing or histor
 &lt;li&gt;you need to have python installed on your computer. here is the link to the official site &lt;a href="https://www.python.org/downloads/"&gt;python.org&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;create a virtual enviroment, steps can be found here &lt;a href="https://virtualenv.pypa.io/en/stable/"&gt;click me&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;activate your created virtualenvironment and install scrapy framework by running the command
-&lt;code&gt;pip install scrapy&lt;/code&gt;.&lt;/li&gt;
+pip install scrapy.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;NB&lt;/strong&gt; if everything is installed correctly you are good to start scraping some data.&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;In this tutorial we will be scraping the Python Nairobi Blog, you may apply the concepts in this tutorial to scrape 
 other websites too. You will also have to read further on your own since i will only cover the basics&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;step one.&lt;/li&gt;
-&lt;/ol&gt;
 &lt;p&gt;check again if &lt;code&gt;scrapy&lt;/code&gt; is available in your current environment by typing &lt;code&gt;scrapy&lt;/code&gt; in your terminal. If you see some 
 bunch of help options then you are good to go.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;we are going to create our project. to do that type 
-&lt;code&gt;bash
-$ scrapy createproject naiblog&lt;/code&gt;
-after creating the project minimize your terminal and you should see a directory named &lt;code&gt;naiblog&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;the directory structure of naiblob should look like this.&lt;/p&gt;
-&lt;p&gt;```
-naiblog/
-   scrapy.cfg
-   naiblog/
-       &lt;strong&gt;init&lt;/strong&gt;.py # deploy configuration file project's Python module, you'll import your code from here
-       items.py # project items definition file
-       pipelines.py # project pipelines file
-       settings.py # project settings file
-       spiders/
-           &lt;strong&gt;init&lt;/strong&gt;.py # a directory where you'll later put your spiders&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;we are going to create our project. to do that type &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scrapy createproject naiblog
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;after creating the project minimize your terminal and you should see a directory named &lt;code&gt;naiblog&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;the directory structure of naiblob should look like this:-&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;naiblog/
+    scrapy.cfg
+    naiblog/
+        __init__.py &lt;span class="c1"&gt;# deploy configuration file project&amp;#39;s Python module, you&amp;#39;ll import your code from here&lt;/span&gt;
+        items.py &lt;span class="c1"&gt;# project items definition file&lt;/span&gt;
+        pipelines.py &lt;span class="c1"&gt;# project pipelines file&lt;/span&gt;
+        settings.py &lt;span class="c1"&gt;# project settings file&lt;/span&gt;
+        spiders/
+            __init__.py &lt;span class="c1"&gt;# a directory where you&amp;#39;ll later put your spiders&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;create a file named &lt;code&gt;naiblog_spider.py&lt;/code&gt; inside the folder &lt;code&gt;naiblog/spiders/naiblog_spider.py&lt;/code&gt;&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;p&gt;now copy the contents below to the new file.&lt;/p&gt;
-&lt;p&gt;```python
-import scrapy&lt;/p&gt;
-&lt;p&gt;class NailblogSpider(scrapy.Spider):
-   name = 'naiblog'&lt;/p&gt;
-&lt;p&gt;start_urls = [
-       'http://blog.pynbo.or.ke/'
-   ]&lt;/p&gt;
-&lt;p&gt;def parse(self, response):
-       pass
-```&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;scrapy&lt;/span&gt;
+
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;NailblogSpider&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scrapy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;naiblog&amp;#39;&lt;/span&gt;
+
+    &lt;span class="n"&gt;start_urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;http://blog.pynbo.or.ke/&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;you need to note some few things here.&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;our spider subcalsses &lt;code&gt;scrapy.Spider&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;name=naiblog&lt;/code&gt; this is the name of our spider, it should be unique within this project.&lt;/li&gt;
@@ -59,105 +60,104 @@ import scrapy&lt;/p&gt;
 the ways&lt;/strong&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;parse()&lt;/code&gt; is a method that will be called to handle response download from each request.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;now you atleast have the basics, so change the contents of the &lt;code&gt;parse()&lt;/code&gt; method to be the same as the one below.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;```python
-class NaiblogSpider(spider.Spider):
-  ...&lt;/p&gt;
-&lt;p&gt;def parse(self, response):
-       sub_header = response.xpath("//div//h1[@class='content-subhead']/text()").extract_first()
-       print sub_header
-```&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;NaiblogSpider&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;spider&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+   &lt;span class="o"&gt;...&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;sub_header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;//div//h1[@class=&amp;#39;content-subhead&amp;#39;]/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_first&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;sub_header&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;on your terminal navigate to the root/base directory of the &lt;code&gt;naiblog&lt;/code&gt; project and type&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;```bash
-$ scrapy crawl naiblog --nolog
-````&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scrapy crawl naiblog --nolog
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;output&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;bash
-$ Latest posts&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ Latest posts
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;strong&gt;yeey you just extracted the content subheading of the &lt;a href="http://blog.pynbo.or.ke/"&gt;http://blog.pynbo.or.ke/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;just open the above url in your browser and right click on the heading &lt;code&gt;Latest Posts&lt;/code&gt; then select the option inspect.
 you will see that the &lt;code&gt;Post List&lt;/code&gt; is wrapped inside &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;html
-&amp;lt;div class="posts"
-   &amp;lt;h1 class="content-subhead"&amp;gt;
-       Latest posts
-   &amp;lt;/h1&amp;gt;
-   ...&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="na"&gt;h1&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content-subhead&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        Latest posts
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;&lt;strong&gt;NB:&lt;/strong&gt; when extracting contents from a response we use &lt;code&gt;css&lt;/code&gt; or &lt;code&gt;xpath&lt;/code&gt; Selectors to select elements from the downloaded
 response.&lt;/p&gt;
 &lt;p&gt;I find &lt;code&gt;xpath&lt;/code&gt; more powerful rather than using &lt;code&gt;css&lt;/code&gt;, you will also have to read more on yourself to understand &lt;code&gt;Xpath&lt;/code&gt;
 expressions.&lt;/p&gt;
 &lt;p&gt;now to the final part of our spider, comments on the code will help you get the idea of what is happening&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;```python
-import scrapy&lt;/p&gt;
-&lt;p&gt;class NaiblogSpider(scrapy.Spider):
-   name = 'naiblog'&lt;/p&gt;
-&lt;p&gt;start_urls = [
-       'http://blog.pynbo.or.ke/'
-   ]&lt;/p&gt;
-&lt;p&gt;def parse(self, response):
-       # lets start by extracting the root node /html
-       # from the response.
-       html = response.xpath("/html")&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   # select the body element which is inside
-   # the root node html
-   body = html.xpath(&amp;quot;//body&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;scrapy&lt;/span&gt;
 
-   # lets now get the content element
-   content = body.xpath(&amp;quot;//div[@class=&amp;#39;content&amp;#39;]&amp;quot;)
 
-   # extract the posts element
-   posts = content.xpath(&amp;quot;//div[@class=&amp;#39;posts&amp;#39;]&amp;quot;)
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;NaiblogSpider&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scrapy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Spider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;naiblog&amp;#39;&lt;/span&gt;
 
-   # iterate over the posts element in order to get
-   # each individual post by extracting section node
+    &lt;span class="n"&gt;start_urls&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;http://blog.pynbo.or.ke/&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
 
-   for post in posts.xpath(&amp;quot;section[@class=&amp;#39;post&amp;#39;]&amp;quot;):
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# lets start by extracting the root node /html&lt;/span&gt;
+        &lt;span class="c1"&gt;# from the response.&lt;/span&gt;
+        &lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-       # get the node header
-       header = post.xpath(&amp;quot;header[@class=&amp;#39;post-header&amp;#39;]&amp;quot;)
-       # finally get the title text
-       title = header.xpath(&amp;quot;h3 /a/text()&amp;quot;).extract_first()
+        &lt;span class="c1"&gt;# select the body element which is inside&lt;/span&gt;
+        &lt;span class="c1"&gt;# the root node html&lt;/span&gt;
+        &lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;html&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;//body&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-       # to get the description is the hardest part, if you inspect the element
-       # of the page you will notice that there are two &amp;lt;p class=&amp;#39;post-meta&amp;#39;&amp;gt; and there
-       # is a &amp;lt;p&amp;gt; element without any attribute between them which holds a simple description
-       # of the post. Basically it makes it hard to extract the description of the post.
-       # I suggest the developers of the web app should look into it.
-       # with that issue in mind I did some tweak below in order to get the empty &amp;lt;p&amp;gt;
-       # tag.
-       description = header.xpath(&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;]|p/text()&amp;quot;).extract()[1]
+        &lt;span class="c1"&gt;# lets now get the content element&lt;/span&gt;
+        &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;//div[@class=&amp;#39;content&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-       # extract post category
-       category = header.xpath(&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;] /a/text()&amp;quot;).extract_first()
+        &lt;span class="c1"&gt;# extract the posts element&lt;/span&gt;
+        &lt;span class="n"&gt;posts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;//div[@class=&amp;#39;posts&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-       # extract post date
-       date = header.xpath(&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;] /text()&amp;quot;)[-1].extract()
+        &lt;span class="c1"&gt;# iterate over the posts element in order to get&lt;/span&gt;
+        &lt;span class="c1"&gt;# each individual post by extracting section node&lt;/span&gt;
 
-       # finally lets return some data
-       yield {
-             &amp;#39;description&amp;#39;: description, &amp;#39;category&amp;#39;: category, &amp;#39;title&amp;#39;: title, &amp;#39;date&amp;#39;: date
-       }
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;section[@class=&amp;#39;post&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# get the node header&lt;/span&gt;
+            &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;header[@class=&amp;#39;post-header&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="c1"&gt;# finally get the title text&lt;/span&gt;
+            &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;h3 /a/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_first&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# to get the description is the hardest part, if you inspect the element&lt;/span&gt;
+            &lt;span class="c1"&gt;# of the page you will notice that there are two &amp;lt;p class=&amp;#39;post-meta&amp;#39;&amp;gt; and there&lt;/span&gt;
+            &lt;span class="c1"&gt;# is a &amp;lt;p&amp;gt; element without any attribute between them which holds a simple description&lt;/span&gt;
+            &lt;span class="c1"&gt;# of the post. Basically it makes it hard to extract the description of the post.&lt;/span&gt;
+            &lt;span class="c1"&gt;# I suggest the developers of the web app should look into it.&lt;/span&gt;
+            &lt;span class="c1"&gt;# with that issue in mind I did some tweak below in order to get the empty &amp;lt;p&amp;gt;&lt;/span&gt;
+            &lt;span class="c1"&gt;# tag.&lt;/span&gt;
+            &lt;span class="n"&gt;description&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;]|p/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# extract post category&lt;/span&gt;
+            &lt;span class="n"&gt;category&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;] /a/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_first&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# extract post date&lt;/span&gt;
+            &lt;span class="n"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;] /text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# finally lets return some data&lt;/span&gt;
+            &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                  &lt;span class="s1"&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;category&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;date&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;date&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;```&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;p&gt;lets execute our spider&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;bash
-$ scrapy crawl naiblog -o posts.json&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ scrapy crawl naiblog -o posts.json
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;you will see lots of logs being displayed on your terminal, when there are no more logs displayed navigate to the root of 
 &lt;code&gt;naiblog&lt;/code&gt; project and you will see a file named &lt;code&gt;posts.json&lt;/code&gt;, open it and you will see all the posts in &lt;code&gt;pynbo blog&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Thats all!!&lt;/p&gt;
