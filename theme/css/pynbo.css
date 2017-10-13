@@ -1,0 +1,28 @@
+@import 'fontello/css/fontello.css';
+
+.CodeMirror{ height: 100%; }
+.CodeMirror-gutter-wrapper + pre > span { margin-left:30px; }
+.CodeMirror pre {
+    line-height: normal;
+    box-shadow: none;
+    padding: 2px 1px;
+    font-size: 15px;
+}
+.CodeMirror-gutters { display:none }
+.cover-body .header { text-align: center; }
+.brand-main a, .tagline { margin-left: 0; }
+.brand-main a { 
+    font-family: inherit;
+    font-size: 70px;
+    text-transform: none;
+}
+.tagline { letter-spacing: 2px; }
+h1,h2,h3,h4,h5,h6,.cover-body { font-family: 'cuprumbold_italic'; }
+.cover-img { background-color:black; }
+
+.fa-meetup:before {
+    font-family: "fontello";
+    content: '\e801';
+}
+
+.post-title{ font-family: cuprumbold_italic; }
