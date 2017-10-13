@@ -1,19 +1,11 @@
 Title: Scraping The Python Nairobi Blog
-
 Date: 2017-09-17 00:00
-
 Tags: scrapy, web, spiders
-
 Category: Web Scraping
-
 Slug: scraping-the-python-nairobi-blog
-
 Author: Gideon Kimutai (https://github.com/gr1d99)
-
 Summary: This post will show you how to scrape the Python Nairobi blog using scrapy framework. 
-
 about_author: A freelance Django web developer
-
 email: [gravar](gideonkimutai9@gmail.com)
 
 Scrapy is an application framework for crawling web sites and extracting structured data which can be used for a wide
