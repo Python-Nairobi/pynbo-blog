@@ -17,26 +17,26 @@ email: michaelbukachi@gmail.com
  > - Pytest installed
  
  
- #Intro
+#Intro
+
+![alt text](https://cdn-images-1.medium.com/max/1600/1*7dFF3N2BwzlPz5MHA3_eyA.gif "When things go wrong")
  
- ![alt text](https://cdn-images-1.medium.com/max/1600/1*7dFF3N2BwzlPz5MHA3_eyA.gif "When things go wrong")
+Ah, testing, a topic many devs don't like hearing. I really don't blame them. Testing is _tricky_.
+It's difficult to get it right and it's always evolving. I personally struggled with it for quite
+some time before I got the hang of it. But it is **necessary**. These days I can't start a project  before making sure 
+that there are testing frameworks available for the specific language I am using.
  
- Ah, testing, a topic many devs don't like hearing. I really don't blame them. Testing is _tricky_.
- It's difficult to get it right and it's always evolving. I personally struggled with it for quite
- some time before I got the hang of it. But it is **necessary**. These days I can't start a project  before making sure 
- that there are testing frameworks available for the specific language I am using.
- 
- **Disclaimer:** This guide is not an introduction to testing using pytest. For that, just open 
- [our friendly search engine](https://www.google.com) and search "getting started with pytest". Trust me, you won't 
- regret it.
- 
- ![](https://data.whicdn.com/images/86201703/original.gif "You're welcome")
- 
- #Getting started
- For this guide, I'll be using flask for demonstration. The demo project is available 
- [here](https://github.com/michaelbukachi/flask_pystest_state.git). The basic structure of the project as follows:
- ```
- ├── app
+**Disclaimer:** This guide is not an introduction to testing using pytest. For that, just open 
+[our friendly search engine](https://www.google.com) and search "getting started with pytest". Trust me, you won't 
+regret it.
+
+![](https://data.whicdn.com/images/86201703/original.gif "You're welcome")
+
+#Getting started
+For this guide, I'll be using flask for demonstration. The demo project is available 
+[here](https://github.com/michaelbukachi/flask_pystest_state.git). The basic structure of the project as follows:
+```
+├── app
 │   ├── __init__.py
 │   └── views.py
 ├── requirements.txt
@@ -44,9 +44,9 @@ email: michaelbukachi@gmail.com
     ├── conftest.py
     ├── __init__.py
     └── test_token.py
+    
+```
 
- ```
- 
 **app/__init__.py**
 ```
 from flask import Flask
