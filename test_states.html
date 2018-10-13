@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python-Nairobi Blog">
+
+
+        <title>Maintaining states while using Pytest // #PyNBO // The Python-Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/michael-bukachi.html" title="See posts by Michael Bukachi">
+                    <img class="avatar" alt="Michael Bukachi" src="http://www.gravatar.com/avatar/bd5b8981a308c94b642befb656d8cf8f">
+                    <h2 class="article-info">Michael Bukachi</h2>
+                </a>
+                <small class="about-author">Michael is a Software Engineer at Mobidev Kenya Limited</small>
+                <h5>Published</h5>
+                <p>September 10, 2018</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Maintaining states while using Pytest</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/pytest.html">pytest</a>
+                        </p>
+                </header>
+            </section>
+            <h2>Pre-requisites</h2>
+<blockquote>
+<ul>
+<li>Beginner level Python</li>
+<li>Python2<em> or Python3</em> installed</li>
+<li>Basic knowledge on TDD and python UnitTesting</li>
+<li>Pytest installed</li>
+</ul>
+</blockquote>
+<h1>Intro</h1>
+<p><img alt="alt text" src="https://cdn-images-1.medium.com/max/1600/1*7dFF3N2BwzlPz5MHA3_eyA.gif" title="When things go wrong"></p>
+<p>Ah, testing, a topic many devs don't like hearing. I really don't blame them. Testing is <em>tricky</em>.
+It's difficult to get it right and it's always evolving. I personally struggled with it for quite
+some time before I got the hang of it. But it is <strong>necessary</strong>. These days I can't start a project  before making sure 
+that there are testing frameworks available for the specific language I am using.</p>
+<p><strong>Disclaimer:</strong> This guide is not an introduction to testing using pytest. For that, just open 
+<a href="https://www.google.com">our friendly search engine</a> and search "getting started with pytest". Trust me, you won't 
+regret it.</p>
+<p><img alt="" src="https://data.whicdn.com/images/86201703/original.gif" title="You're welcome"></p>
+<h1>Getting started</h1>
+<p>For this guide, I'll be using flask for demonstration. The demo project is available 
+<a href="https://github.com/michaelbukachi/flask_pystest_state.git">here</a>. The basic structure of the project as follows:</p>
+<div class="highlight"><pre><span></span>├── app
+│   ├── __init__.py
+│   └── views.py
+├── requirements.txt
+└── test
+    ├── conftest.py
+    ├── __init__.py
+    └── test_token.py
+</pre></div>
+
+
+<p><strong>app/<strong>init</strong>.py</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+
+<span class="k">def</span> <span class="nf">create_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">auth</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</pre></div>
+
+
+<p>Notice that I've used the lazy pattern so that it is easy to test.</p>
+<p><strong>app/views.py</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">auth</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())</span>
+
+
+<span class="nd">@auth.route</span><span class="p">(</span><span class="s1">&#39;/token&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_token</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">TOKEN</span><span class="p">)</span>
+
+
+<span class="nd">@auth.route</span><span class="p">(</span><span class="s1">&#39;/secure&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">secure_page</span><span class="p">():</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;token&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">TOKEN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="s1">&#39;This is a secure page&#39;</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">jsonify</span><span class="p">(</span><span class="s1">&#39;Unauthorized&#39;</span><span class="p">)</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">401</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+
+
+<p><strong>test/conftest.py</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">flask.testing</span> <span class="kn">import</span> <span class="n">FlaskClient</span>
+<span class="kn">from</span> <span class="nn">werkzeug.utils</span> <span class="kn">import</span> <span class="n">cached_property</span>
+
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">create_app</span>
+
+
+<span class="k">class</span> <span class="nc">JSONResponse</span><span class="p">(</span><span class="n">Response</span><span class="p">):</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">as_text</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="s1">&#39;session&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">flask_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="n">app</span>
+
+
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="s1">&#39;session&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">client</span><span class="p">(</span><span class="n">flask_app</span><span class="p">):</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">flask_app</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">flask_app</span><span class="o">.</span><span class="n">test_request_context</span><span class="p">()</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">test_client_class</span> <span class="o">=</span> <span class="n">FlaskClient</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">response_class</span> <span class="o">=</span> <span class="n">JSONResponse</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">test_client</span><span class="p">()</span>
+</pre></div>
+
+
+<p><strong>test/test_token.py</strong></p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">flask.testing</span> <span class="kn">import</span> <span class="n">FlaskClient</span>
+
+
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="s1">&#39;module&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">token</span><span class="p">():</span>
+    <span class="k">return</span> <span class="vm">__name__</span> <span class="o">+</span> <span class="s1">&#39;:token&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">test_get_token</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">FlaskClient</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/token&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">token_</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token_</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_secure_page</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">FlaskClient</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+    <span class="n">token_</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/secure&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{})</span>
+    <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/secure&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token_</span><span class="p">})</span>
+    <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</pre></div>
+
+
+<p>For those who have not used pytest before, pytest basically uses dependency injection to 
+provide dependencies to tests. This has numerous applications, from providing dummy data to providing
+configurations and constants. If you take a look at <code>test/conftest.py</code> you'll notice that the dependencies to be injected
+have been defined.</p>
+<p>All the magic happens in <code>test/test_token.py</code> in the following lines of code:</p>
+<div class="highlight"><pre><span></span>@pytest.fixture(&#39;module&#39;)
+def token():
+    return __name__ + &#39;:token&#39;
+</pre></div>
+
+
+<p>The name of the function can be anything. What's important to note is the use of <code>__name__ + ':token:</code>. Since state changes
+are persisted into a file, using <code>__name__</code> enables creation of unique files in case multiple test are being run in parallel.</p>
+<p>The <code>request</code> dependency is provided by pytest and is used to store and retrieve persisted data</p>
+<p>I find state persistence very useful in situations why I need to share data between tests. Yes, yes. I know. Test are supposed
+to be unique and independent. But sometimes it's necessary. For instance, when a token is required to access an api, like in 
+the example above or, if you want to maintain data from a response for use in future requests.</p>
+<p><img alt="alt text" src="https://orig00.deviantart.net/6ef3/f/2015/092/e/7/that_s_all_folks_by_shootersp-d8o2m64.gif" title="That's all folks!"></p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

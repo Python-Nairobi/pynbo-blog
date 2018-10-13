@@ -86,7 +86,7 @@
     <span class="n">b</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">names</span> <span class="o">!=</span> <span class="s1">&#39;.DS_Store&#39;</span><span class="p">:</span>
                     <span class="n">a</span><span class="p">[</span><span class="n">names</span><span class="p">]</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
@@ -152,7 +152,7 @@
         <span class="n">p0r</span><span class="p">,</span><span class="n">st</span><span class="p">,</span><span class="n">err</span> <span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">calcOpticalFlowPyrLK</span><span class="p">(</span><span class="n">img2</span><span class="p">,</span><span class="n">img1</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span>
                                         <span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">lk_params</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">loop</span><span class="o">-</span><span class="n">p0r</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">loop</span><span class="o">-</span><span class="n">p0r</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">dst</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span><span class="n">p0r</span><span class="p">)</span>
             <span class="n">dist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
 
@@ -174,7 +174,7 @@
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># create HTTP endpoint</span>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/ImPro/&lt;road&gt;&#39;</span><span class="p">)</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/ImPro/&amp;lt;road&amp;gt;&#39;</span><span class="p">)</span>
 
 <span class="c1"># main function</span>
 <span class="k">def</span> <span class="nf">get_route</span><span class="p">(</span><span class="n">road</span><span class="p">):</span>

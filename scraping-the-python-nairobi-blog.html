@@ -138,10 +138,10 @@ the ways</strong>.</li>
 <p><strong>yeey you just extracted the content subheading of the <a href="http://blog.pynbo.or.ke/">http://blog.pynbo.or.ke/</a></strong></p>
 <p>just open the above url in your browser and right click on the heading <code>Latest Posts</code> then select the option inspect.
 you will see that the <code>Post List</code> is wrapped inside </p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;posts&quot;</span>
-    <span class="err">&lt;</span><span class="na">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content-subhead&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="ni">&amp;lt;</span>div class=&quot;posts&quot;
+    <span class="ni">&amp;lt;</span>h1 class=&quot;content-subhead&quot;<span class="ni">&amp;gt;</span>
         Latest posts
-    <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span>
     ...
 </pre></div>
 
@@ -187,11 +187,11 @@ expressions.</p>
             <span class="n">title</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;h3 /a/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract_first</span><span class="p">()</span>
 
             <span class="c1"># to get the description is the hardest part, if you inspect the element</span>
-            <span class="c1"># of the page you will notice that there are two &lt;p class=&#39;post-meta&#39;&gt; and there</span>
-            <span class="c1"># is a &lt;p&gt; element without any attribute between them which holds a simple description</span>
+            <span class="c1"># of the page you will notice that there are two &amp;lt;p class=&#39;post-meta&#39;&amp;gt; and there</span>
+            <span class="c1"># is a &amp;lt;p&amp;gt; element without any attribute between them which holds a simple description</span>
             <span class="c1"># of the post. Basically it makes it hard to extract the description of the post.</span>
             <span class="c1"># I suggest the developers of the web app should look into it.</span>
-            <span class="c1"># with that issue in mind I did some tweak below in order to get the empty &lt;p&gt;</span>
+            <span class="c1"># with that issue in mind I did some tweak below in order to get the empty &amp;lt;p&amp;gt;</span>
             <span class="c1"># tag.</span>
             <span class="n">description</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s2">&quot;p[@class=&#39;post-meta&#39;]|p/text()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">extract</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 
