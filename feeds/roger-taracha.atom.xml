@@ -10,10 +10,10 @@ If you would like to jump straight into the project, here is link to the repo on
 https://github.com/TheDancerCodes/Selenium-Webscraping-Example&lt;/p&gt;
 &lt;h3&gt;What will we require?&lt;/h3&gt;
 &lt;p&gt;We will also use the following packages and driver.
-&lt;em&gt; &lt;a href="https://pypi.python.org/pypi/selenium"&gt;selenium package&lt;/a&gt; — used to automate web browser interaction from Python
-&lt;/em&gt; &lt;a href="https://sites.google.com/a/chromium.org/chromedriver/downloads"&gt;ChromeDriver&lt;/a&gt; — provides a platform to open up and perform tasks in specified browser.
-&lt;em&gt; &lt;a href="https://virtualenv.pypa.io/en/stable/"&gt;Virtualenv&lt;/a&gt; — to create an isolated Python environment for our project.
-&lt;/em&gt; &lt;a href="http://selenium-python.readthedocs.io/"&gt;Extras&lt;/a&gt; - Selenium-Python ReadTheDocs Resource.&lt;/p&gt;
+* &lt;a href="https://pypi.python.org/pypi/selenium"&gt;selenium package&lt;/a&gt; — used to automate web browser interaction from Python
+* &lt;a href="https://sites.google.com/a/chromium.org/chromedriver/downloads"&gt;ChromeDriver&lt;/a&gt; — provides a platform to open up and perform tasks in specified browser.
+* &lt;a href="https://virtualenv.pypa.io/en/stable/"&gt;Virtualenv&lt;/a&gt; — to create an isolated Python environment for our project.
+* &lt;a href="http://selenium-python.readthedocs.io/"&gt;Extras&lt;/a&gt; - Selenium-Python ReadTheDocs Resource.&lt;/p&gt;
 &lt;h3&gt;Steps&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Setup project&lt;/li&gt;
@@ -78,29 +78,29 @@ In this file, type in our dependency &lt;code&gt;selenium&lt;/code&gt;.&lt;/p&gt
 &lt;p&gt;Once we make a request and it is successful, we need to get a response.
 We will break the response into 2 and combine it at the end.
 The response is the title and language of the pinned repositories of the Github profile.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
-# find_elements_by_xpath - Returns an array of selenium objects.
-titles_element = browser.find_elements_by_xpath(&amp;quot;//a[@class=&amp;#39;text-bold&amp;#39;]&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```&lt;span class="nv"&gt;python&lt;/span&gt;
+# &lt;span class="nv"&gt;find_elements_by_xpath&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;Returns&lt;/span&gt; &lt;span class="nv"&gt;an&lt;/span&gt; &lt;span class="nv"&gt;array&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;selenium&lt;/span&gt; &lt;span class="nv"&gt;objects&lt;/span&gt;.
+&lt;span class="nv"&gt;titles_element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;browser&lt;/span&gt;.&lt;span class="nv"&gt;find_elements_by_xpath&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;//a[@class=&amp;#39;text-bold&amp;#39;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 
-# List Comprehension to get the actual repo titles and not the selenium objects.
-titles = [x.text for x in titles_element]
-
-
-print(&amp;#39;TITLES:&amp;#39;)
-print(titles, &amp;#39;\n&amp;#39;)
+# &lt;span class="nv"&gt;List&lt;/span&gt; &lt;span class="nv"&gt;Comprehension&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;get&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;actual&lt;/span&gt; &lt;span class="nv"&gt;repo&lt;/span&gt; &lt;span class="nv"&gt;titles&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;selenium&lt;/span&gt; &lt;span class="nv"&gt;objects&lt;/span&gt;.
+&lt;span class="nv"&gt;titles&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; [&lt;span class="nv"&gt;x&lt;/span&gt;.&lt;span class="nv"&gt;text&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;titles_element&lt;/span&gt;]
 
 
-# Get all of the pinned repo languages
-language_element = browser.find_elements_by_xpath(&amp;quot;//p[@class=&amp;#39;mb-0 f6 text-gray&amp;#39;]&amp;quot;)
-languages = [x.text for x in language_element] # same concept as for-loop/ list-comprehension above.
+&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;TITLES:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 
-print(&amp;quot;LANGUAGES:&amp;quot;)
-print(languages, &amp;#39;\n&amp;#39;)
 
-# Pair each title with its corresponding language using zip function and print each pair
-for title, language in zip(titles, languages):
-    print(&amp;quot;RepoName : Language&amp;quot;)
-    print(title + &amp;quot;: &amp;quot; + language, &amp;#39;\n&amp;#39;)
+# &lt;span class="nv"&gt;Get&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;pinned&lt;/span&gt; &lt;span class="nv"&gt;repo&lt;/span&gt; &lt;span class="nv"&gt;languages&lt;/span&gt;
+&lt;span class="nv"&gt;language_element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;browser&lt;/span&gt;.&lt;span class="nv"&gt;find_elements_by_xpath&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;//p[@class=&amp;#39;mb-0 f6 text-gray&amp;#39;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;languages&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; [&lt;span class="nv"&gt;x&lt;/span&gt;.&lt;span class="nv"&gt;text&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;language_element&lt;/span&gt;] # &lt;span class="nv"&gt;same&lt;/span&gt; &lt;span class="nv"&gt;concept&lt;/span&gt; &lt;span class="nv"&gt;as&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;loop&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="nv"&gt;list&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;comprehension&lt;/span&gt; &lt;span class="nv"&gt;above&lt;/span&gt;.
+
+&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;LANGUAGES:&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;languages&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+# &lt;span class="nv"&gt;Pair&lt;/span&gt; &lt;span class="nv"&gt;each&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt; &lt;span class="nv"&gt;with&lt;/span&gt; &lt;span class="nv"&gt;its&lt;/span&gt; &lt;span class="nv"&gt;corresponding&lt;/span&gt; &lt;span class="nv"&gt;language&lt;/span&gt; &lt;span class="nv"&gt;using&lt;/span&gt; &lt;span class="nv"&gt;zip&lt;/span&gt; &lt;span class="nv"&gt;function&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;each&lt;/span&gt; &lt;span class="nv"&gt;pair&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;title&lt;/span&gt;, &lt;span class="nv"&gt;language&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;zip&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;titles&lt;/span&gt;, &lt;span class="nv"&gt;languages&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;RepoName : Language&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;title&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;: &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;language&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 
 ```
 &lt;/pre&gt;&lt;/div&gt;
@@ -108,10 +108,10 @@ for title, language in zip(titles, languages):
 
 &lt;h3&gt;Run the program&lt;/h3&gt;
 &lt;p&gt;Finally execute the program by running it directly in your IDE or by using the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
-$ (webscraping_example) python webscraping_example.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;```&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webscraping_example&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;webscraping_example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;
 
-```
+&lt;span class="o"&gt;```&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 

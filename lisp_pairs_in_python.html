@@ -70,35 +70,35 @@
 
 
 <p>Here's how our implementation of <code>cons</code>, <code>car</code>, <code>cdr</code> looks like:</p>
-<div class="highlight"><pre><span></span>def cons(x, y):
-    def dispatch(m):
-        if m == &quot;car&quot;:
-            return x
-        elif m == &quot;cdr&quot;:
-            return y
-        else:
-            print(&quot;error dude&quot;)
-    return dispatch
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">cons</span><span class="ss">(</span><span class="nv">x</span>, <span class="nv">y</span><span class="ss">)</span>:
+    <span class="nv">def</span> <span class="nv">dispatch</span><span class="ss">(</span><span class="nv">m</span><span class="ss">)</span>:
+        <span class="k">if</span> <span class="nv">m</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">car</span><span class="s2">&quot;</span>:
+            <span class="k">return</span> <span class="nv">x</span>
+        <span class="nv">elif</span> <span class="nv">m</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">cdr</span><span class="s2">&quot;</span>:
+            <span class="k">return</span> <span class="nv">y</span>
+        <span class="k">else</span>:
+            <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">error dude</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="k">return</span> <span class="nv">dispatch</span>
 </pre></div>
 
 
 <p>Here, we define an internal procedure <code>dispatch</code> that receives some "message" and acts on it. If the "message" is a <code>car</code> it will return the first element of cons' arguments. If it's a <code>cdr</code>, it'll return the second element; otherwise, a simple error message is printed. Our <code>cons</code> function returns a procedure as its return value. As we shall see later, our "message" will be passed to this return value. Now let's create our <code>car</code> and <code>cdr</code> functions.</p>
-<div class="highlight"><pre><span></span>def car(z):
-    return z(&quot;car&quot;)
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">car</span><span class="ss">(</span><span class="nv">z</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="nv">z</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">car</span><span class="s2">&quot;</span><span class="ss">)</span>
 
-def cdr(z):
-    return z(&quot;cdr&quot;)
+<span class="nv">def</span> <span class="nv">cdr</span><span class="ss">(</span><span class="nv">z</span><span class="ss">)</span>:
+    <span class="k">return</span> <span class="nv">z</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">cdr</span><span class="s2">&quot;</span><span class="ss">)</span>
 </pre></div>
 
 
 <p>Both <code>car</code> and <code>cdr</code> take a pair(a cons object) as it's arguments. The right value is returned depending on the "message passed". The name "message passing" comes from the image that a data object(in our case the pairs) is an entity that receives the requested operation name as a "message". Let's create some fancy pairs :)</p>
-<div class="highlight"><pre><span></span>x = cons(2, 3)
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">cons</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-# Let&#39;s print the first element of x:
-print(car(x))
+<span class="o">#</span> <span class="n">Let</span><span class="s1">&#39;s print the first element of x:</span>
+<span class="s1">print(car(x))</span>
 
-# Let&#39;s print the second element of x:
-print(cdr(x))
+<span class="s1"># Let&#39;</span><span class="n">s</span> <span class="n">print</span> <span class="n">the</span> <span class="k">second</span> <span class="n">element</span> <span class="k">of</span> <span class="n">x</span><span class="p">:</span>
+<span class="n">print</span><span class="p">(</span><span class="n">cdr</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
             <div class="hr"></div>
             <a href="#" class="go-top">Go Top</a>

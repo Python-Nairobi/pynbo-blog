@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="#PyNBO, The Python-Nairobi Blog">
+
+
+        <title>Pagination Review of Django's and Pelican's Implementation // #PyNBO // The Python-Nairobi Blog</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./theme/css/pure.css">
+
+    <link rel="stylesheet" href="./theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+    <link href="./theme/css/cuprum_bolditalic/cuprum.css" rel="stylesheet">
+    <link href="./theme/css/pynbo.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="./author/john-nduli.html" title="See posts by John Nduli">
+                    <img class="avatar" alt="John Nduli" src="http://www.gravatar.com/avatar/94c981715ccfff410d95bdef8ec91684">
+                    <h2 class="article-info">John Nduli</h2>
+                </a>
+                <small class="about-author">Linux enthusiast, Anime + Manga Fan, Audiophile, Tinkerer</small>
+                <h5>Published</h5>
+                <p>March 12, 2019</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>Pagination Review of Django's and Pelican's Implementation</h1>
+                        <p class="post-meta">
+                            // under                         </p>
+                </header>
+            </section>
+            <p><em>I wrote this article earlier on my blog <a href="https://jnduli.co.ke/pagination-review-of-django-pelican-implementation.html" target="_blank">here</a>.</em></p>
+<p>Pagination is the process of dividing up a document into discrete pages
+(<a href="https://en.wikipedia.org/wiki/Pagination">wikipedia</a>). Django and
+Pelican have similar pagination implementations. This boils down to
+having a class that has accepts a sliceable object as one of its params,
+and returns a page containing list of items depending on number of items
+per page. The django <a href="https://docs.djangoproject.com/en/2.1/topics/pagination/#required-arguments">paginator
+docs</a>
+describe the object list as a list, tuple, QuerySet, or other sliceable
+object with a count() or <strong>len</strong>() method.</p>
+<div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">Paginator</span><span class="p">(</span><span class="n">object_list</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">per_page</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To get the contents of a particular page one calls the get_page method:</p>
+<div class="highlight"><pre><span></span><span class="n">paginator</span><span class="o">.</span><span class="n">get_page</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>What this does is to first check if the number provided is valid using
+the validate_number method. A number is valid if its an integer, it's
+greater than 0 and is less that the total number of pages in the
+paginator (if the alloy_empty_first_page parameter was set to True, 1
+will be valid even if the total number of pages is 0).</p>
+<p>If the number was valid the page method is called. This creates the
+required start and end slices i.e.<code>start:end</code> on the object list, and
+returns a Page object that only contains these elements.</p>
+<p>The code below shows some boiler plate that can achieve this:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Paginator</span><span class="p">:</span>
+
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_list</span><span class="p">,</span> <span class="n">per_page</span><span class="p">,</span>
+                <span class="n">allow_empty_first_page</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">object_list</span> <span class="o">=</span> <span class="n">object_list</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">per_page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">per_page</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">orphans</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">orphans</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">allow_empty_first_page</span> <span class="o">=</span> <span class="n">allow_empty_first_page</span>
+
+   <span class="k">def</span> <span class="nf">validate_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+       <span class="c1"># Make sure number is integer, greater than 1 and less than</span>
+       <span class="c1"># the total number of pages</span>
+
+  <span class="k">def</span> <span class="nf">get_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+       <span class="c1"># if number is valid, returns a page object.</span>
+       <span class="c1"># This is done by getting range of items required</span>
+       <span class="c1"># e.g. 11:20, and returning an object that one can iterate</span>
+       <span class="c1"># through (called a Page object)</span>
+
+  <span class="k">def</span> <span class="nf">num_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="c1"># Returns the total number of pages</span>
+
+  <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="c1"># Returns total number of objects</span>
+</pre></div>
+
+
+<p>To loop over the page object with a for, the Page class implements the
+<strong>getitem</strong> for this. Pelican's implementation does not have this method
+though. It also has some useful methods like:</p>
+<ul>
+<li><code>has_next</code></li>
+<li><code>has_previous</code></li>
+<li><code>has_other_pages</code></li>
+<li><code>next_page_number</code></li>
+<li><code>previous_page_number</code></li>
+</ul>
+<p>With these one can effectively get the contents of a page by looping
+through the paginator (in django only) and have various logic on which
+page numbers to display.</p>
+<p>The example provided in the <a href="https://docs.djangoproject.com/en/2.1/topics/pagination/#using-paginator-in-a-view">django docs
+here</a>
+shows a really good usage of the various methods.</p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; #PyNBO &ndash;
+        Built with
+        ( <a href="https://github.com/Python-Nairobi/pure-pynbo"> a slightly modified</a> )
+        <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-54801851-1', 'auto');
+        ga('require', 'displayfeatures');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

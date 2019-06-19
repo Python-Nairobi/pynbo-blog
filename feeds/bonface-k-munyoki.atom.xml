@@ -18,33 +18,33 @@
 
 
 &lt;p&gt;Here's how our implementation of &lt;code&gt;cons&lt;/code&gt;, &lt;code&gt;car&lt;/code&gt;, &lt;code&gt;cdr&lt;/code&gt; looks like:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def cons(x, y):
-    def dispatch(m):
-        if m == &amp;quot;car&amp;quot;:
-            return x
-        elif m == &amp;quot;cdr&amp;quot;:
-            return y
-        else:
-            print(&amp;quot;error dude&amp;quot;)
-    return dispatch
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;cons&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;, &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;dispatch&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;m&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;car&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;:
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt;
+        &lt;span class="nv"&gt;elif&lt;/span&gt; &lt;span class="nv"&gt;m&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;cdr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;:
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;:
+            &lt;span class="nv"&gt;print&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;error dude&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;dispatch&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Here, we define an internal procedure &lt;code&gt;dispatch&lt;/code&gt; that receives some "message" and acts on it. If the "message" is a &lt;code&gt;car&lt;/code&gt; it will return the first element of cons' arguments. If it's a &lt;code&gt;cdr&lt;/code&gt;, it'll return the second element; otherwise, a simple error message is printed. Our &lt;code&gt;cons&lt;/code&gt; function returns a procedure as its return value. As we shall see later, our "message" will be passed to this return value. Now let's create our &lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; functions.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def car(z):
-    return z(&amp;quot;car&amp;quot;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;car&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;car&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 
-def cdr(z):
-    return z(&amp;quot;cdr&amp;quot;)
+&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;cdr&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;z&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;cdr&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Both &lt;code&gt;car&lt;/code&gt; and &lt;code&gt;cdr&lt;/code&gt; take a pair(a cons object) as it's arguments. The right value is returned depending on the "message passed". The name "message passing" comes from the image that a data object(in our case the pairs) is an entity that receives the requested operation name as a "message". Let's create some fancy pairs :)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;x = cons(2, 3)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cons&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-# Let&amp;#39;s print the first element of x:
-print(car(x))
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Let&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s print the first element of x:&lt;/span&gt;
+&lt;span class="s1"&gt;print(car(x))&lt;/span&gt;
 
-# Let&amp;#39;s print the second element of x:
-print(cdr(x))
+&lt;span class="s1"&gt;# Let&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;second&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cdr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</content></entry></feed>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>#PyNBO - John Nduli</title><link href="http://blog.pynbo.or.ke/" rel="alternate"></link><link href="http://blog.pynbo.or.ke/feeds/john-nduli.atom.xml" rel="self"></link><id>http://blog.pynbo.or.ke/</id><updated>2019-03-12T17:30:00+03:00</updated><entry><title>Pagination Review of Django's and Pelican's Implementation</title><link href="http://blog.pynbo.or.ke/pagination-review-of-django-pelican-implementation.html" rel="alternate"></link><published>2019-03-12T17:30:00+03:00</published><updated>2019-03-12T17:30:00+03:00</updated><author><name>John Nduli</name></author><id>tag:blog.pynbo.or.ke,2019-03-12:/pagination-review-of-django-pelican-implementation.html</id><summary type="html">&lt;p&gt;I discuss how pagination is implemented in both pelican and django, and how this implementation can generally be used&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;I wrote this article earlier on my blog &lt;a href="https://jnduli.co.ke/pagination-review-of-django-pelican-implementation.html" target="_blank"&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Pagination is the process of dividing up a document into discrete pages
+(&lt;a href="https://en.wikipedia.org/wiki/Pagination"&gt;wikipedia&lt;/a&gt;). Django and
+Pelican have similar pagination implementations. This boils down to
+having a class that has accepts a sliceable object as one of its params,
+and returns a page containing list of items depending on number of items
+per page. The django &lt;a href="https://docs.djangoproject.com/en/2.1/topics/pagination/#required-arguments"&gt;paginator
+docs&lt;/a&gt;
+describe the object list as a list, tuple, QuerySet, or other sliceable
+object with a count() or &lt;strong&gt;len&lt;/strong&gt;() method.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;object_list&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;per_page&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To get the contents of a particular page one calls the get_page method:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;What this does is to first check if the number provided is valid using
+the validate_number method. A number is valid if its an integer, it's
+greater than 0 and is less that the total number of pages in the
+paginator (if the alloy_empty_first_page parameter was set to True, 1
+will be valid even if the total number of pages is 0).&lt;/p&gt;
+&lt;p&gt;If the number was valid the page method is called. This creates the
+required start and end slices i.e.&lt;code&gt;start:end&lt;/code&gt; on the object list, and
+returns a Page object that only contains these elements.&lt;/p&gt;
+&lt;p&gt;The code below shows some boiler plate that can achieve this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Paginator&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;object_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;per_page&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="n"&gt;allow_empty_first_page&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;object_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;object_list&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;per_page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;per_page&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;orphans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;orphans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;allow_empty_first_page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;allow_empty_first_page&lt;/span&gt;
+
+   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;validate_number&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+       &lt;span class="c1"&gt;# Make sure number is integer, greater than 1 and less than&lt;/span&gt;
+       &lt;span class="c1"&gt;# the total number of pages&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_page&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+       &lt;span class="c1"&gt;# if number is valid, returns a page object.&lt;/span&gt;
+       &lt;span class="c1"&gt;# This is done by getting range of items required&lt;/span&gt;
+       &lt;span class="c1"&gt;# e.g. 11:20, and returning an object that one can iterate&lt;/span&gt;
+       &lt;span class="c1"&gt;# through (called a Page object)&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;num_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+     &lt;span class="c1"&gt;# Returns the total number of pages&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+     &lt;span class="c1"&gt;# Returns total number of objects&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To loop over the page object with a for, the Page class implements the
+&lt;strong&gt;getitem&lt;/strong&gt; for this. Pelican's implementation does not have this method
+though. It also has some useful methods like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;has_next&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;has_previous&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;has_other_pages&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;next_page_number&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;previous_page_number&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With these one can effectively get the contents of a page by looping
+through the paginator (in django only) and have various logic on which
+page numbers to display.&lt;/p&gt;
+&lt;p&gt;The example provided in the &lt;a href="https://docs.djangoproject.com/en/2.1/topics/pagination/#using-paginator-in-a-view"&gt;django docs
+here&lt;/a&gt;
+shows a really good usage of the various methods.&lt;/p&gt;</content></entry></feed>

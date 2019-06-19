@@ -75,14 +75,14 @@ regret it.</p>
 <h1>Getting started</h1>
 <p>For this guide, I'll be using flask for demonstration. The demo project is available 
 <a href="https://github.com/michaelbukachi/flask_pystest_state.git">here</a>. The basic structure of the project as follows:</p>
-<div class="highlight"><pre><span></span>├── app
-│   ├── __init__.py
-│   └── views.py
-├── requirements.txt
-└── test
-    ├── conftest.py
-    ├── __init__.py
-    └── test_token.py
+<div class="highlight"><pre><span></span><span class="err">├──</span> <span class="n">app</span>
+<span class="err">│</span>   <span class="err">├──</span> <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
+<span class="err">│</span>   <span class="err">└──</span> <span class="n">views</span><span class="p">.</span><span class="n">py</span>
+<span class="err">├──</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+<span class="err">└──</span> <span class="n">test</span>
+    <span class="err">├──</span> <span class="n">conftest</span><span class="p">.</span><span class="n">py</span>
+    <span class="err">├──</span> <span class="n">__init__</span><span class="p">.</span><span class="n">py</span>
+    <span class="err">└──</span> <span class="n">test_token</span><span class="p">.</span><span class="n">py</span>
 </pre></div>
 
 
@@ -193,9 +193,9 @@ provide dependencies to tests. This has numerous applications, from providing du
 configurations and constants. If you take a look at <code>test/conftest.py</code> you'll notice that the dependencies to be injected
 have been defined.</p>
 <p>All the magic happens in <code>test/test_token.py</code> in the following lines of code:</p>
-<div class="highlight"><pre><span></span>@pytest.fixture(&#39;module&#39;)
-def token():
-    return __name__ + &#39;:token&#39;
+<div class="highlight"><pre><span></span>@<span class="nv">pytest</span>.<span class="nv">fixture</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">module</span><span class="s1">&#39;</span><span class="ss">)</span>
+<span class="nv">def</span> <span class="nv">token</span><span class="ss">()</span>:
+    <span class="k">return</span> <span class="nv">__name__</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="s">:token</span><span class="s1">&#39;</span>
 </pre></div>
 
 

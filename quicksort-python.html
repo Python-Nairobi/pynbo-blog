@@ -76,7 +76,7 @@
     <span class="c1"># Base case: lo and hi are equal, i.e. only one element in sublist</span>
     <span class="c1"># In this case, nothing is done on the list</span>
 
-    <span class="k">if</span> <span class="n">lo</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">hi</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">lo</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
         <span class="c1"># lo is less than hi, i.e. at least two elements in sublist</span>
 
         <span class="c1"># the partitioning step, p is the final position of the</span>
@@ -118,10 +118,10 @@ less than or equal, and greater than the pivot.</p>
     <span class="c1"># separating elements less than or equal to the pivot</span>
     <span class="c1"># from those greater than the pivot</span>
     <span class="n">j</span> <span class="o">=</span> <span class="n">lo</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">hi</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">hi</span><span class="p">:</span>
         <span class="c1"># if element at j is less than or equal to the pivot</span>
         <span class="c1"># swap it into location i</span>
-        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">pivot</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="p">:</span>
             <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># and increment i</span>
 

@@ -66,10 +66,10 @@ If you would like to jump straight into the project, here is link to the repo on
 https://github.com/TheDancerCodes/Selenium-Webscraping-Example</p>
 <h3>What will we require?</h3>
 <p>We will also use the following packages and driver.
-<em> <a href="https://pypi.python.org/pypi/selenium">selenium package</a> — used to automate web browser interaction from Python
-</em> <a href="https://sites.google.com/a/chromium.org/chromedriver/downloads">ChromeDriver</a> — provides a platform to open up and perform tasks in specified browser.
-<em> <a href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> — to create an isolated Python environment for our project.
-</em> <a href="http://selenium-python.readthedocs.io/">Extras</a> - Selenium-Python ReadTheDocs Resource.</p>
+* <a href="https://pypi.python.org/pypi/selenium">selenium package</a> — used to automate web browser interaction from Python
+* <a href="https://sites.google.com/a/chromium.org/chromedriver/downloads">ChromeDriver</a> — provides a platform to open up and perform tasks in specified browser.
+* <a href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> — to create an isolated Python environment for our project.
+* <a href="http://selenium-python.readthedocs.io/">Extras</a> - Selenium-Python ReadTheDocs Resource.</p>
 <h3>Steps</h3>
 <ol>
 <li>Setup project</li>
@@ -134,29 +134,29 @@ In this file, type in our dependency <code>selenium</code>.</p>
 <p>Once we make a request and it is successful, we need to get a response.
 We will break the response into 2 and combine it at the end.
 The response is the title and language of the pinned repositories of the Github profile.</p>
-<div class="highlight"><pre><span></span>```python
-# find_elements_by_xpath - Returns an array of selenium objects.
-titles_element = browser.find_elements_by_xpath(&quot;//a[@class=&#39;text-bold&#39;]&quot;)
+<div class="highlight"><pre><span></span>```<span class="nv">python</span>
+# <span class="nv">find_elements_by_xpath</span> <span class="o">-</span> <span class="nv">Returns</span> <span class="nv">an</span> <span class="nv">array</span> <span class="nv">of</span> <span class="nv">selenium</span> <span class="nv">objects</span>.
+<span class="nv">titles_element</span> <span class="o">=</span> <span class="nv">browser</span>.<span class="nv">find_elements_by_xpath</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">//a[@class=&#39;text-bold&#39;]</span><span class="s2">&quot;</span><span class="ss">)</span>
 
-# List Comprehension to get the actual repo titles and not the selenium objects.
-titles = [x.text for x in titles_element]
-
-
-print(&#39;TITLES:&#39;)
-print(titles, &#39;\n&#39;)
+# <span class="nv">List</span> <span class="nv">Comprehension</span> <span class="nv">to</span> <span class="nv">get</span> <span class="nv">the</span> <span class="nv">actual</span> <span class="nv">repo</span> <span class="nv">titles</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">the</span> <span class="nv">selenium</span> <span class="nv">objects</span>.
+<span class="nv">titles</span> <span class="o">=</span> [<span class="nv">x</span>.<span class="nv">text</span> <span class="k">for</span> <span class="nv">x</span> <span class="nv">in</span> <span class="nv">titles_element</span>]
 
 
-# Get all of the pinned repo languages
-language_element = browser.find_elements_by_xpath(&quot;//p[@class=&#39;mb-0 f6 text-gray&#39;]&quot;)
-languages = [x.text for x in language_element] # same concept as for-loop/ list-comprehension above.
+<span class="nv">print</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">TITLES:</span><span class="s1">&#39;</span><span class="ss">)</span>
+<span class="nv">print</span><span class="ss">(</span><span class="nv">titles</span>, <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="ss">)</span>
 
-print(&quot;LANGUAGES:&quot;)
-print(languages, &#39;\n&#39;)
 
-# Pair each title with its corresponding language using zip function and print each pair
-for title, language in zip(titles, languages):
-    print(&quot;RepoName : Language&quot;)
-    print(title + &quot;: &quot; + language, &#39;\n&#39;)
+# <span class="nv">Get</span> <span class="nv">all</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">pinned</span> <span class="nv">repo</span> <span class="nv">languages</span>
+<span class="nv">language_element</span> <span class="o">=</span> <span class="nv">browser</span>.<span class="nv">find_elements_by_xpath</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">//p[@class=&#39;mb-0 f6 text-gray&#39;]</span><span class="s2">&quot;</span><span class="ss">)</span>
+<span class="nv">languages</span> <span class="o">=</span> [<span class="nv">x</span>.<span class="nv">text</span> <span class="k">for</span> <span class="nv">x</span> <span class="nv">in</span> <span class="nv">language_element</span>] # <span class="nv">same</span> <span class="nv">concept</span> <span class="nv">as</span> <span class="k">for</span><span class="o">-</span><span class="k">loop</span><span class="o">/</span> <span class="nv">list</span><span class="o">-</span><span class="nv">comprehension</span> <span class="nv">above</span>.
+
+<span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">LANGUAGES:</span><span class="s2">&quot;</span><span class="ss">)</span>
+<span class="nv">print</span><span class="ss">(</span><span class="nv">languages</span>, <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="ss">)</span>
+
+# <span class="nv">Pair</span> <span class="nv">each</span> <span class="nv">title</span> <span class="nv">with</span> <span class="nv">its</span> <span class="nv">corresponding</span> <span class="nv">language</span> <span class="nv">using</span> <span class="nv">zip</span> <span class="nv">function</span> <span class="nv">and</span> <span class="nv">print</span> <span class="nv">each</span> <span class="nv">pair</span>
+<span class="k">for</span> <span class="nv">title</span>, <span class="nv">language</span> <span class="nv">in</span> <span class="nv">zip</span><span class="ss">(</span><span class="nv">titles</span>, <span class="nv">languages</span><span class="ss">)</span>:
+    <span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">RepoName : Language</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nv">title</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="s">: </span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nv">language</span>, <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="ss">)</span>
 
 ```
 </pre></div>
@@ -164,10 +164,10 @@ for title, language in zip(titles, languages):
 
 <h3>Run the program</h3>
 <p>Finally execute the program by running it directly in your IDE or by using the following command:</p>
-<div class="highlight"><pre><span></span>```python
-$ (webscraping_example) python webscraping_example.py
+<div class="highlight"><pre><span></span><span class="o">```</span><span class="n">python</span>
+<span class="err">$</span> <span class="p">(</span><span class="n">webscraping_example</span><span class="p">)</span> <span class="n">python</span> <span class="n">webscraping_example</span><span class="p">.</span><span class="n">py</span>
 
-```
+<span class="o">```</span>
 </pre></div>
 
 

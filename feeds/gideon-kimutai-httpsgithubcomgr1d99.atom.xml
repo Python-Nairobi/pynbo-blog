@@ -83,10 +83,10 @@ the ways&lt;/strong&gt;.&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;yeey you just extracted the content subheading of the &lt;a href="http://blog.pynbo.or.ke/"&gt;http://blog.pynbo.or.ke/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;just open the above url in your browser and right click on the heading &lt;code&gt;Latest Posts&lt;/code&gt; then select the option inspect.
 you will see that the &lt;code&gt;Post List&lt;/code&gt; is wrapped inside &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;div class=&amp;quot;posts&amp;quot;
-    &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;h1 class=&amp;quot;content-subhead&amp;quot;&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;posts&amp;quot;&lt;/span&gt;
+    &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="na"&gt;h1&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content-subhead&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
         Latest posts
-    &lt;span class="ni"&gt;&amp;amp;lt;&lt;/span&gt;/h1&lt;span class="ni"&gt;&amp;amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
     ...
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -132,11 +132,11 @@ expressions.&lt;/p&gt;
             &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;h3 /a/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract_first&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
             &lt;span class="c1"&gt;# to get the description is the hardest part, if you inspect the element&lt;/span&gt;
-            &lt;span class="c1"&gt;# of the page you will notice that there are two &amp;amp;lt;p class=&amp;#39;post-meta&amp;#39;&amp;amp;gt; and there&lt;/span&gt;
-            &lt;span class="c1"&gt;# is a &amp;amp;lt;p&amp;amp;gt; element without any attribute between them which holds a simple description&lt;/span&gt;
+            &lt;span class="c1"&gt;# of the page you will notice that there are two &amp;lt;p class=&amp;#39;post-meta&amp;#39;&amp;gt; and there&lt;/span&gt;
+            &lt;span class="c1"&gt;# is a &amp;lt;p&amp;gt; element without any attribute between them which holds a simple description&lt;/span&gt;
             &lt;span class="c1"&gt;# of the post. Basically it makes it hard to extract the description of the post.&lt;/span&gt;
             &lt;span class="c1"&gt;# I suggest the developers of the web app should look into it.&lt;/span&gt;
-            &lt;span class="c1"&gt;# with that issue in mind I did some tweak below in order to get the empty &amp;amp;lt;p&amp;amp;gt;&lt;/span&gt;
+            &lt;span class="c1"&gt;# with that issue in mind I did some tweak below in order to get the empty &amp;lt;p&amp;gt;&lt;/span&gt;
             &lt;span class="c1"&gt;# tag.&lt;/span&gt;
             &lt;span class="n"&gt;description&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xpath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;p[@class=&amp;#39;post-meta&amp;#39;]|p/text()&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extract&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
